@@ -72,7 +72,7 @@ class User extends Authenticatable
     }
     public function assignedTo()
     {
-        return $this->belongsTo(Ticket::class, 'assigned_to');
+        return $this->belongsTo(Ticket::class, 'assigned_to_id');
     }
     public function ticketComment()
     {

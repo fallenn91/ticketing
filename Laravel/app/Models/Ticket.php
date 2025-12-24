@@ -10,12 +10,13 @@ class Ticket extends Model
     protected $fillable = [
         'id',
         'user_id',
-        'assigned_to',
+        'assigned_to_id',
         'title',
         'description',
-        'type',
         'comments',
         'status',
+        'priority',
+        'category',
         'timestamps',
     ];
 
@@ -26,7 +27,7 @@ class Ticket extends Model
 
     public function agent()
     {
-        return $this->belongsTo(User::class, 'assigned_to');
+        return $this->belongsTo(User::class, 'assigned_to_id');
     }
 
     public function comments()
