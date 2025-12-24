@@ -16,7 +16,7 @@ class Ticket extends Model
         'comments',
         'status',
         'priority',
-        'category',
+        'category_id',
         'timestamps',
     ];
 
