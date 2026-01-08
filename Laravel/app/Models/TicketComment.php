@@ -10,7 +10,6 @@ class TicketComments extends Model
         'id',
         'ticket_id',
         'user_id',
-        'comments',
         'timestamps',
     ];
 
