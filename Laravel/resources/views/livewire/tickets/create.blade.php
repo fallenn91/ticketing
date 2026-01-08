@@ -28,6 +28,7 @@
                 wire:model.defer="comment"
                 autocomplete="comments"
             />
+            <x-input-label for="user_id" value="{{ __('Assign User') }}" />
             <select wire:model="user_id" class="mt-1 block w-full">
                 <option value = "">-- Assign User --</option>
                 @foreach ($users as $user )
