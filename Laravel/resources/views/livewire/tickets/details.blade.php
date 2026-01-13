@@ -50,6 +50,25 @@
            
         </tbody>
     </table>
+    <x-slot name="form">
+        <div class="col-span-6 sm:col-span-4">
+          
+          <!-- Ticket Comment -->
+            <x-input-label for="comment" value="{{ __('Comment') }}" />
+
+            <p class="mt-1 block w-full border-gray-300 rounded">
+                {{ $ticket->comment }}
+            </p>
+              
+                <!-- Ticket Description -->
+                <x-input-label for="description" value="{{ __('Description') }}" />
+                
+            <p class="mt-1 block w-full border-gray-300 rounded">
+                {{ $ticket->description }}  
+            </p>
+            
+        </div>
+    </x-slot>
     @else
       <p class="text-center text-gray-500">No ticket selected.</p>
     @endif

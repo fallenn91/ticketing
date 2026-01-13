@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ShowDetailsController;
+use App\Http\Controllers\TicketController;
 use App\Models\Ticket;
 use App\Livewire\Tickets\Details;
 
@@ -20,7 +20,5 @@ Route::middleware([
     Route::get('/management', function() {
       return view('ticketManagement');
     })->name('management');
-    Route::get('/details/{ticket_number}', function() {
-      return view('ticketDetails');
-    })->name('details');
+    Route::get('/details/{ticket_number}',[ TicketController::class, 'show'])->name('details');
 });
