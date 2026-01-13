@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ticket_comments', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('tickets', function (Blueprint $table) {
+          $table->dropConstrainedForeignId('comments_id');
         });
     }
 
@@ -22,6 +21,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ticket_comments');
+        Schema::table('tickets', function (Blueprint $table) {
+          $table->foreignId('comments_id')
+                  ->constrained('ticket_comments')
+                  ->onDelete('cascade');
+        });
     }
 };

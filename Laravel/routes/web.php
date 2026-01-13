@@ -15,6 +15,6 @@ Route::middleware([
         return view('tickets');
     })->name('dashboard');
     Route::get('/management', function() {
-      return view('tickets');
+      return view('ticketManagement');
     })->name('management');
 });

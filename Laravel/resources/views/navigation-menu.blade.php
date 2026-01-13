@@ -15,9 +15,11 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('My Tickets') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('management') }}" :active="request()->routeIs('management')">
-                        {{ __('Tickets Management') }}
-                    </x-nav-link>
+                    @can('viewAny', App\Models\Ticket::class)
+                      <x-nav-link href="{{ route('management') }}" :active="request()->routeIs('management')">
+                          {{ __('Tickets Management') }}
+                      </x-nav-link>
+                    @endcan
                 </div>
             </div>
 
