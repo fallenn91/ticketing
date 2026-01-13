@@ -8,6 +8,7 @@ class Ticket extends Model
 {
     //
     protected $fillable = [
+        'ticket_number',
         'id',
         'user_id',
         'assigned_to_id',
@@ -40,6 +41,11 @@ class Ticket extends Model
     public function category()
     {
       return $this->belongsTo(TicketCategory::class);
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'ticket_number';
     }
     
 }

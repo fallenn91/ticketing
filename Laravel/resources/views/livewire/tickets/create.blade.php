@@ -67,9 +67,6 @@
     </x-slot>
 
     <x-slot name="actions">
-        <x-action-message class="mr-3" on="saved">
-            {{ __('Created.') }}
-        </x-action-message>
         
             <button wire:click="create"
             class="px-4 py-2 bg-blue-600 text-white rounded"

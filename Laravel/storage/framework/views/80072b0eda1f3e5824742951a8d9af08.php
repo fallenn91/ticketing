@@ -269,28 +269,6 @@
      <?php $__env->endSlot(); ?>
 
      <?php $__env->slot('actions', null, []); ?> 
-        <?php if (isset($component)) { $__componentOriginala665a74688c74e9ee80d4fedd2b98434 = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginala665a74688c74e9ee80d4fedd2b98434 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.action-message','data' => ['class' => 'mr-3','on' => 'saved']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('action-message'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes(['class' => 'mr-3','on' => 'saved']); ?>
-            <?php echo e(__('Created.')); ?>
-
-         <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginala665a74688c74e9ee80d4fedd2b98434)): ?>
-<?php $attributes = $__attributesOriginala665a74688c74e9ee80d4fedd2b98434; ?>
-<?php unset($__attributesOriginala665a74688c74e9ee80d4fedd2b98434); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginala665a74688c74e9ee80d4fedd2b98434)): ?>
-<?php $component = $__componentOriginala665a74688c74e9ee80d4fedd2b98434; ?>
-<?php unset($__componentOriginala665a74688c74e9ee80d4fedd2b98434); ?>
-<?php endif; ?>
         
             <button wire:click="create"
             class="px-4 py-2 bg-blue-600 text-white rounded"

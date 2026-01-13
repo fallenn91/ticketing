@@ -39,4 +39,5 @@ class Show extends Component
     {
         $tickets->update(['status' => $tickets->status === 'in_process' ? 'resolved' : ($tickets->status === 'resolved' ? 'closed' : 'in_process')]);
     }
+    
 }
