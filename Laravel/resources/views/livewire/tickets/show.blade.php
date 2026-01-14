@@ -15,35 +15,63 @@
                 <tr>
                     <td class="border px-4 py-2">{{ sprintf('TCK-%04d', $ticket->ticket_number) }}</td>
                     <td class="border px-4 py-2">{{ $ticket->title }}</td>
-                    <td class="border px-4 py-2"><select wire:change="changeStatus({{ $ticket->id }}, $event.target.value)" class="mt-1 block w-full border-gray-300 rounded
-                                                              {{ match($ticket->status) {
-                                                              'open' => 'bg-gray-100 text-gray-800',
-                                                    'in_process' => 'bg-blue-100 text-blue-800',
-                                                    'resolved' => 'bg-green-100 text-green-800',
-                                                    'closed' => 'bg-red-300 text-red-800',
-                                                    default => 'bg-white text-black',
-                                                } }}"
-                                                >
-                                                  @foreach (['open', 'in_process', 'resolved', 'closed'] as $status)
-                                                    <option value="{{ $status }}">{{ $ticket->status === $status ? '' : '' }}
-                                                      {{ ucfirst($status) }}
-                                                    </option>
-                                                  @endforeach
-                                                </select></td>
-                    <td class="border px-4 py-2"><select wire:change="changePriority({{ $ticket->id }}, $event.target.value)" class="mt-1 block w-full border-gray-300 rounded
-                      {{ match($ticket->priority) {
-            'low' => 'bg-green-100 text-green-800',
-            'medium' => 'bg-yellow-100 text-yellow-800',
-            'high' => 'bg-orange-100 text-orange-800',
-            'critical' => 'bg-red-100 text-red-800',
-            default => 'bg-white text-black',
-        } }}">
-                                                  @foreach (['low', 'medium', 'high', 'critical'] as $priority)
-                                                    <option value="{{ $priority }}">{{ $ticket->priority === $priority ? '' : '' }}
-                                                      {{ ucfirst($priority) }} <!--Change uppercase first letter-->
-                                                    </option>
-                                                  @endforeach
-                                                </select></td>
+                    <td class="border px-4 py-2"><button wire:click="toggleStatusDropdown({{ $ticket->id }})"
+                      class="px-3 py-1 rounded-full text-sm font-semibold 
+                      {{  match($ticket->status) {
+                            'open' => 'bg-gray-100 text-gray-800',
+                            'in_process' => 'bg-blue-100 text-blue-800',
+                            'resolved' => 'bg-green-100 text-green-800',
+                            'closed' => 'bg-red-100 text-red-800',
+                      } }}">
+                      {{ ucfirst(str_replace('_', ' ', $ticket->status)) }}
+                      </button>
+                    <!--Dropdown-->
+                    @if($openStatusDropdown === $ticket->id)
+                    <div class="absolute z-10 mt-2 w-40 bg-white border rounded-lg shadow-lg">
+                      @foreach (['open', 'in_process', 'resolved', 'closed'] as $status)
+                      <button wire:click="changeStatus({{ $ticket->id }}, '{{ $status }}')"
+                        class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100
+                        {{  match($ticket->status) {
+                            'open' => 'bg-gray-100 text-gray-800',
+                            'in_process' => 'bg-blue-100 text-blue-800',
+                            'resolved' => 'bg-green-100 text-green-800',
+                            'closed' => 'bg-red-100 text-red-800',
+                      } }}">
+                        
+                        {{ ucfirst(str_replace('_', ' ', $status)) }}
+                      </button>
+                      @endforeach
+                    </div>
+                    @endif
+                  </td>
+                  <td class="border px-4 py-2"><button wire:click="togglePriorityDropdown({{ $ticket->id }})" 
+                    class="px-3 py-1 rounded-full text-sm font-semibold
+                    {{ match($ticket->priority) {
+                          'low' => 'bg-green-100 text-green-800',
+                          'medium' => 'bg-yellow-100 text-yellow-800',
+                          'high' => 'bg-orange-100 text-orange-800',
+                          'critical' => 'bg-red-100 text-red-800',
+                    } }}">
+                      {{ ucfirst(str_replace('_', ' ', $ticket->priority)) }}
+                    </button>
+                    <!--Dropdown-->
+                      @if($openPriorityDropdown === $ticket->id)
+                      <div class="absolute z-10 mt-2 w-40 bg-white border rounded-lg shadow-lg">
+                        @foreach (['low', 'medium', 'high', 'critical'] as $priority)
+                          <button wire:click="changePriority({{ $ticket->id }}, '{{ $priority }}')"
+                            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100
+                            {{ match($ticket->priority) {
+                          'low' => 'bg-green-100 text-green-800',
+                          'medium' => 'bg-yellow-100 text-yellow-800',
+                          'high' => 'bg-orange-100 text-orange-800',
+                          'critical' => 'bg-red-100 text-red-800',
+                    } }}">
+                            {{ ucfirst(str_replace('_', ' ', $priority)) }}
+                          </button>
+                        @endforeach
+                      </div>
+                    @endif
+                    </td>
                     <td class="border px-4 py-2">{{ $ticket->created_at }}
                       @can('delete', $ticket)
                       <button wire:click="deleteTicket({{ $ticket->id }})"

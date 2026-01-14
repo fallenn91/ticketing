@@ -54,8 +54,8 @@
                 <x-input-error :messages="$errors->get('description')" class="mt-2" />
           <!-- Assign User -->
           @can('viewAny', App\Models\Ticket::class)
-            <x-input-label for="user_id" value="{{ __('Assign User') }}" />
-            <select wire:model="user_id" class="mt-1 block w-full">
+            <x-input-label for="assigned_to_id" value="{{ __('Assign User') }}" />
+            <select wire:model="assigned_to_id" class="mt-1 block w-full">
                 <option value = "">-- Assign User --</option>
                 @foreach ($users as $user)
                     <option value="{{ $user->id }}">{{ $user->name }}</option>

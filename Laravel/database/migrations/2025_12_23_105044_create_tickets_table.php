@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('assigned_to_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->foreignId('category_id')->constrained('tickets_category')->cascadeOnDelete();
-            $table->foreignId('comments_id')->constrained('ticket_comments')->onDelete('cascade');
             $table->string('title');
             $table->text('description');
             $table->enum('status', ['open', 'in_process', 'resolved', 'closed'])->default('in_process');

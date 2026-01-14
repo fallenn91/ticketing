@@ -2,7 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\TicketCategory;
+use App\Models\TicketComment;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+
 
 class Ticket extends Model
 {
@@ -28,14 +32,14 @@ class Ticket extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function agent()
+    public function assignedTo()
     {
         return $this->belongsTo(User::class, 'assigned_to_id');
     }
 
     public function comments()
     {
-        return $this->hasMany(TicketComment::class, 'ticket_id');
+        return $this->hasMany(TicketComment::class);
     }
 
     public function category()

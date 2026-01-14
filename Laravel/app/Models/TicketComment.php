@@ -2,22 +2,23 @@
 
 namespace App\Models;
 
+use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
-class TicketComments extends Model
+class TicketComment extends Model
 {
     protected $fillable = [
         'ticket_id',
         'user_id',
         'comment',
-        'timestamps',
     ];
 
-    public function ticketComment()
+    public function ticket()
     {
         return $this->belongsTo(Ticket::class);
     }
-    public function userComment()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
