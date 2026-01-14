@@ -1,14 +1,16 @@
 <?php
 
 namespace App\Livewire\Tickets;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Ticket;
 use Livewire\Component;
+use Illuminate\Support\Facades\Gate;
 
 class Show extends Component
 {
-    protected $listeners = ['saved'];
-    use AuthorizesRequests;
+    public $status;
+    public $priority;
+    
+    protected $listeners = ['saved', 'ticketUpdated' => 'refreshTickets'];
 
     public function render()
     {
@@ -24,20 +26,42 @@ class Show extends Component
     }
 
     // METHODS
-    public function delete(Ticket $tickets)
+    public function deleteTicket($id)
     {
-        $this->authorize('delete', $tickets);
-        $tickets->delete();
+        $ticket = Ticket::findOrFail($id);
+        Gate::authorize('delete', $ticket);
+        $ticket->delete();
+        session()->flash('message', 'Ticket deleted successfully.');
     }
+    
 
-    public function changePriority(Ticket $tickets)
+    public function changePriority($ticketId, $priority)
     {
-        $tickets->update(['priority' => $tickets->priority === 'low' ? 'medium' : ($tickets->priority === 'medium' ? 'high' : 'low')]);
+        Ticket::findOrFail($ticketId)->update(['priority' => $priority]);
+        //$this->dispatch('ticketUpdated', $ticketId); // Emit to all listeners
+        $this->dispatchBrowserEvent('ticket-updated', [
+        'ticketId' => $ticket->id,
+        'priority' => $ticket->priority,
+    ]);
     } 
 
-    public function changeStatus(Ticket $tickets)
+    public function changeStatus($ticketId, $status)
     {
-        $tickets->update(['status' => $tickets->status === 'in_process' ? 'resolved' : ($tickets->status === 'resolved' ? 'closed' : 'in_process')]);
+         Ticket::findOrFail($ticketId)->update(['status' => $status]);
+         //$this->dispatch('ticketUpdated', $ticketId); // Emit to all listeners
+         $this->dispatchBrowserEvent('ticket-updated', [
+        'ticketId' => $ticket->id,
+        'status' => $ticket->status,
+    ]);
+    }
+
+    public function refreshTicket($ticketId)
+    {
+      $ticket = Ticket::find($ticketId);
+      if ($ticket) {
+
+        $this->render();
+      }
     }
     
 }

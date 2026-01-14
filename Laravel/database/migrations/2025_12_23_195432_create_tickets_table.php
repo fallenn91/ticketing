@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->enum('status', ['in_process', 'resolved', 'closed'])->default('in_process');
-            $table->enum('priority', ['low', 'medium', 'hight', 'critic'])->default('medium');
+            $table->enum('priority', ['low', 'medium', 'high', 'critical'])->default('medium');
             $table->timestamps();
         });
     }
