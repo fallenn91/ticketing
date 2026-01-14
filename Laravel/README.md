@@ -10,6 +10,7 @@ docker compose up -d
 
 ```bash
 cp .env.example .env
+chmod -R 775 storage/* bootstrap/cache
 ```
 
 ### 3. Generate key application

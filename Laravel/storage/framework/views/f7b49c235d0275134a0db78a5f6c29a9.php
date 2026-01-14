@@ -63,18 +63,9 @@
           
           <!-- Ticket Comment -->
             <h2 class="text-lg font-semibold">Comments</h2>
-
-            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__empty_1 = true; $__currentLoopData = $ticket->comments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                <div class="mt-2 p-2 border border-gray-300 rounded">
-                    <p class="text-sm text-gray-600">
-                        <strong><?php echo e($comment->userComment->name ?? 'Deleted User'); ?></strong> commented:
-                    </p>
-                    <p class="mt-1"><?php echo nl2br(e($comment->comment)); ?></p>
-                    <p class="text-xs text-gray-400 mt-1"><?php echo e($comment->created_at->format('d/m/Y H:i')); ?></p>
-                </div>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-                <p class="mt-1 block w-full border border-gray-300 rounded p-2">No comments available.</p>
-            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+              <p class="mt-1 block w-full border-gray-300 rounded">
+                <?php echo e($ticket->comment ?? 'No comments available.'); ?>  
+              </p>
 
               
                 <!-- Ticket Description -->

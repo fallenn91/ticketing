@@ -55,18 +55,9 @@
           
           <!-- Ticket Comment -->
             <h2 class="text-lg font-semibold">Comments</h2>
-
-            @forelse($ticket->comments as $comment)
-                <div class="mt-2 p-2 border border-gray-300 rounded">
-                    <p class="text-sm text-gray-600">
-                        <strong>{{ $comment->userComment->name ?? 'Deleted User' }}</strong> commented:
-                    </p>
-                    <p class="mt-1">{!! nl2br(e($comment->comment)) !!}</p>
-                    <p class="text-xs text-gray-400 mt-1">{{ $comment->created_at->format('d/m/Y H:i') }}</p>
-                </div>
-            @empty
-                <p class="mt-1 block w-full border border-gray-300 rounded p-2">No comments available.</p>
-            @endforelse
+              <p class="mt-1 block w-full border-gray-300 rounded">
+                {{ $ticket->comment ?? 'No comments available.' }}  
+              </p>
 
               
                 <!-- Ticket Description -->
