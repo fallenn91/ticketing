@@ -50,25 +50,35 @@
            
         </tbody>
     </table>
-    <x-slot name="form">
+    
         <div class="col-span-6 sm:col-span-4">
           
           <!-- Ticket Comment -->
-            <x-input-label for="comment" value="{{ __('Comment') }}" />
+            <h2 class="text-lg font-semibold">Comments</h2>
 
-            <p class="mt-1 block w-full border-gray-300 rounded">
-                {{ $ticket->comment }}
-            </p>
+            @forelse($ticket->comments as $comment)
+                <div class="mt-2 p-2 border border-gray-300 rounded">
+                    <p class="text-sm text-gray-600">
+                        <strong>{{ $comment->userComment->name ?? 'Deleted User' }}</strong> commented:
+                    </p>
+                    <p class="mt-1">{!! nl2br(e($comment->comment)) !!}</p>
+                    <p class="text-xs text-gray-400 mt-1">{{ $comment->created_at->format('d/m/Y H:i') }}</p>
+                </div>
+            @empty
+                <p class="mt-1 block w-full border border-gray-300 rounded p-2">No comments available.</p>
+            @endforelse
+
               
                 <!-- Ticket Description -->
-                <x-input-label for="description" value="{{ __('Description') }}" />
+                <h2 class="text-lg font-semibold">Description</h2>
                 
             <p class="mt-1 block w-full border-gray-300 rounded">
                 {{ $ticket->description }}  
             </p>
             
         </div>
-    </x-slot>
+    
+  </div>
     @else
       <p class="text-center text-gray-500">No ticket selected.</p>
     @endif

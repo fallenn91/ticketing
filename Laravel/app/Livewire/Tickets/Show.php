@@ -37,22 +37,21 @@ class Show extends Component
 
     public function changePriority($ticketId, $priority)
     {
-        Ticket::findOrFail($ticketId)->update(['priority' => $priority]);
-        //$this->dispatch('ticketUpdated', $ticketId); // Emit to all listeners
-        $this->dispatchBrowserEvent('ticket-updated', [
-        'ticketId' => $ticket->id,
-        'priority' => $ticket->priority,
-    ]);
+        $ticket = Ticket::findOrFail($ticketId);
+        $ticket->priority = $priority;
+        $ticket->save();
+        $this->dispatch('ticketUpdated', $ticketId); // Emit to all listeners
+        
     } 
 
     public function changeStatus($ticketId, $status)
     {
-         Ticket::findOrFail($ticketId)->update(['status' => $status]);
-         //$this->dispatch('ticketUpdated', $ticketId); // Emit to all listeners
-         $this->dispatchBrowserEvent('ticket-updated', [
-        'ticketId' => $ticket->id,
-        'status' => $ticket->status,
-    ]);
+        $ticket = Ticket::findOrFail($ticketId);
+        $ticket->status = $status;
+        $ticket->save();
+        $this->dispatch('ticketUpdated', $ticketId); // Emit to all listeners
+        
+    
     }
 
     public function refreshTicket($ticketId)

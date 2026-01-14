@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('comments_id')->constrained('ticket_comments')->onDelete('cascade');
             $table->string('title');
             $table->text('description');
-            $table->enum('status', ['in_process', 'resolved', 'closed'])->default('in_process');
+            $table->enum('status', ['open', 'in_process', 'resolved', 'closed'])->default('in_process');
             $table->enum('priority', ['low', 'medium', 'high', 'critical'])->default('medium');
             $table->timestamps();
         });

@@ -10,23 +10,32 @@
 <?php $component->withAttributes([]); ?>
      <?php $__env->slot('header', null, []); ?> 
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            <?php echo e(__('Tickets Details')); ?>
+            <?php echo e(__('Tickets Management')); ?>
 
         </h2>
      <?php $__env->endSlot(); ?>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
+            <div class="flex gap-2 mb-6">
+              
+              <span class="bg-gray-200 border border-gray-300 text-gray-800 text-sm font-medium px-1.5 py-0.5 rounded">OPEN</span>
+              <span class="bg-blue-100 border border-blue-300 text-blue-800 text-sm font-medium px-1.5 py-0.5 rounded">IN PROCESS</span>
+              <span class="bg-green-100 border border-green-300 text-green-800 text-sm font-medium px-1.5 py-0.5 rounded">RESOLVED</span>
+              <span class="bg-red-100 border border-red-300 text-red-800 text-sm font-medium px-1.5 py-0.5 rounded">CLOSED</span>
+              
+            </div>
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <?php
 $__split = function ($name, $params = []) {
     return [$name, $params];
 };
-[$__name, $__params] = $__split('tickets.details', ['ticket' => $ticket]);
+[$__name, $__params] = $__split('tickets.show', []);
 
 $key = null;
 
-$key ??= \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::generateKey('lw-572078688-0', null);
+$key ??= \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::generateKey('lw-947317877-0', null);
 
 $__html = app('livewire')->mount($__name, $__params, $key);
 
@@ -50,4 +59,4 @@ if (isset($__slots)) unset($__slots);
 <?php if (isset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>
 <?php $component = $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
 <?php unset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
-<?php endif; ?><?php /**PATH /var/www/html/resources/views/ticketDetails.blade.php ENDPATH**/ ?>
+<?php endif; ?><?php /**PATH /var/www/html/resources/views/ticketManagement.blade.php ENDPATH**/ ?>
