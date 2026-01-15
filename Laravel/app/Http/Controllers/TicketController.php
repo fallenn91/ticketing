@@ -12,4 +12,5 @@ class TicketController extends Controller
         $ticket = Ticket::where('ticket_number', $ticket_number)->firstOrFail(); // fetch the ticket by id
         return view('ticketDetails', compact('ticket')); // pass it to the Blade
     }
+    
 }

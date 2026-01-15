@@ -25,7 +25,6 @@ class Ticket extends Model
         'timestamps',
     ];
     
-    
 
     public function user()
     {

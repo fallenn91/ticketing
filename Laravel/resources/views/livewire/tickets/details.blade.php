@@ -73,12 +73,12 @@
           
           <!-- Ticket Comment -->
             <h2 class="text-lg font-semibold">Comments</h2>
-@if($ticket->comments->count())
-    @foreach($ticket->comments as $comment)
-        {{ $comment->user->name ?? 'Deleted User' }}: {{ $comment->comment }}
-    @endforeach
-@endif
-
+            @if($ticket->comments->count())
+                @foreach($ticket->comments as $comment)
+                    {{ $comment->user->name ?? 'Deleted User' }}: {{ $comment->comment }}
+                @endforeach
+            @endif
+          
 
               
                 <!-- Ticket Description -->
