@@ -12,15 +12,16 @@ class Show extends Component
 
     protected $paginationTheme = 'tailwind';
     
-    public $status;
+    public $status = null;
     public $priority;
     public $created_at;
     public $openStatusDropdown = null;
     public $openPriorityDropdown = null;
-    public $filterByStatus = null;
+    public $statusFilter = null;
     public $filterByTimeCreation = null;
+    public $showFilters = false;
 
-    protected $listeners = ['saved', 'ticketUpdated' => 'refreshTickets', 'statusSelected' => 'filterByStatus'];
+    protected $listeners = ['saved', 'ticketUpdated' => 'refreshTickets'];
 
     public function render()
     {
@@ -34,8 +35,8 @@ class Show extends Component
           });
         }
 
-        if (!is_null(($this->filterByStatus))) {
-          $query->where('status', $this->filterByStatus);
+        if (!is_null(($this->statusFilter))) {
+          $query->where('status', $this->statusFilter);
         }
 
         $tickets = $query->orderByDesc('created_at')->get();
@@ -67,7 +68,7 @@ class Show extends Component
         $ticket->priority = $priority;
         $ticket->save();
         $this->openPriorityDropdown = null;
-        $this->dispatch('ticketUpdated', $ticketId); // Emit to all listeners
+        //$this->dispatch('ticketUpdated', $ticketId); // Emit to all listeners
         
     } 
 
@@ -77,7 +78,7 @@ class Show extends Component
         $ticket->status = $status;
         $ticket->save();
         $this->openStatusDropdown = null;
-        $this->dispatch('ticketUpdated', $ticketId); // Emit to all listeners
+        //$this->dispatch('ticketUpdated', $ticketId); // Emit to all listeners
         
     
     }
@@ -91,10 +92,15 @@ class Show extends Component
       }
     }
 
-    public function filterByStatus($status = null)
+    public function filterByStatus($status)
     {
-      $this->filterByStatus = $status;
+      $this->statusFilter = $status;
+      $this->resetPage();
 
+    }
+    public function mount($showFilters = false)
+    {
+      $this->showFilters = $showFilters;
     }
 
     public function filterByTimeCreation($created_at = null)

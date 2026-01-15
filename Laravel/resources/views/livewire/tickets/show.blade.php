@@ -1,4 +1,15 @@
 <div>
+  @if($showFilters)
+  <div class="flex gap-2 mb-6">
+              
+    <button wire:click="filterByStatus(null)" class="bg-gray-800 border border-gray-300 text-white text-sm font-medium px-1.5 py-0.5 rounded-lg">ALL</button>
+    <button wire:click="filterByStatus('open')" class="bg-gray-200 border border-gray-300 text-gray-800 text-sm font-medium px-1.5 py-0.5 rounded-lg">OPEN</button>
+    <button wire:click="filterByStatus('in_process')" class="bg-blue-100 border border-blue-300 text-blue-800 text-sm font-medium px-1.5 py-0.5 rounded-lg">IN PROCESS</button>
+    <button wire:click="filterByStatus('resolved')" class="bg-green-100 border border-green-300 text-green-800 text-sm font-medium px-1.5 py-0.5 rounded-lg">RESOLVED</button>
+    <button wire:click="filterByStatus('closed')" class="bg-red-100 border border-red-300 text-red-800 text-sm font-medium px-1.5 py-0.5 rounded-lg">CLOSED</button>
+              
+  </div>
+  @endif
   <table class="table-auto w-full">
         
         <thead>
