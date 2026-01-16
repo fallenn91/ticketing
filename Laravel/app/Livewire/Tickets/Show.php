@@ -4,27 +4,26 @@ namespace App\Livewire\Tickets;
 use App\Models\Ticket;
 use Livewire\Component;
 use Illuminate\Support\Facades\Gate;
-use Livewire\WithPagination;
 
 class Show extends Component
 {
-    use WithPagination;
-
-    protected $paginationTheme = 'tailwind';
     
-    public $status = null;
     public $priority;
-    public $created_at;
     public $openStatusDropdown = null;
     public $openPriorityDropdown = null;
     public $statusFilter = null;
-    public $filterByTimeCreation = null;
+    public $status = null;
     public $showFilters = false;
+    public $creationFilter = 'desc';
+    public $statusPriority = null;
+    public $showPriority = false;
+    public $search = '';
 
     protected $listeners = ['saved', 'ticketUpdated' => 'refreshTickets'];
 
     public function render()
     {
+        $query = Ticket::query();
       // Filter
         if (auth()->user()->isAdmin()) {
           $query = Ticket::query();
@@ -35,11 +34,38 @@ class Show extends Component
           });
         }
 
+        /*****FILTERS STATUS AND PRIORITY*****/
         if (!is_null(($this->statusFilter))) {
           $query->where('status', $this->statusFilter);
         }
+        if (!is_null(($this->statusPriority))) {
+          $query->where('priority', $this->statusPriority);
+        }
 
-        $tickets = $query->orderByDesc('created_at')->get();
+        /*****SEARCH*****/ 
+        $userInput = strtoupper($this->search); 
+
+        $query->where(function($q) use ($userInput) {
+            $q->where('title', 'like', '%' . $userInput . '%');
+
+            if (preg_match('/TCK-(\d+)/', $userInput, $matches) && is_numeric($matches[1])) {
+                $q->orWhere('id', $matches[1]);
+            }
+
+            if (isset($this->search)) {
+                $q->orWhere('ticket_number', 'like', '%' . $userInput . '%');
+            }
+        });
+
+        /*****TIME CREATION FILTER*****/
+        $query->orderBy(
+          'created_at',
+          in_array($this->creationFilter, ['asc', 'desc'])
+          ? $this->creationFilter : 'desc'
+        );
+
+
+        $tickets = $query->get();
         
         return view('livewire.tickets.show', compact('tickets'));
     }
@@ -68,7 +94,6 @@ class Show extends Component
         $ticket->priority = $priority;
         $ticket->save();
         $this->openPriorityDropdown = null;
-        //$this->dispatch('ticketUpdated', $ticketId); // Emit to all listeners
         
     } 
 
@@ -78,7 +103,6 @@ class Show extends Component
         $ticket->status = $status;
         $ticket->save();
         $this->openStatusDropdown = null;
-        //$this->dispatch('ticketUpdated', $ticketId); // Emit to all listeners
         
     
     }
@@ -95,19 +119,30 @@ class Show extends Component
     public function filterByStatus($status)
     {
       $this->statusFilter = $status;
-      $this->resetPage();
 
     }
-    public function mount($showFilters = false)
+    public function mount($showFilters = false, $showPriority = false)
     {
       $this->showFilters = $showFilters;
+      $this->showPriority = $showPriority;
     }
 
-    public function filterByTimeCreation($created_at = null)
+    public function filterByPriority($priority)
     {
-      $this->filterByTimeCreation = $created_at;
-      $this->resetPage();
+      $this->statusPriority = $priority;
     }
 
+    public function filterByCreation($value)
+    {
+      $this->creationFilter = $creationFilter;
+    }
+
+    public function filterBySearching()
+    {
+      $this->validate([
+        'search' => 'nullable|string|max:50',
+      ]);
+      //$this->search = $search;
+    }
     
 }

@@ -1,13 +1,41 @@
 <div>
   @if($showFilters)
-  <div class="flex gap-2 mb-6">
-              
+  <div class="flex items-center content-center gap-2 mb-6 ml-4 mt-5">
+    <x-input-label for="filterByStatus" value="{{ __('STATUS') }}" />
+    
     <button wire:click="filterByStatus(null)" class="bg-gray-800 border border-gray-300 text-white text-sm font-medium px-1.5 py-0.5 rounded-lg">ALL</button>
     <button wire:click="filterByStatus('open')" class="bg-gray-200 border border-gray-300 text-gray-800 text-sm font-medium px-1.5 py-0.5 rounded-lg">OPEN</button>
     <button wire:click="filterByStatus('in_process')" class="bg-blue-100 border border-blue-300 text-blue-800 text-sm font-medium px-1.5 py-0.5 rounded-lg">IN PROCESS</button>
     <button wire:click="filterByStatus('resolved')" class="bg-green-100 border border-green-300 text-green-800 text-sm font-medium px-1.5 py-0.5 rounded-lg">RESOLVED</button>
     <button wire:click="filterByStatus('closed')" class="bg-red-100 border border-red-300 text-red-800 text-sm font-medium px-1.5 py-0.5 rounded-lg">CLOSED</button>
-              
+
+    
+    <select wire:model.lazy="creationFilter" class="bg-gray-100 border border-gray-300 text-sm font-medium px-2.5 py-0.5 rounded-lg h-[28px] ">
+      <option value="desc">DESC</option>
+      <option value="asc">ASC</option>
+    </select>
+    
+    
+    <x-text-input
+                id="search"
+                type="text"
+                class="mt-1 block w-[150px]"
+                wire:model.defer="search"
+                wire:keydown.enter="filterBySearching"
+                placeholder='Search your ticket...'
+                autocomplete="search"
+            />
+  </div>
+  @endif
+  @if($showPriority)
+  <div class="flex items-center content-center gap-2 mb-6 ml-4 mt-5">
+    <x-input-label for="filterByPriority" value="{{ __('PRIORITY') }}" />
+    <button wire:click="filterByPriority(null)" class="bg-gray-800 border border-gray-300 text-white text-sm font-medium px-1.5 py-0.5 rounded-lg">ALL</button>
+    <button wire:click="filterByPriority('low')" class="bg-gray-200 border border-gray-300 text-gray-800 text-sm font-medium px-1.5 py-0.5 rounded-lg">LOW</button>
+    <button wire:click="filterByPriority('medium')" class="bg-blue-100 border border-blue-300 text-blue-800 text-sm font-medium px-1.5 py-0.5 rounded-lg">MEDIUM</button>
+    <button wire:click="filterByPriority('high')" class="bg-green-100 border border-green-300 text-green-800 text-sm font-medium px-1.5 py-0.5 rounded-lg">HIGH</button>
+    <button wire:click="filterByPriority('critical')" class="bg-red-100 border border-red-300 text-red-800 text-sm font-medium px-1.5 py-0.5 rounded-lg">CRITIAL</button>
+
   </div>
   @endif
   <table class="table-auto w-full">

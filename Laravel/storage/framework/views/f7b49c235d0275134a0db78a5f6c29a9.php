@@ -77,18 +77,34 @@
         </tbody>
     </table>
     
-        <div class="col-span-6 sm:col-span-4">
-          
+        <div class="col-span-6 sm:col-span-4 px-3 py-3">
+          <!-- Ticket History Comment -->
+          <h2 class="text-lg font-semibold">History Comments</h2>
+          <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($ticket->comments->count()): ?>
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $ticket->comments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+              <?php echo e($comment->user->name ?? 'Deleted User'); ?> : <?php echo e($comment->comment); ?>
+
+              <p class="text-sm font-bold px-5 py-1.5">Ticket ID: <?php echo e($comment->ticket_id); ?> </p>
+              <p class="text-sm font-bold px-5 py-1.5">Ticket Number: <?php echo e($comment->ticket->ticket_number); ?></p>
+              <p class="text-sm font-bold px-5 py-1.5">Created At: <?php echo e($comment->created_at); ?></p>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+          <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
           <!-- Ticket Comment -->
             <h2 class="text-lg font-semibold">Comments</h2>
-            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($ticket->comments->count()): ?>
-                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $ticket->comments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <?php echo e($comment->user->name ?? 'Deleted User'); ?>: <?php echo e($comment->comment); ?>
+            <div class="px-2.5 py-3 w-full border">
+              <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($ticket->comments->count()): ?>
+                  <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $ticket->comments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                      <?php echo e($comment->user->name ?? 'Deleted User'); ?>: <?php echo e($comment->comment); ?>
 
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
-            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
-          
+                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+              <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
+              
+            </div>
+            <form>
+              <input type="text" class="px-5 py-2.5 mt-8">
+              <button type="submit" value="comment" class="px-4 py-2 bg-blue-600 text-white rounded ml-4">Send</button>
+            </form>
               
                 <!-- Ticket Description -->
                 <h2 class="text-lg font-semibold">Description</h2>

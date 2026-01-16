@@ -69,17 +69,32 @@
         </tbody>
     </table>
     
-        <div class="col-span-6 sm:col-span-4">
-          
+        <div class="col-span-6 sm:col-span-4 px-3 py-3">
+          <!-- Ticket History Comment -->
+          <h2 class="text-lg font-semibold">History Comments</h2>
+          @if($ticket->comments->count())
+            @foreach($ticket->comments as $comment)
+              {{ $comment->user->name ?? 'Deleted User' }} : {{ $comment->comment }}
+              <p class="text-sm font-bold px-5 py-1.5">Ticket ID: {{ $comment->ticket_id }} </p>
+              <p class="text-sm font-bold px-5 py-1.5">Ticket Number: {{ $comment->ticket->ticket_number }}</p>
+              <p class="text-sm font-bold px-5 py-1.5">Created At: {{ $comment->created_at }}</p>
+            @endforeach
+          @endif
           <!-- Ticket Comment -->
             <h2 class="text-lg font-semibold">Comments</h2>
-            @if($ticket->comments->count())
-                @foreach($ticket->comments as $comment)
-                    {{ $comment->user->name ?? 'Deleted User' }}: {{ $comment->comment }}
-                @endforeach
-            @endif
-          
+            <div class="px-2.5 py-3 w-full border">
+              @if($ticket->comments->count())
+                  @foreach($ticket->comments as $comment)
+                      {{ $comment->user->name ?? 'Deleted User' }}: {{ $comment->comment }}
+                  @endforeach
+              @endif
 
+              
+            </div>
+            <form>
+              <input type="text" class="px-5 py-2.5 mt-8">
+              <button type="submit" value="comment" class="px-4 py-2 bg-blue-600 text-white rounded ml-4">Send</button>
+            </form>
               
                 <!-- Ticket Description -->
                 <h2 class="text-lg font-semibold">Description</h2>

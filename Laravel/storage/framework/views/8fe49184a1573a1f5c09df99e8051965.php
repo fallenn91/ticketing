@@ -22,7 +22,7 @@
 $__split = function ($name, $params = []) {
     return [$name, $params];
 };
-[$__name, $__params] = $__split('tickets.show', ['showFilters' => true]);
+[$__name, $__params] = $__split('tickets.show', ['showFilters' => true,'showPriority' => true]);
 
 $key = null;
 
