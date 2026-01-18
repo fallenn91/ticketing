@@ -35,7 +35,7 @@
     
 
     
-    <select wire:model.lazy="creationFilter" class="bg-gray-100 border border-gray-300 text-sm font-medium px-3.5 py-0.5 rounded-lg h-[28px] ">
+    <select wire:model.lazy="creationFilter" class="bg-gray-100 border border-gray-300 text-sm font-medium px-4.5 py-0.5 rounded-lg h-[28px] ">
       <option value="desc">DESC</option>
       <option value="asc">ASC</option>
     </select>

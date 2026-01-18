@@ -27,10 +27,13 @@
         </td>
         @can('viewAny', App\Models\Ticket::class)
         <td class="border px-4 py-2">
-          <select wire:model="assigned_to_id" class="mt-1 block w-full">
+          <select wire:change="assignedToIdUpdate({{ $ticket->id }}, $event.target.value)" class="mt-1 block w-full">
             <option value="">-- Assign User --</option>
             @foreach ($users as $user)
-              <option value = "{{ $user->id }}">
+              <option value = "{{ $user->id }}"
+                @if($ticket->assigned_to_id == $user->id) 
+                selected 
+                @endif>
                 {{ $user->name }}
               </option>
             @endforeach

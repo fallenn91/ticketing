@@ -12,6 +12,7 @@ class Details extends Component
     public $ticket;
     public $assigned_to_id;
     public $users;
+    public $assignedToId = [];
 
     public $newComment = '';
 
@@ -45,11 +46,12 @@ class Details extends Component
         $this->render();
     }
 
-    public function updatedAssignedToId($value)
+    public function assignedToIdUpdate($ticketId, $userId)
     {
-        $this->ticket->assigned_to_id = $value;
-        $this->ticket->save();
+        $ticket = Ticket::findOrFail($ticketId);
+        $ticket->assigned_to_id = $userId;
+        $ticket->save();
 
-        $this->emit('ticketAssigned', $this->ticket->id);
+        //$this->emit('ticketAssigned', $ticket->id);
     }
 }

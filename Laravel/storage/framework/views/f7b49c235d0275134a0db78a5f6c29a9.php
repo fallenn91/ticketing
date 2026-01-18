@@ -29,10 +29,13 @@
         </td>
         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('viewAny', App\Models\Ticket::class)): ?>
         <td class="border px-4 py-2">
-          <select wire:model="assigned_to_id" class="mt-1 block w-full">
+          <select wire:change="assignedToIdUpdate(<?php echo e($ticket->id); ?>, $event.target.value)" class="mt-1 block w-full">
             <option value="">-- Assign User --</option>
             <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-              <option value = "<?php echo e($user->id); ?>">
+              <option value = "<?php echo e($user->id); ?>"
+                <?php if($ticket->assigned_to_id == $user->id): ?> 
+                selected 
+                <?php endif; ?>>
                 <?php echo e($user->name); ?>
 
               </option>
