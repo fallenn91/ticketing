@@ -1,5 +1,32 @@
 <div>
-  <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($showFilters): ?>
+  <?php
+    $status = [
+      'open' => 'OPEN',
+      'in_process' => 'IN PROCESS',
+      'resolved' => 'RESOLVED',
+      'closed' => 'CLOSED'
+    ];
+
+    $priorities = [
+      'low' => 'LOW',
+      'medium' => 'MEDIUM',
+      'high' => 'HIGH',
+      'critical' => 'CRITICAL'
+    ];
+
+    $colors = [
+      'open' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-gray-200 text-gray-800 border-gray-300'],
+      'in_process' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-blue-100 text-blue-800 border-blue-300'],
+      'resolved' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-green-100 text-green-800 border-green-300'],
+      'closed' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-red-100 text-red-800 border-red-300'],
+      'low' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-gray-200 text-gray-800 border-gray-300'],
+      'medium' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-blue-100 text-blue-800 border-blue-300'],
+      'high' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-green-100 text-green-800 border-green-300'],
+      'critical' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-red-100 text-red-800 border-red-300']
+    ];
+  ?>
+
+  
   <div class="flex items-center content-center gap-2 mb-6 ml-4 mt-5">
     <?php if (isset($component)) { $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $attributes; } ?>
@@ -21,15 +48,13 @@
 <?php $component = $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581; ?>
 <?php unset($__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581); ?>
 <?php endif; ?>
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $status; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $label): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+      <button wire:click="filterByStatus('<?php echo e($key); ?>')" class="text-sm font-medium px-1.5 py-0.5 rounded-lg border <?php echo e($statusFilter === $key ? $colors[$key]['active'] : $colors[$key]['inactive']); ?>"><?php echo e($label); ?></button>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
     
-    <button wire:click="filterByStatus(null)" class="bg-gray-800 border border-gray-300 text-white text-sm font-medium px-1.5 py-0.5 rounded-lg">ALL</button>
-    <button wire:click="filterByStatus('open')" class="bg-gray-200 border border-gray-300 text-gray-800 text-sm font-medium px-1.5 py-0.5 rounded-lg">OPEN</button>
-    <button wire:click="filterByStatus('in_process')" class="bg-blue-100 border border-blue-300 text-blue-800 text-sm font-medium px-1.5 py-0.5 rounded-lg">IN PROCESS</button>
-    <button wire:click="filterByStatus('resolved')" class="bg-green-100 border border-green-300 text-green-800 text-sm font-medium px-1.5 py-0.5 rounded-lg">RESOLVED</button>
-    <button wire:click="filterByStatus('closed')" class="bg-red-100 border border-red-300 text-red-800 text-sm font-medium px-1.5 py-0.5 rounded-lg">CLOSED</button>
 
     
-    <select wire:model.lazy="creationFilter" class="bg-gray-100 border border-gray-300 text-sm font-medium px-2.5 py-0.5 rounded-lg h-[28px] ">
+    <select wire:model.lazy="creationFilter" class="bg-gray-100 border border-gray-300 text-sm font-medium px-3.5 py-0.5 rounded-lg h-[28px] ">
       <option value="desc">DESC</option>
       <option value="asc">ASC</option>
     </select>
@@ -37,14 +62,14 @@
     
     <?php if (isset($component)) { $__componentOriginal18c21970322f9e5c938bc954620c12bb = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal18c21970322f9e5c938bc954620c12bb = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.text-input','data' => ['id' => 'search','type' => 'text','class' => 'mt-1 block w-[150px]','wire:model.defer' => 'search','wire:keydown.enter' => 'filterBySearching','placeholder' => 'Search your ticket...','autocomplete' => 'search']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.text-input','data' => ['id' => 'search','type' => 'text','class' => 'mt-1 block w-[150px]','wire:model.live.debounce.300ms' => 'search','placeholder' => 'Search...','autocomplete' => 'search']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('text-input'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['id' => 'search','type' => 'text','class' => 'mt-1 block w-[150px]','wire:model.defer' => 'search','wire:keydown.enter' => 'filterBySearching','placeholder' => 'Search your ticket...','autocomplete' => 'search']); ?>
+<?php $component->withAttributes(['id' => 'search','type' => 'text','class' => 'mt-1 block w-[150px]','wire:model.live.debounce.300ms' => 'search','placeholder' => 'Search...','autocomplete' => 'search']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginal18c21970322f9e5c938bc954620c12bb)): ?>
@@ -56,8 +81,8 @@
 <?php unset($__componentOriginal18c21970322f9e5c938bc954620c12bb); ?>
 <?php endif; ?>
   </div>
-  <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
-  <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($showPriority): ?>
+  
+  
   <div class="flex items-center content-center gap-2 mb-6 ml-4 mt-5">
     <?php if (isset($component)) { $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $attributes; } ?>
@@ -79,14 +104,16 @@
 <?php $component = $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581; ?>
 <?php unset($__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581); ?>
 <?php endif; ?>
-    <button wire:click="filterByPriority(null)" class="bg-gray-800 border border-gray-300 text-white text-sm font-medium px-1.5 py-0.5 rounded-lg">ALL</button>
-    <button wire:click="filterByPriority('low')" class="bg-gray-200 border border-gray-300 text-gray-800 text-sm font-medium px-1.5 py-0.5 rounded-lg">LOW</button>
-    <button wire:click="filterByPriority('medium')" class="bg-blue-100 border border-blue-300 text-blue-800 text-sm font-medium px-1.5 py-0.5 rounded-lg">MEDIUM</button>
-    <button wire:click="filterByPriority('high')" class="bg-green-100 border border-green-300 text-green-800 text-sm font-medium px-1.5 py-0.5 rounded-lg">HIGH</button>
-    <button wire:click="filterByPriority('critical')" class="bg-red-100 border border-red-300 text-red-800 text-sm font-medium px-1.5 py-0.5 rounded-lg">CRITIAL</button>
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $priorities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $label): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+      <button wire:click="filterByPriority('<?php echo e($key); ?>')" class="text-sm font-medium px-1.5 py-0.5 rounded-lg border <?php echo e($statusPriority === $key ? $colors[$key]['active'] : $colors[$key]['inactive']); ?>"><?php echo e($label); ?></button>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+    <button wire:click="clearFilters"
+        class="px-1.5 py-0.5 bg-red-600 text-white rounded-lg ml-4">
+        CLEAR
+    </button>
 
   </div>
-  <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+  
   <table class="table-auto w-full">
         
         <thead>

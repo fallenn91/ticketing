@@ -8,18 +8,19 @@ use Illuminate\Support\Facades\Gate;
 class Show extends Component
 {
     
-    public $priority;
+    
     public $openStatusDropdown = null;
     public $openPriorityDropdown = null;
     public $statusFilter = null;
-    public $status = null;
     public $showFilters = false;
     public $creationFilter = 'desc';
     public $statusPriority = null;
     public $showPriority = false;
     public $search = '';
 
-    protected $listeners = ['saved', 'ticketUpdated' => 'refreshTickets'];
+    protected $listeners = ['saved', 
+    'ticketUpdated' => 'refreshTicket', 
+    'ticketAssigned' => 'refreshTicket'];
 
     public function render()
     {
@@ -43,18 +44,18 @@ class Show extends Component
         }
 
         /*****SEARCH*****/ 
-        $userInput = strtoupper($this->search); 
+        $query->when(trim($this->search) !== '', function($query) {
+          $userInput = trim($this->search);
 
-        $query->where(function($q) use ($userInput) {
-            $q->where('title', 'like', '%' . $userInput . '%');
-
-            if (preg_match('/TCK-(\d+)/', $userInput, $matches) && is_numeric($matches[1])) {
-                $q->orWhere('id', $matches[1]);
-            }
-
-            if (isset($this->search)) {
-                $q->orWhere('ticket_number', 'like', '%' . $userInput . '%');
-            }
+          $query->where(function($q) use ($userInput) {
+              $q->where('title', 'like', '%' . $userInput . '%')
+              ->orWhere('ticket_number', 'like', '%' . $userInput . '%');
+  
+              if (preg_match('/TCK-(\d+)/', $userInput, $matches)) {
+                  $q->orWhere('id', (int) $matches[1]);
+  
+              }            
+          });
         });
 
         /*****TIME CREATION FILTER*****/
@@ -109,11 +110,7 @@ class Show extends Component
 
     public function refreshTicket($ticketId)
     {
-      $ticket = Ticket::find($ticketId);
-      if ($ticket) {
-
-        $this->render();
-      }
+      $this->render();
     }
 
     public function filterByStatus($status)
@@ -132,17 +129,16 @@ class Show extends Component
       $this->statusPriority = $priority;
     }
 
+    public function clearFilters()
+    {
+      $this->statusFilter = null;
+      $this->statusPriority = null;
+    }
+
     public function filterByCreation($value)
     {
       $this->creationFilter = $creationFilter;
     }
 
-    public function filterBySearching()
-    {
-      $this->validate([
-        'search' => 'nullable|string|max:50',
-      ]);
-      //$this->search = $search;
-    }
     
 }
