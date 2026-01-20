@@ -143,13 +143,13 @@
                     <td class="border px-4 py-2">{{ $ticket->created_at }}
                       @can('delete', $ticket)
                       <button wire:click="deleteTicket({{ $ticket->id }})"
-                        class="px-4 py-2 bg-red-600 text-white rounded ml-4"
+                        class="inline-block px-4 py-2 bg-red-600 text-white rounded ml-4"
                         >
                         Delete
                       </button>
                     @endcan
                     <a href="{{ route('details', $ticket->ticket_number) }}"
-                      class="px-4 py-2 bg-blue-600 text-white rounded ml-4">
+                      class="inline-block px-4 py-2 bg-blue-600 text-white rounded ml-4">
                         Details
                     </a>
 

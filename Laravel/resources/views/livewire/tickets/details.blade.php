@@ -1,4 +1,3 @@
-
 <div>
   @if($ticket)
   <table class="table-auto w-full">

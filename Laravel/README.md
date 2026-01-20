@@ -47,15 +47,12 @@ docker compose exec laravel.test php artisan migrate --seed
 
 ## Features
 
-| Status | Priority | Category |
-|--------|----------|----------|
-| Open   | Low      | RRHH     |
-| In Process | Medium | IT     |
-| Resolved   | High   | Web    |
-| Closed     | Critical |      |
+| Status     | Priority | Category |
+|--------    |----------|----------|
+| Open       | Low      | RRHH     |
+| In Process | Medium   | IT       |
+| Resolved   | High     | Web      |
+| Closed     | Critical | Marketing|
 
--**Status:** Open, In Process, Resolved, Closed
--**Priority:** Low, Medium, High, Critical
--**Category:** RRHH, It, Web
 
 

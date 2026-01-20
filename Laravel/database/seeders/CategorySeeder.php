@@ -16,5 +16,6 @@ class CategorySeeder extends Seeder
         TicketCategory::firstOrCreate(['name' => 'RRHH']);
         TicketCategory::firstOrCreate(['name' => 'IT']);
         TicketCategory::firstOrCreate(['name' => 'Web']);
+        TicketCategory::firstOrCreate(['name' => 'Marketing']);
     }
 }

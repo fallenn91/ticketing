@@ -7,8 +7,11 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <a href="{{ route('management') }}" class="inline-block mb-5">
+              <button class="px-4 py-2 mb-5 bg-blue-600 text-white rounded-lg ml-4">Back</button>
+            </a>
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <livewire:tickets.details :ticket="$ticket" />
+                <livewire:tickets.details :ticket="$ticket"/>
             </div>
         </div>
     </div>
