@@ -4,11 +4,13 @@ namespace App\Livewire\Tickets;
 use App\Models\Ticket;
 use Livewire\Component;
 use Illuminate\Support\Facades\Gate;
+use Livewire\WithPagination;
 
 class Show extends Component
 {
+    use WithPagination;
     
-    
+    protected $paginationTheme = 'tailwind';
     public $openStatusDropdown = null;
     public $openPriorityDropdown = null;
     public $statusFilter = null;
@@ -65,8 +67,7 @@ class Show extends Component
           ? $this->creationFilter : 'desc'
         );
 
-
-        $tickets = $query->get();
+        $tickets = $query->paginate(5);
         
         return view('livewire.tickets.show', compact('tickets'));
     }
@@ -140,5 +141,4 @@ class Show extends Component
       $this->creationFilter = $creationFilter;
     }
 
-    
 }

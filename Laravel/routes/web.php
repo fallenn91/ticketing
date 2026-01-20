@@ -6,7 +6,7 @@ use App\Models\Ticket;
 use App\Livewire\Tickets\Details;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('dashboard');
 });
 
 Route::middleware([

@@ -148,6 +148,13 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
+        @can ('viewAny', App\Models\Ticket::class)
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link href="{{ route('management') }}" :active="request()->routeIs('mamangement')">
+                {{ __('Tickets Management') }}
+            </x-responsive-nav-link>
+        </div>
+        @endcan
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

@@ -19,9 +19,9 @@
       'in_process' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-blue-100 text-blue-800 border-blue-300'],
       'resolved' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-green-100 text-green-800 border-green-300'],
       'closed' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-red-100 text-red-800 border-red-300'],
-      'low' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-gray-200 text-gray-800 border-gray-300'],
-      'medium' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-blue-100 text-blue-800 border-blue-300'],
-      'high' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-green-100 text-green-800 border-green-300'],
+      'low' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-green-100 text-green-800'],
+      'medium' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-yellow-100 text-yellow-800 border-yellow-300'],
+      'high' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-orange-100 text-orange-800 border-orange-300'],
       'critical' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-red-100 text-red-800 border-red-300']
     ];
   ?>
@@ -127,6 +127,7 @@
         </thead>
         <tbody>
             <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $tickets; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ticket): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            
                 <tr>
                     <td class="border px-4 py-2"><?php echo e(sprintf('TCK-%04d', $ticket->ticket_number)); ?></td>
                     <td class="border px-4 py-2"><?php echo e($ticket->title); ?></td>
@@ -157,7 +158,9 @@
                         <?php echo e(ucfirst(str_replace('_', ' ', $status))); ?>
 
                       </button>
+                      
                       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+                      
                     </div>
                     <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
                   </td>
@@ -210,7 +213,13 @@
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
             
         </tbody>
-    </table>
+      </table>
+      <div class="flex justify-center items-center mb-6 ml-4 mt-5">
+        <?php echo e($tickets->links('vendor.pagination.tailwind')); ?>
+
+      </div>
+
+    
     
 </div>
 <?php /**PATH /var/www/html/resources/views/livewire/tickets/show.blade.php ENDPATH**/ ?>
