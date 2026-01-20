@@ -42,10 +42,17 @@ docker compose exec laravel.test php artisan migrate --seed
 
 | Role  | Actions
 |-------|--------------------------------|
-| Admin | Can create tickets, view all tickets, Assign to other users, change Status and Priority, comment any ticket. |
+| Admin | Can create tickets, view all tickets, assign to other users, change Status and Priority, comment any ticket. |
 | User  | Can create tickets, view just their tickets, comment their tickets. |
 
 ## Features
+
+| Status | Priority | Category |
+|--------|----------|----------|
+| Open   | Low      | RRHH     |
+| In Process | Medium | IT     |
+| Resolved   | High   | Web    |
+| Closed     | Critical |      |
 
 -**Status:** Open, In Process, Resolved, Closed
 -**Priority:** Low, Medium, High, Critical
