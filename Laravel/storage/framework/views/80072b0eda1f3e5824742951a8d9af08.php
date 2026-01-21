@@ -8,19 +8,8 @@
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
 <?php $component->withAttributes(['submit' => 'create']); ?>
-     <?php $__env->slot('title', null, []); ?> 
-        <?php echo e(__('Create New Ticket')); ?>
-
-     <?php $__env->endSlot(); ?>
-    
-     <?php $__env->slot('description', null, []); ?> 
-        <?php echo e(__('Fill out the form to create a ticket.')); ?>
-
-     <?php $__env->endSlot(); ?>
-    
-    
      <?php $__env->slot('form', null, []); ?> 
-        <div class="col-span-6 sm:col-span-4">
+        <div class="col-span-6 sm:col-span-4 ">
           <!-- Ticket Title -->
           <?php if (isset($component)) { $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $attributes; } ?>

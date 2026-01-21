@@ -1,15 +1,6 @@
 <x-form-section submit="create">
-    <x-slot name="title">
-        {{ __('Create New Ticket') }}
-    </x-slot>
-    
-    <x-slot name="description">
-        {{ __('Fill out the form to create a ticket.') }}
-    </x-slot>
-    
-    
     <x-slot name="form">
-        <div class="col-span-6 sm:col-span-4">
+        <div class="col-span-6 sm:col-span-4 ">
           <!-- Ticket Title -->
           <x-input-label for="title" value="{{ __('Ticket Title') }}" />
 

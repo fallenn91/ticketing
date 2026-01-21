@@ -15,9 +15,15 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('My Tickets') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('create') }}" :active="request()->routeIs('create')">
+                          {{ __('Create Ticket') }}
+                      </x-nav-link>
                     @can('viewAny', App\Models\Ticket::class)
                       <x-nav-link href="{{ route('management') }}" :active="request()->routeIs('management')">
                           {{ __('Tickets Management') }}
+                      </x-nav-link>
+                      <x-nav-link href="{{ route('configuration') }}" :active="request()->routeIs('configuration')">
+                          {{ __('Tickets Configuration') }}
                       </x-nav-link>
                     @endcan
                 </div>
@@ -152,6 +158,11 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link href="{{ route('management') }}" :active="request()->routeIs('mamangement')">
                 {{ __('Tickets Management') }}
+            </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link href="{{ route('configuration') }}" :active="request()->routeIs('configuration')">
+                {{ __('Tickets Configuration') }}
             </x-responsive-nav-link>
         </div>
         @endcan

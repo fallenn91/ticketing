@@ -82,4 +82,8 @@ class User extends Authenticatable
     {
       return $this->role === 'admin';
     }
+    public function groups()
+    {
+      return $this->belongsToMany(Group::class);
+    }
 }

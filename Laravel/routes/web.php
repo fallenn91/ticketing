@@ -17,8 +17,14 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('tickets');
     })->name('dashboard');
+    Route::get('/create', function() {
+      return view('ticketCreate');
+    })->name('create');
     Route::get('/management', function() {
       return view('ticketManagement');
     })->name('management');
     Route::get('/details/{ticket_number}',[ TicketController::class, 'show'])->name('details');
+    Route::get('/configuration', function() {
+      return view('ticketConfiguration');
+    })->name('configuration');
 });
