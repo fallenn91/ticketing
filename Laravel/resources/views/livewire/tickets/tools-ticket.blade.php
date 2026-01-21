@@ -1,3 +1,4 @@
+<div>
 <x-form-section submit="createGroup">
     <x-slot name="form">
         <div class="col-span-6 sm:col-span-4 ">
@@ -56,4 +57,22 @@
     </x-slot>
 
 </x-form-section>
+<x-form-section submit="createGroup" class="mt-5">
+    <x-slot name="form">
+        <div class="col-span-6 sm:col-span-4 ">
+
+          <x-input-label for="groups" value="{{ __('Groups') }}" />
+
+          @foreach($allGroups as $group)
+            <p><strong>{{ $group->name }}</strong></p>
+          @endforeach
+          
+         
+        </div>
+        
+    </x-slot>
+
+</x-form-section>
+</div>
+
 

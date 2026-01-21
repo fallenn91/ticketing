@@ -8,6 +8,7 @@
 <?php $attributes = $attributes->except(\App\View\Components\AppLayout::ignoredParameterNames()); ?>
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
+  
      <?php $__env->slot('header', null, []); ?> 
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <?php echo e(__('Tickets Configuration')); ?>
@@ -15,7 +16,20 @@
         </h2>
      <?php $__env->endSlot(); ?>
 
-    <div class="py-12">
+    <div class="flex min-h-screen">
+
+        <!-- Sidebar -->
+        <aside class="w-80 bg-blue-800 text-white flex-shrink-0 border-blue">
+            <nav class="mt-4">
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-800 rounded transition-colors duration-200">Groups</a>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-800 rounded transition-colors duration-200">Statuses</a>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-800 rounded transition-colors duration-200">Priority</a>
+            </nav>
+        </aside>
+
+        <!-- Contenido principal -->
+        <main class="flex-1 py-12 bg-gray-100">
+            <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">            
                 <?php
 $__split = function ($name, $params = []) {
@@ -39,6 +53,9 @@ if (isset($__slots)) unset($__slots);
 ?>
         </div>
     </div>
+        </main>
+
+    
  <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>
