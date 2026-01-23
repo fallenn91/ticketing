@@ -25,7 +25,17 @@
       'critical' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-red-100 text-red-800 border-red-300']
     ];
   @endphp
+  
+  <div class="flex items-center content-center gap-2 mb-6 ml-4 mt-5">
 
+    @if ($myGroups->isNotEmpty())
+      <x-input-label for="groups" value="{{ __('GROUPS') }}" />
+      @foreach($myGroups as $group)
+        <span class="px-3 py-1 rounded-full text-sm font-semibold bg-blue-100 text-blue-800">{{ $group->name }}</span>
+      @endforeach
+    @endif
+  </div>
+  
   
   <div class="flex items-center content-center gap-2 mb-6 ml-4 mt-5">
     <x-input-label for="filterByStatus" value="{{ __('STATUS') }}" />

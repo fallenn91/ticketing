@@ -1,14 +1,14 @@
 <div>
 <?php if (isset($component)) { $__componentOriginalb95fb6157a10b6449458ef38a3dd045c = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginalb95fb6157a10b6449458ef38a3dd045c = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.form-section','data' => ['submit' => 'createGroup']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.form-section','data' => ['submit' => 'createGroup','id' => 'groups']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('form-section'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['submit' => 'createGroup']); ?>
+<?php $component->withAttributes(['submit' => 'createGroup','id' => 'groups']); ?>
      <?php $__env->slot('form', null, []); ?> 
         <div class="col-span-6 sm:col-span-4 ">
 
@@ -95,7 +95,7 @@
                   <li class="flex justify-between items-center mt-1">
                     <?php echo e($user->name); ?>
 
-                    <button wire:click="removeUser(<?php echo e($userId); ?>)" class="px-2 py-1 bg-red-500 text-white rounded text-xs"> 
+                    <button wire:click="removeUser(<?php echo e($userId); ?>)" class="px-2 py-1 bg-red-500 text-white rounded text-sm"> 
                       Remove User
                     </button>
                   </li>
@@ -112,9 +112,6 @@
 
           
          <?php $__env->endSlot(); ?>
-        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(session()->has('message')): ?>
-          <p class="mt-3 text-green-600"><?php echo e(session('message')); ?> </p>
-        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
      <?php $__env->endSlot(); ?>
 
  <?php echo $__env->renderComponent(); ?>
@@ -127,60 +124,62 @@
 <?php $component = $__componentOriginalb95fb6157a10b6449458ef38a3dd045c; ?>
 <?php unset($__componentOriginalb95fb6157a10b6449458ef38a3dd045c); ?>
 <?php endif; ?>
-<?php if (isset($component)) { $__componentOriginalb95fb6157a10b6449458ef38a3dd045c = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginalb95fb6157a10b6449458ef38a3dd045c = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.form-section','data' => ['submit' => 'createGroup','class' => 'mt-5']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('form-section'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes(['submit' => 'createGroup','class' => 'mt-5']); ?>
-     <?php $__env->slot('form', null, []); ?> 
-        <div class="col-span-6 sm:col-span-4 ">
+<table class="table-auto w-full bg-white overflow-hidden shadow-xl mt-5 sm:rounded-lg">
+  <thead>
+    <tr>
+      <th class="px-4 py-2">Groups</th>
+      <th class="px-4 py-2">Users</th>
+      <th class="px-4 py-2">Created At</th>
+    </tr>
 
-          <?php if (isset($component)) { $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-label','data' => ['for' => 'groups','value' => ''.e(__('Groups')).'']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('input-label'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes(['for' => 'groups','value' => ''.e(__('Groups')).'']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581)): ?>
-<?php $attributes = $__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581; ?>
-<?php unset($__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581)): ?>
-<?php $component = $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581; ?>
-<?php unset($__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581); ?>
-<?php endif; ?>
-
-          <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $allGroups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $group): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <p><strong><?php echo e($group->name); ?></strong></p>
+  </thead>
+  <tbody>
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(session('success')): ?>
+    <p class="mt-3 text-red-600"><?php echo e(session('success')); ?> </p>
+    
+    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $allGroups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $group): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+      <tr>
+        <td  class="border px-4 py-2"><?php echo e($group->name); ?></td>
+        <td  class="border px-4 py-2">
+          <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $group->users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <span class="block"><?php echo e($user->name); ?></span>
           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
-          
-         
-        </div>
-        
-     <?php $__env->endSlot(); ?>
+        </td>
+        <td  class="border px-4 py-2">
+          <?php echo e($group->created_at); ?>
 
- <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginalb95fb6157a10b6449458ef38a3dd045c)): ?>
-<?php $attributes = $__attributesOriginalb95fb6157a10b6449458ef38a3dd045c; ?>
-<?php unset($__attributesOriginalb95fb6157a10b6449458ef38a3dd045c); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalb95fb6157a10b6449458ef38a3dd045c)): ?>
-<?php $component = $__componentOriginalb95fb6157a10b6449458ef38a3dd045c; ?>
-<?php unset($__componentOriginalb95fb6157a10b6449458ef38a3dd045c); ?>
-<?php endif; ?>
+
+            
+          <button type="button" wire:click="deleteGroup(<?php echo e($group->id); ?>)"
+            class="inline-block px-4 py-2 bg-red-600 text-white rounded ml-4"
+            >
+            Delete Group
+          </button>
+            
+
+        </td>
+      </tr>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+  </tbody>
+</table>
+
+
+<div id="status" class="w-full bg-white overflow-hidden shadow-xl mt-5 sm:rounded-lg px-5 py-2.5">
+  <h1 class="text-lg font-bold mb-2">Status</h1>
+    <input type="text" 
+    id="status" 
+    class="mt-1 block"
+    wire:model.defer="status" 
+    autocomplete="status"/>
+  <button type="submit" wire:click="createStatus" class="px-4 py-2 bg-blue-600 text-white rounded-lg mt-5">Create Status</button>
+  <div class="bg-black text-white w-full">
+    <ul class="text-sm text-semibold">
+      <li>STATUS 1</li>
+    </ul>
+  </div>
 </div>
+
 
 
 <?php /**PATH /var/www/html/resources/views/livewire/tickets/tools-ticket.blade.php ENDPATH**/ ?>

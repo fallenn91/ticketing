@@ -4,6 +4,7 @@ namespace App\Livewire\Tickets;
 use App\Models\Ticket;
 use Livewire\Component;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
 
 class Show extends Component
@@ -19,6 +20,7 @@ class Show extends Component
     public $statusPriority = null;
     public $showPriority = false;
     public $search = '';
+    public $myGroups;
 
     protected $listeners = ['saved', 
     'ticketUpdated' => 'refreshTicket', 
@@ -123,6 +125,10 @@ class Show extends Component
     {
       $this->showFilters = $showFilters;
       $this->showPriority = $showPriority;
+       $this->allUsers = User::class;
+      $this->allGroups = Group::class;
+
+      $this->loadGroups();
     }
 
     public function filterByPriority($priority)
@@ -139,6 +145,13 @@ class Show extends Component
     public function filterByCreation($value)
     {
       $this->creationFilter = $creationFilter;
+    }
+
+    public function loadGroups()
+    {
+      $this->myGroups = Auth::user()->groups()->get();
+      
+
     }
 
 }

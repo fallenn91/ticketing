@@ -5,6 +5,7 @@ namespace App\Livewire\Tickets;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\Group;
+use Illuminate\Support\Facades\Gate;
 
 class ToolsTicket extends Component
 {
@@ -15,14 +16,17 @@ class ToolsTicket extends Component
   public $selectedUser;
   public $allGroups;
 
+
+  protected $listeners = ['saved'];
+
     public function mount()
     {
-
       $this->allUsers = User::all();
       $this->allGroups = Group::all();
     }
     public function render()
     {
+        
         return view('livewire.tickets.tools-ticket');
     }
     public function createGroup()
@@ -33,16 +37,19 @@ class ToolsTicket extends Component
           'selectedUsers.*' => 'exists:users,id',
         ]);
 
+        $this->authorize('create', Group::class);
+
         $group = Group::create([
           'name' => $this->group_name,
         ]);
         $group->users()->sync($this->selectedUsers);
 
+        $this->allGroups = Group::all();
         $this->group_name = '';
         $this->selectedUser = null;
         $this->selectedUsers = [];
+        $this->dispatch('saved');
 
-        session()->flash('message', 'Group created successfully.');
     }
     public function addUser()
     {
@@ -54,5 +61,15 @@ class ToolsTicket extends Component
     {
       $this->selectedUsers = array_filter($this->selectedUsers, fn($id) => $id != $userId);
     }
+    public function deleteGroup($id)
+    {
+      $group = Group::findOrFail($id);
+      Gate::authorize('delete', $group);
+      $group->delete();
+      $this->allGroups = Group::all();
+      session()->flash('success', 'Group deleted successfully.');
+    }
+    
+    
 }
 
