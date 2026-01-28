@@ -4,6 +4,7 @@ namespace App\Livewire\Tickets;
 
 use Livewire\Component;
 use App\Models\Ticket;
+use App\Models\TicketStatus;
 use App\Models\User;
 use App\Models\TicketCategory;
 
@@ -44,14 +45,16 @@ class Create extends Component
       ]);
       $nextNumber = (Ticket::max('ticket_number') ?? 0) + 1;
 
+      $defaultStatus = TicketStatus::where('is_default', true)->firstOrFail();
+
       $ticket = Ticket::create([
         'ticket_number' => $nextNumber,
         'user_id' => $this->user_id ?? auth()->id(),
         'assigned_to_id' => $this->assigned_to_id ?? null,
         'title' => $this->title,
         'description' => $this->description ?? '',
-        'status' => 'in_process',
         'priority' => 'medium',
+        'status_id' => $defaultStatus->id,
         'category_id' => $this->category_id,
         'created_at' => now(),
       ]);

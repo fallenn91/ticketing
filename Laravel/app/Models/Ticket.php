@@ -19,7 +19,7 @@ class Ticket extends Model
         'title',
         'description',
         'comments_id',
-        'status',
+        'status_id',
         'priority',
         'category_id',
         'timestamps',
@@ -49,6 +49,22 @@ class Ticket extends Model
     public function getRouteKeyName()
     {
         return 'ticket_number';
+    }
+
+    public function status()
+    {
+      return $this->belongsTo(TicketStatus::class, 'status_id');
+    }
+
+    protected static function booted()
+    {
+      static::creating(function ($ticket) {
+
+        if (!$ticket->status_id) {
+          $ticket->status_id = TicketStatus::where('is_default', true)->value('id');
+        }
+
+      });
     }
     
 }

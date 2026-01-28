@@ -4,14 +4,17 @@ namespace App\Livewire\Tickets;
 
 use Livewire\Component;
 use App\Models\Ticket;
+use App\Models\TicketStatus;
 use App\Models\TicketComment;
 use App\Models\User;
 
 class Details extends Component
 {
     public $ticket;
+    public $tickets;
     public $assigned_to_id;
     public $users;
+    public $statuses;
     public $assignedToId = [];
 
     public $newComment = '';
@@ -22,6 +25,8 @@ class Details extends Component
         $this->ticket = $ticket;
         $this->assigned_to_id = $ticket->assigned_to_id;
         $this->users = User::all();
+        $this->statuses = TicketStatus::all();
+        $this->tickets = Ticket::all();
     }
     public function render()
     {

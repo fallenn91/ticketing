@@ -94,19 +94,56 @@
 </table>
 
 
-<div id="status" class="w-full bg-white overflow-hidden shadow-xl mt-5 sm:rounded-lg px-5 py-2.5">
-  <h1 class="text-lg font-bold mb-2">Status</h1>
+<div id="status" class="w-full bg-white overflow-hidden shadow-xl mt-5 sm:rounded-lg px-5 py-2.5 ">
+  <h1 class="text-lg font-bold mb-2">Ticket Status</h1>
+  <div class="w-full flex items-center align-center gap-4 py-2">
+
     <input type="text" 
-    id="status" 
+    id="name" 
     class="mt-1 block"
-    wire:model.defer="status" 
-    autocomplete="status"/>
+    wire:model.defer="name" 
+    autocomplete="name"/>
+  @error('name')
+    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+  @enderror
+    <input type="color"
+      wire:model="color"
+      class="w-100 h-10 rounded-lg cursor-pointer"
+    />
+  </div>
   <button type="submit" wire:click="createStatus" class="px-4 py-2 bg-blue-600 text-white rounded-lg mt-5">Create Status</button>
-  <div class="bg-black text-white w-full">
-    <ul class="text-sm text-semibold">
-      <li>STATUS 1</li>
+  
+  <div class="w-full py-5 px-2.5 border mt-5">
+    <ul class="space-y-2">
+     @foreach($statuses as $item)
+      <li class="mt-5">
+        <span class="px-2.5 py-3 rounded-full text-sm font-semibold"
+              style="background-color: {{ $item->color }}30; color: black; 
+              border: 1px solid {{ $item->color}}99;">{{ $item->name }}
+        </span>
+        <button type="button" wire:click="deleteStatus({{ $item->id }})"
+              class="inline-block px-2 py-1 text-sm bg-red-600 text-white rounded ml-4"
+              >
+              Delete Status
+        </button>
+      </li>
+      
+     @endforeach
     </ul>
   </div>
+  
+    @if(session('deleted'))
+      <p class="mt-3 text-red-600">{{ session('deleted')}} </p>
+    @endif
+    @if(session('error'))
+      <p class="mt-3 text-red-600">{{ session('error')}} </p>
+    @endif
+    @if(session('default'))
+      <p class="mt-3 text-red-600">{{ session('default')}} </p>
+    @endif
+    
+    
+  
 </div>
 
 

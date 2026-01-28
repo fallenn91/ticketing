@@ -59,11 +59,11 @@
 
     <x-slot name="actions">
         
-            <button wire:click="create"
-            class="px-4 py-2 bg-blue-600 text-white rounded"
-            >
-            Create
-            </button>
+      <button wire:click="create"
+      class="px-4 py-2 bg-blue-600 text-white rounded"
+      >
+      Create
+      </button>
         
     </x-slot>
 </x-form-section>

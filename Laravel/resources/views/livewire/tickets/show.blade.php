@@ -1,11 +1,5 @@
 <div>
   @php
-    $status = [
-      'open' => 'OPEN',
-      'in_process' => 'IN PROCESS',
-      'resolved' => 'RESOLVED',
-      'closed' => 'CLOSED'
-    ];
 
     $priorities = [
       'low' => 'LOW',
@@ -15,10 +9,6 @@
     ];
 
     $colors = [
-      'open' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-gray-200 text-gray-800 border-gray-300'],
-      'in_process' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-blue-100 text-blue-800 border-blue-300'],
-      'resolved' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-green-100 text-green-800 border-green-300'],
-      'closed' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-red-100 text-red-800 border-red-300'],
       'low' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-green-100 text-green-800'],
       'medium' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-yellow-100 text-yellow-800 border-yellow-300'],
       'high' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-orange-100 text-orange-800 border-orange-300'],
@@ -39,9 +29,17 @@
   
   <div class="flex items-center content-center gap-2 mb-6 ml-4 mt-5">
     <x-input-label for="filterByStatus" value="{{ __('STATUS') }}" />
-    @foreach ($status as $key => $label )
-      <button wire:click="filterByStatus('{{ $key }}')" class="text-sm font-medium px-1.5 py-0.5 rounded-lg border {{ $statusFilter === $key ? $colors[$key]['active'] : $colors[$key]['inactive'] }}">{{ $label }}</button>
-    @endforeach
+    <div class="flex flex-wrap gap-2">
+      @foreach($statuses as $status)
+        <button wire:click="filterByStatus({{ $status->id }})"
+          class="text-sm font-medium px-2 py-1 rounded-lg border transition"
+          style="background-color: {{ $statusFilter === $status->id ? $status->color :  $status->color . '20' }}; 
+          border: 1px solid {{ $status->color }}99;">
+          {{ ucfirst(str_replace('_', ' ', $status->name)) }}
+        </button>
+      @endforeach
+    </div>
+    
     
 
     
@@ -92,29 +90,19 @@
                     <td class="border px-4 py-2">{{ sprintf('TCK-%04d', $ticket->ticket_number) }}</td>
                     <td class="border px-4 py-2">{{ $ticket->title }}</td>
                     <td class="border px-4 py-2"><button wire:click="toggleStatusDropdown({{ $ticket->id }})"
-                      class="px-3 py-1 rounded-full text-sm font-semibold 
-                      {{  match($ticket->status) {
-                            'open' => 'bg-gray-100 text-gray-800',
-                            'in_process' => 'bg-blue-100 text-blue-800',
-                            'resolved' => 'bg-green-100 text-green-800',
-                            'closed' => 'bg-red-100 text-red-800',
-                      } }}">
-                      {{ ucfirst(str_replace('_', ' ', $ticket->status)) }}
+                      class="px-3 py-1 rounded-full text-sm font-semibold"
+                      style="background-color: {{ $ticket->status->color}}20; color: black; border: 1px solid {{ $ticket->status->color}}99; ">
+                      {{ ucfirst(str_replace('_', ' ', $ticket->status->name)) }}
                       </button>
                     <!--Dropdown-->
                     @if($openStatusDropdown === $ticket->id)
                     <div class="absolute z-10 mt-2 w-40 bg-white border rounded-lg shadow-lg">
-                      @foreach (['open', 'in_process', 'resolved', 'closed'] as $status)
-                      <button wire:click="changeStatus({{ $ticket->id }}, '{{ $status }}')"
-                        class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100
-                        {{  match($ticket->status) {
-                            'open' => 'bg-gray-100 text-gray-800',
-                            'in_process' => 'bg-blue-100 text-blue-800',
-                            'resolved' => 'bg-green-100 text-green-800',
-                            'closed' => 'bg-red-100 text-red-800',
-                      } }}">
+                      @foreach ($statuses as $status)
+                      <button wire:click="changeStatus({{ $ticket->id }}, '{{ $status->id }}')"
+                        class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                        style="background-color: {{ $status->color }}10; color: {{ $status->color }};" >
                         
-                        {{ ucfirst(str_replace('_', ' ', $status)) }}
+                        {{ ucfirst(str_replace('_', ' ', $status->name)) }}
                       </button>
                       
                       @endforeach

@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Livewire\Tickets;
-
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\Group;
+use App\Models\Ticket;
+use App\Models\TicketStatus;
 use Illuminate\Support\Facades\Gate;
 
 class ToolsTicket extends Component
@@ -15,19 +17,32 @@ class ToolsTicket extends Component
   public $selectedUsers = [];
   public $selectedUser;
   public $allGroups;
+  public $name;
+  public $color = '#9ca3af';
+  public $statuses;
+  
 
 
-  protected $listeners = ['saved'];
+    protected $listeners = ['saved'];
+
+    protected $rules = [
+      'name' => 'required|string|max:50|unique:ticket_statuses,name',
+      'color' => 'required|regex:/^#([A-Fa-f0-9]{6})$/',
+    ];
+
+    protected $messages = [
+      'name.unique' => 'Name already in use.',
+    ];
 
     public function mount()
     {
       $this->allUsers = User::all();
       $this->allGroups = Group::all();
+      $this->statuses = TicketStatus::all();
     }
     public function render()
     {
-        
-        return view('livewire.tickets.tools-ticket');
+        return view('livewire.tickets.tools-ticket', ['statuses' => TicketStatus::all()]);
     }
     public function createGroup()
     {
@@ -68,6 +83,35 @@ class ToolsTicket extends Component
       $group->delete();
       $this->allGroups = Group::all();
       session()->flash('success', 'Group deleted successfully.');
+    }
+
+    public function createStatus()
+    {
+      $this->validate();
+
+      TicketStatus::create([
+        'name' => strtolower($this->name),
+        'color' => $this->color,
+      ]);
+
+      $this->statuses = TicketStatus::all();
+
+      $this->reset(['name', 'color']);
+    }
+
+    public function deleteStatus($statusId)
+    {
+      $status = TicketStatus::findOrFail($statusId);
+      if ($status->tickets()->exists()) {
+        return redirect()->back()->with('error', 'Cannot delete status with assigned tickets.');
+      }
+    
+      if ($status->is_default) {
+        return redirect()->back()->with('default', 'Cannot delete default status.');
+      }
+      $status->delete();
+      
+      session()->flash('deleted', 'Delete status successfully.');
     }
     
     

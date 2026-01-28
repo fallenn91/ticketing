@@ -21,6 +21,8 @@
             <img src="<?php echo e(asset('storage/' . $product->img )); ?>" style="width: 500px" class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail">
             <div class="card-body">
                 <p class="card-text">Product Name: <?php echo e($product->name); ?></p>
+                <p class="card-text">Price: <?php echo e($product->price); ?></p>
+                <p class="card-text">Category: <?php echo e($product->category); ?></p>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <form method="POST" action="<?php echo e(route('products.destroy', $product->id)); ?>">

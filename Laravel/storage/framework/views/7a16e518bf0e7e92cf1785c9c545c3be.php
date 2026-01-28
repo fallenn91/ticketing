@@ -1,11 +1,5 @@
 <div>
   <?php
-    $status = [
-      'open' => 'OPEN',
-      'in_process' => 'IN PROCESS',
-      'resolved' => 'RESOLVED',
-      'closed' => 'CLOSED'
-    ];
 
     $priorities = [
       'low' => 'LOW',
@@ -15,10 +9,6 @@
     ];
 
     $colors = [
-      'open' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-gray-200 text-gray-800 border-gray-300'],
-      'in_process' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-blue-100 text-blue-800 border-blue-300'],
-      'resolved' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-green-100 text-green-800 border-green-300'],
-      'closed' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-red-100 text-red-800 border-red-300'],
       'low' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-green-100 text-green-800'],
       'medium' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-yellow-100 text-yellow-800 border-yellow-300'],
       'high' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-orange-100 text-orange-800 border-orange-300'],
@@ -77,9 +67,18 @@
 <?php $component = $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581; ?>
 <?php unset($__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581); ?>
 <?php endif; ?>
-    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $status; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $label): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-      <button wire:click="filterByStatus('<?php echo e($key); ?>')" class="text-sm font-medium px-1.5 py-0.5 rounded-lg border <?php echo e($statusFilter === $key ? $colors[$key]['active'] : $colors[$key]['inactive']); ?>"><?php echo e($label); ?></button>
-    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+    <div class="flex flex-wrap gap-2">
+      <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $statuses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $status): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <button wire:click="filterByStatus(<?php echo e($status->id); ?>)"
+          class="text-sm font-medium px-2 py-1 rounded-lg border transition"
+          style="background-color: <?php echo e($statusFilter === $status->id ? $status->color :  $status->color . '20'); ?>; 
+          border: 1px solid <?php echo e($status->color); ?>99;">
+          <?php echo e(ucfirst(str_replace('_', ' ', $status->name))); ?>
+
+        </button>
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+    </div>
+    
     
 
     
@@ -161,30 +160,20 @@
                     <td class="border px-4 py-2"><?php echo e(sprintf('TCK-%04d', $ticket->ticket_number)); ?></td>
                     <td class="border px-4 py-2"><?php echo e($ticket->title); ?></td>
                     <td class="border px-4 py-2"><button wire:click="toggleStatusDropdown(<?php echo e($ticket->id); ?>)"
-                      class="px-3 py-1 rounded-full text-sm font-semibold 
-                      <?php echo e(match($ticket->status) {
-                            'open' => 'bg-gray-100 text-gray-800',
-                            'in_process' => 'bg-blue-100 text-blue-800',
-                            'resolved' => 'bg-green-100 text-green-800',
-                            'closed' => 'bg-red-100 text-red-800',
-                      }); ?>">
-                      <?php echo e(ucfirst(str_replace('_', ' ', $ticket->status))); ?>
+                      class="px-3 py-1 rounded-full text-sm font-semibold"
+                      style="background-color: <?php echo e($ticket->status->color); ?>20; color: black; border: 1px solid <?php echo e($ticket->status->color); ?>99; ">
+                      <?php echo e(ucfirst(str_replace('_', ' ', $ticket->status->name))); ?>
 
                       </button>
                     <!--Dropdown-->
                     <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($openStatusDropdown === $ticket->id): ?>
                     <div class="absolute z-10 mt-2 w-40 bg-white border rounded-lg shadow-lg">
-                      <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = ['open', 'in_process', 'resolved', 'closed']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $status): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                      <button wire:click="changeStatus(<?php echo e($ticket->id); ?>, '<?php echo e($status); ?>')"
-                        class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100
-                        <?php echo e(match($ticket->status) {
-                            'open' => 'bg-gray-100 text-gray-800',
-                            'in_process' => 'bg-blue-100 text-blue-800',
-                            'resolved' => 'bg-green-100 text-green-800',
-                            'closed' => 'bg-red-100 text-red-800',
-                      }); ?>">
+                      <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $statuses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $status): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                      <button wire:click="changeStatus(<?php echo e($ticket->id); ?>, '<?php echo e($status->id); ?>')"
+                        class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                        style="background-color: <?php echo e($status->color); ?>10; color: <?php echo e($status->color); ?>;" >
                         
-                        <?php echo e(ucfirst(str_replace('_', ' ', $status))); ?>
+                        <?php echo e(ucfirst(str_replace('_', ' ', $status->name))); ?>
 
                       </button>
                       

@@ -259,11 +259,11 @@
 
      <?php $__env->slot('actions', null, []); ?> 
         
-            <button wire:click="create"
-            class="px-4 py-2 bg-blue-600 text-white rounded"
-            >
-            Create
-            </button>
+      <button wire:click="create"
+      class="px-4 py-2 bg-blue-600 text-white rounded"
+      >
+      Create
+      </button>
         
      <?php $__env->endSlot(); ?>
  <?php echo $__env->renderComponent(); ?>

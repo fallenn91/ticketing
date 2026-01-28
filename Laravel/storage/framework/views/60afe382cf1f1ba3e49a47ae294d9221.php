@@ -165,19 +165,64 @@
 </table>
 
 
-<div id="status" class="w-full bg-white overflow-hidden shadow-xl mt-5 sm:rounded-lg px-5 py-2.5">
-  <h1 class="text-lg font-bold mb-2">Status</h1>
+<div id="status" class="w-full bg-white overflow-hidden shadow-xl mt-5 sm:rounded-lg px-5 py-2.5 ">
+  <h1 class="text-lg font-bold mb-2">Ticket Status</h1>
+  <div class="w-full flex items-center align-center gap-4 py-2">
+
     <input type="text" 
-    id="status" 
+    id="name" 
     class="mt-1 block"
-    wire:model.defer="status" 
-    autocomplete="status"/>
+    wire:model.defer="name" 
+    autocomplete="name"/>
+  <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__errorArgs = ['name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+    <p class="text-red-500 text-sm mt-1"><?php echo e($message); ?></p>
+  <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+    <input type="color"
+      wire:model="color"
+      class="w-100 h-10 rounded-lg cursor-pointer"
+    />
+  </div>
   <button type="submit" wire:click="createStatus" class="px-4 py-2 bg-blue-600 text-white rounded-lg mt-5">Create Status</button>
-  <div class="bg-black text-white w-full">
-    <ul class="text-sm text-semibold">
-      <li>STATUS 1</li>
+  
+  <div class="w-full py-5 px-2.5 border mt-5">
+    <ul class="space-y-2">
+     <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $statuses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+      <li class="mt-5">
+        <span class="px-2.5 py-3 rounded-full text-sm font-semibold"
+              style="background-color: <?php echo e($item->color); ?>30; color: black; 
+              border: 1px solid <?php echo e($item->color); ?>99;"><?php echo e($item->name); ?>
+
+        </span>
+        <button type="button" wire:click="deleteStatus(<?php echo e($item->id); ?>)"
+              class="inline-block px-2 py-1 text-sm bg-red-600 text-white rounded ml-4"
+              >
+              Delete Status
+        </button>
+      </li>
+      
+     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
     </ul>
   </div>
+  
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(session('deleted')): ?>
+      <p class="mt-3 text-red-600"><?php echo e(session('deleted')); ?> </p>
+    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(session('error')): ?>
+      <p class="mt-3 text-red-600"><?php echo e(session('error')); ?> </p>
+    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(session('default')): ?>
+      <p class="mt-3 text-red-600"><?php echo e(session('default')); ?> </p>
+    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+    
+    
+  
 </div>
 
 

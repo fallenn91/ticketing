@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Tickets;
 use App\Models\Ticket;
+use App\Models\TicketStatus;
 use Livewire\Component;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
@@ -21,11 +22,14 @@ class Show extends Component
     public $showPriority = false;
     public $search = '';
     public $myGroups;
+    public $statuses;
 
     protected $listeners = ['saved', 
     'ticketUpdated' => 'refreshTicket', 
     'ticketAssigned' => 'refreshTicket'];
 
+
+    
     public function render()
     {
         $query = Ticket::query();
@@ -40,9 +44,10 @@ class Show extends Component
         }
 
         /*****FILTERS STATUS AND PRIORITY*****/
-        if (!is_null(($this->statusFilter))) {
-          $query->where('status', $this->statusFilter);
+        if ($this->statusFilter) {
+          $query->where('status_id', $this->statusFilter);
         }
+        
         if (!is_null(($this->statusPriority))) {
           $query->where('priority', $this->statusPriority);
         }
@@ -101,10 +106,12 @@ class Show extends Component
         
     } 
 
-    public function changeStatus($ticketId, $status)
+    public function changeStatus($ticketId, $statusId)
     {
         $ticket = Ticket::findOrFail($ticketId);
-        $ticket->status = $status;
+        $ticket->update([
+          'status_id' => $statusId,
+        ]);
         $ticket->save();
         $this->openStatusDropdown = null;
         
@@ -116,16 +123,17 @@ class Show extends Component
       $this->render();
     }
 
-    public function filterByStatus($status)
+    public function filterByStatus($statusId)
     {
-      $this->statusFilter = $status;
+      $this->statusFilter = $statusId;
 
     }
     public function mount($showFilters = false, $showPriority = false)
     {
+      $this->statuses = TicketStatus::all();
       $this->showFilters = $showFilters;
       $this->showPriority = $showPriority;
-       $this->allUsers = User::class;
+      $this->allUsers = User::class;
       $this->allGroups = Group::class;
 
       $this->loadGroups();
