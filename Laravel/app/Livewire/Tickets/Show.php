@@ -3,6 +3,7 @@
 namespace App\Livewire\Tickets;
 use App\Models\Ticket;
 use App\Models\TicketStatus;
+use App\Models\TicketPriority;
 use Livewire\Component;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
@@ -23,6 +24,7 @@ class Show extends Component
     public $search = '';
     public $myGroups;
     public $statuses;
+    public $priorities;
 
     protected $listeners = ['saved', 
     'ticketUpdated' => 'refreshTicket', 
@@ -32,6 +34,8 @@ class Show extends Component
     
     public function render()
     {
+      
+
         $query = Ticket::query();
       // Filter
         if (auth()->user()->isAdmin()) {
@@ -47,9 +51,9 @@ class Show extends Component
         if ($this->statusFilter) {
           $query->where('status_id', $this->statusFilter);
         }
-        
-        if (!is_null(($this->statusPriority))) {
-          $query->where('priority', $this->statusPriority);
+
+        if ($this->statusPriority) {
+          $query->where('priority_id', $this->statusPriority);
         }
 
         /*****SEARCH*****/ 
@@ -97,10 +101,12 @@ class Show extends Component
       $this->openPriorityDropdown = $this->openPriorityDropdown === $ticketId ? null : $ticketId;
     }
 
-    public function changePriority($ticketId, $priority)
+    public function changePriority($ticketId, $priorityId)
     {
         $ticket = Ticket::findOrFail($ticketId);
-        $ticket->priority = $priority;
+        $ticket->update([
+          'priority_id' => $priorityId,
+        ]);
         $ticket->save();
         $this->openPriorityDropdown = null;
         
@@ -130,7 +136,9 @@ class Show extends Component
     }
     public function mount($showFilters = false, $showPriority = false)
     {
+
       $this->statuses = TicketStatus::all();
+      $this->priorities = TicketPriority::all();
       $this->showFilters = $showFilters;
       $this->showPriority = $showPriority;
       $this->allUsers = User::class;
@@ -139,9 +147,9 @@ class Show extends Component
       $this->loadGroups();
     }
 
-    public function filterByPriority($priority)
+    public function filterByPriority($priorityId)
     {
-      $this->statusPriority = $priority;
+      $this->statusPriority = $priorityId;
     }
 
     public function clearFilters()

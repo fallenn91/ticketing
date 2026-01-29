@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\TicketStatus;
+use App\Models\TicketPriority;
 
 return new class extends Migration
 {
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->text('description');
             $table->enum('status', ['open', 'in_process', 'resolved', 'closed'])->default('in_process');
             $table->foreignId('status_id')->constrained('ticket_statuses')->default(TicketStatus::where('is_default', true)->value('id'));
+            $table->foreignId('priority_id')->constrained('ticket_priorities')->default(TicketPriority::where('is_default', true)->value('id'));
             $table->enum('priority', ['low', 'medium', 'high', 'critical'])->default('medium');
             $table->timestamps();
         });

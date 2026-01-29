@@ -56,6 +56,11 @@ class Ticket extends Model
       return $this->belongsTo(TicketStatus::class, 'status_id');
     }
 
+    public function priority()
+    {
+      return $this->belongsTo(TicketPriority::class, 'priority_id');
+    }
+
     protected static function booted()
     {
       static::creating(function ($ticket) {
@@ -63,8 +68,13 @@ class Ticket extends Model
         if (!$ticket->status_id) {
           $ticket->status_id = TicketStatus::where('is_default', true)->value('id');
         }
+        if (!$ticket->priority_id) {
+          $ticket->priority_id = TicketPriority::where('is_default', true)->value('id');
+        }
 
       });
     }
+
+    
     
 }

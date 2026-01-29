@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Group;
 use App\Models\Ticket;
 use App\Models\TicketStatus;
+use App\Models\TicketPriority;
 use Illuminate\Support\Facades\Gate;
 
 class ToolsTicket extends Component
@@ -20,25 +21,47 @@ class ToolsTicket extends Component
   public $name;
   public $color = '#9ca3af';
   public $statuses;
+  public $priorities;
+  public $namePriority;
+  public $priorityColor;
+  public $statusName;
   
 
 
     protected $listeners = ['saved'];
 
-    protected $rules = [
-      'name' => 'required|string|max:50|unique:ticket_statuses,name',
-      'color' => 'required|regex:/^#([A-Fa-f0-9]{6})$/',
-    ];
+    protected function rulesStatus()
+    {
+      return [
+        'name' => 'required|string|max:15|unique:ticket_statuses,name',
+        'color' => 'required|regex:/^#([A-Fa-f0-9]{6})$/',
+      ];
+    }
+
+    protected function rulesPriority()
+    {
+      return [
+        'namePriority' => 'required|string|max:15|unique:ticket_priorities,name',
+        'priorityColor' => 'required|regex:/^#([A-Fa-f0-9]{6})$/',
+      ];
+    }
 
     protected $messages = [
-      'name.unique' => 'Name already in use.',
+      'name.unique' => 'Status already in use.',
+      'name.string' => 'Max 15 character.',
+      'color.required' => 'Color is required.',
+      'namePriority.unique' => 'Priority already in use.', 
+      'namePriority.string' => 'Max 15 characters.', 
+      'priorityColor.required' => 'Color is required.'
     ];
+
 
     public function mount()
     {
       $this->allUsers = User::all();
       $this->allGroups = Group::all();
       $this->statuses = TicketStatus::all();
+      $this->priorities = TicketPriority::all();
     }
     public function render()
     {
@@ -87,7 +110,7 @@ class ToolsTicket extends Component
 
     public function createStatus()
     {
-      $this->validate();
+      $this->validate($this->rulesStatus());
 
       TicketStatus::create([
         'name' => strtolower($this->name),
@@ -97,6 +120,19 @@ class ToolsTicket extends Component
       $this->statuses = TicketStatus::all();
 
       $this->reset(['name', 'color']);
+    }
+
+    public function createPriority()
+    {
+      $this->validate($this->rulesPriority());
+
+      TicketPriority::create([
+        'name' => strtolower($this->namePriority),
+        'color' => $this->priorityColor,
+      ]);
+
+      $this->priorities = TicketPriority::all();
+      $this->reset(['namePriority', 'priorityColor']);
     }
 
     public function deleteStatus($statusId)
@@ -111,7 +147,24 @@ class ToolsTicket extends Component
       }
       $status->delete();
       
-      session()->flash('deleted', 'Delete status successfully.');
+      session()->flash('deleted', 'Status deleted successfully.');
+    }
+
+    public function deletePriority($priorityId)
+    {
+      $priority = TicketPriority::findOrFail($priorityId);
+
+      if ($priority->tickets()->exists()) {
+        return redirect()->back()->with('errorPriority', 'Cannot delete priorities with assigned tickets.');
+      }
+
+      if ($priority->is_default) {
+        return redirect()->back()->with('defaultPriority', 'Cannot delete default priority.');
+      }
+
+      $priority->delete();
+
+      session()->flash('deletedPriority', 'Priority deleted successfully.');
     }
     
     

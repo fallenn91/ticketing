@@ -1,20 +1,4 @@
 <div>
-  <?php
-
-    $priorities = [
-      'low' => 'LOW',
-      'medium' => 'MEDIUM',
-      'high' => 'HIGH',
-      'critical' => 'CRITICAL'
-    ];
-
-    $colors = [
-      'low' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-green-100 text-green-800'],
-      'medium' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-yellow-100 text-yellow-800 border-yellow-300'],
-      'high' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-orange-100 text-orange-800 border-orange-300'],
-      'critical' => ['active' => 'bg-gray-800 text-white border-gray-800', 'inactive' => 'bg-red-100 text-red-800 border-red-300']
-    ];
-  ?>
   
   <div class="flex items-center content-center gap-2 mb-6 ml-4 mt-5">
 
@@ -108,9 +92,12 @@
 <?php $component = $__componentOriginal18c21970322f9e5c938bc954620c12bb; ?>
 <?php unset($__componentOriginal18c21970322f9e5c938bc954620c12bb); ?>
 <?php endif; ?>
+    <button wire:click="clearFilters"
+        class="px-1.5 py-0.5 bg-red-600 text-white rounded-lg ml-4">
+        CLEAR
+    </button>
   </div>
-  
-  
+
   <div class="flex items-center content-center gap-2 mb-6 ml-4 mt-5">
     <?php if (isset($component)) { $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $attributes; } ?>
@@ -132,15 +119,18 @@
 <?php $component = $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581; ?>
 <?php unset($__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581); ?>
 <?php endif; ?>
-    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $priorities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $label): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-      <button wire:click="filterByPriority('<?php echo e($key); ?>')" class="text-sm font-medium px-1.5 py-0.5 rounded-lg border <?php echo e($statusPriority === $key ? $colors[$key]['active'] : $colors[$key]['inactive']); ?>"><?php echo e($label); ?></button>
-    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
-    <button wire:click="clearFilters"
-        class="px-1.5 py-0.5 bg-red-600 text-white rounded-lg ml-4">
-        CLEAR
-    </button>
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $priorities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $priority): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+      <button wire:click="filterByPriority(<?php echo e($priority->id); ?>)"
+        class="text-sm font-medium px-2 py-1 rounded-lg border transition"
+        style="background-color: <?php echo e($statusPriority === $priority->id ? $priority->color :  $priority->color . '20'); ?>; 
+        border: 1px solid <?php echo e($priority->color); ?>99;">
+        <?php echo e(ucfirst(str_replace('_', ' ', $priority->name))); ?>
 
+      </button>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
   </div>
+
+   
   
   <table class="table-auto w-full">
         
@@ -171,7 +161,7 @@
                       <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $statuses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $status): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                       <button wire:click="changeStatus(<?php echo e($ticket->id); ?>, '<?php echo e($status->id); ?>')"
                         class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
-                        style="background-color: <?php echo e($status->color); ?>10; color: <?php echo e($status->color); ?>;" >
+                        style="background-color: <?php echo e($status->color); ?>50; color: black;" >
                         
                         <?php echo e(ucfirst(str_replace('_', ' ', $status->name))); ?>
 
@@ -183,29 +173,20 @@
                     <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
                   </td>
                   <td class="border px-4 py-2"><button wire:click="togglePriorityDropdown(<?php echo e($ticket->id); ?>)" 
-                    class="px-3 py-1 rounded-full text-sm font-semibold
-                    <?php echo e(match($ticket->priority) {
-                          'low' => 'bg-green-100 text-green-800',
-                          'medium' => 'bg-yellow-100 text-yellow-800',
-                          'high' => 'bg-orange-100 text-orange-800',
-                          'critical' => 'bg-red-100 text-red-800',
-                    }); ?>">
-                      <?php echo e(ucfirst(str_replace('_', ' ', $ticket->priority))); ?>
+                    class="px-3 py-1 rounded-full text-sm font-semibold"
+                    style="background-color: <?php echo e($ticket->priority->color); ?>20; color: black;
+                    border: 1px solid <?php echo e($ticket->status->color); ?>99; ">
+                      <?php echo e(ucfirst(str_replace('_', ' ', $ticket->priority->name))); ?>
 
                     </button>
                     <!--Dropdown-->
                       <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($openPriorityDropdown === $ticket->id): ?>
                       <div class="absolute z-10 mt-2 w-40 bg-white border rounded-lg shadow-lg">
-                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = ['low', 'medium', 'high', 'critical']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $priority): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                          <button wire:click="changePriority(<?php echo e($ticket->id); ?>, '<?php echo e($priority); ?>')"
-                            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100
-                            <?php echo e(match($ticket->priority) {
-                          'low' => 'bg-green-100 text-green-800',
-                          'medium' => 'bg-yellow-100 text-yellow-800',
-                          'high' => 'bg-orange-100 text-orange-800',
-                          'critical' => 'bg-red-100 text-red-800',
-                    }); ?>">
-                            <?php echo e(ucfirst(str_replace('_', ' ', $priority))); ?>
+                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $priorities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $priority): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                          <button wire:click="changePriority(<?php echo e($ticket->id); ?>, '<?php echo e($priority->id); ?>')"
+                          class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                            style="background-color: <?php echo e($priority->color); ?>50; color: black;" >
+                            <?php echo e(ucfirst(str_replace('_', ' ', $priority->name))); ?>
 
                           </button>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>

@@ -93,16 +93,17 @@
   </tbody>
 </table>
 
+<!----------------- STATUS ----------------->
 
 <div id="status" class="w-full bg-white overflow-hidden shadow-xl mt-5 sm:rounded-lg px-5 py-2.5 ">
   <h1 class="text-lg font-bold mb-2">Ticket Status</h1>
   <div class="w-full flex items-center align-center gap-4 py-2">
 
     <input type="text" 
-    id="name" 
+    id="statusName" 
     class="mt-1 block"
     wire:model.defer="name" 
-    autocomplete="name"/>
+    autocomplete="off"/>
   @error('name')
     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
   @enderror
@@ -131,6 +132,46 @@
      @endforeach
     </ul>
   </div>
+
+  <!-------------- PRIORITY -------------->
+
+<div id="priority" class="w-full bg-white overflow-hidden shadow-xl mt-5 sm:rounded-lg px-5 py-2.5 ">
+  <h1 class="text-lg font-bold mb-2">Ticket Priority</h1>
+  <div class="w-full flex items-center align-center gap-4 py-2">
+
+    <input type="text" 
+    id="priorityName" 
+    class="mt-1 block"
+    wire:model.defer="namePriority" 
+    autocomplete="off"/>
+  @error('namePriority')
+    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+  @enderror
+    <input type="color"
+      wire:model="priorityColor"
+      class="w-100 h-10 rounded-lg cursor-pointer"
+    />
+  </div>
+  <button type="submit" wire:click="createPriority" class="px-4 py-2 bg-blue-600 text-white rounded-lg mt-5">Create Priority</button>
+  
+  <div class="w-full py-5 px-2.5 border mt-5">
+    <ul class="space-y-2">
+     @foreach($priorities as $priority)
+      <li class="mt-5">
+        <span class="px-2.5 py-3 rounded-full text-sm font-semibold"
+              style="background-color: {{ $priority->color }}30; color: black; 
+              border: 1px solid {{ $priority->color}}99;">{{ $priority->name }}
+        </span>
+        <button type="button" wire:click="deletePriority({{ $priority->id }})"
+              class="inline-block px-2 py-1 text-sm bg-red-600 text-white rounded ml-4"
+              >
+              Delete Priority
+        </button>
+      </li>
+      
+     @endforeach
+    </ul>
+  </div>
   
     @if(session('deleted'))
       <p class="mt-3 text-red-600">{{ session('deleted')}} </p>
@@ -140,6 +181,15 @@
     @endif
     @if(session('default'))
       <p class="mt-3 text-red-600">{{ session('default')}} </p>
+    @endif
+    @if(session('deletedPriority'))
+      <p class="mt-3 text-red-600">{{ session('deletedPriority')}} </p>
+    @endif
+    @if(session('errorPriority'))
+      <p class="mt-3 text-red-600">{{ session('errorPriority')}} </p>
+    @endif
+    @if(session('defaultPriority'))
+      <p class="mt-3 text-red-600">{{ session('defaultPriority')}} </p>
     @endif
     
     

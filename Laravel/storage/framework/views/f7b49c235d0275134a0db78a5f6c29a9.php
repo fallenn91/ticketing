@@ -47,26 +47,18 @@
 
         </td>
         <td class="border px-4 py-2">
-          
             <span class="block px-3 py-1 rounded-full text-sm font-semibold"
             style="background-color: <?php echo e($ticket->status->color . '20'); ?>; 
-            border-color: <?php echo e($ticket->status->color . '99'); ?>;">
+            border: 1px solid <?php echo e($ticket->status->color); ?>99;">
             <?php echo e(ucfirst(str_replace('_', ' ', $ticket->status->name))); ?>
 
-          
             </span>
-          
         </td>
         <td class="border px-4 py-2">
-            <span class="px-3 py-1 rounded-full text-sm font-semibold
-              <?php echo e(match($ticket->priority) {
-                  'low' => 'bg-green-100 text-green-800 border border-green-300',
-                  'medium' => 'bg-yellow-100 text-yellow-800 border border-yellow-300',
-                  'high' => 'bg-orange-100 text-orange-800 border border-orange-300',
-                  'critical' => 'bg-red-100 text-red-800 border border-red-300',
-                  default => 'bg-gray-100 text-gray-800 border border-gray-300',
-              }); ?>">
-              <?php echo e(ucfirst(str_replace('_', ' ', $ticket->priority))); ?>
+            <span class="px-3 py-1 rounded-full text-sm font-semibold"
+            style="background-color: <?php echo e($ticket->priority->color . '20'); ?>;
+            border: 1px solid <?php echo e($ticket->priority->color); ?>99;">
+              <?php echo e(ucfirst(str_replace('_', ' ', $ticket->priority->name))); ?>
 
             </span>
         </td>
