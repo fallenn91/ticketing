@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('ticket_priorities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('color')->default('#9eb0cf');
+            $table->string('colorPriority')->default('#9eb0cf');
             $table->boolean('is_default')->default(false);
             $table->timestamps();
         });

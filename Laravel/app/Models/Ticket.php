@@ -20,7 +20,7 @@ class Ticket extends Model
         'description',
         'comments_id',
         'status_id',
-        'priority',
+        'priority_id',
         'category_id',
         'timestamps',
     ];

@@ -51,8 +51,8 @@
         </td>
         <td class="border px-4 py-2">
             <span class="px-3 py-1 rounded-full text-sm font-semibold"
-            style="background-color: {{ $ticket->priority->color . '20'}};
-            border: 1px solid {{ $ticket->priority->color}}99;">
+            style="background-color: {{ $ticket->priority->colorPriority . '20'}};
+            border: 1px solid {{ $ticket->priority->colorPriority}}99;">
               {{ ucfirst(str_replace('_', ' ', $ticket->priority->name)) }}
             </span>
         </td>

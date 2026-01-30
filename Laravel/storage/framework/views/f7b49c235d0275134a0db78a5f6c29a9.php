@@ -56,8 +56,8 @@
         </td>
         <td class="border px-4 py-2">
             <span class="px-3 py-1 rounded-full text-sm font-semibold"
-            style="background-color: <?php echo e($ticket->priority->color . '20'); ?>;
-            border: 1px solid <?php echo e($ticket->priority->color); ?>99;">
+            style="background-color: <?php echo e($ticket->priority->colorPriority . '20'); ?>;
+            border: 1px solid <?php echo e($ticket->priority->colorPriority); ?>99;">
               <?php echo e(ucfirst(str_replace('_', ' ', $ticket->priority->name))); ?>
 
             </span>

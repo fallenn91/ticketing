@@ -128,7 +128,7 @@ class ToolsTicket extends Component
 
       TicketPriority::create([
         'name' => strtolower($this->namePriority),
-        'color' => $this->priorityColor,
+        'colorPriority' => $this->priorityColor,
       ]);
 
       $this->priorities = TicketPriority::all();

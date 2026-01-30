@@ -16,28 +16,28 @@ class TicketPrioritySeeder extends Seeder
         TicketPriority::firstOrCreate(
           ['name' => 'low'],
           [
-            'color' => '#D3D5DB',
+            'colorPriority' => '#D3D5DB',
             'is_default' => true,
           ]
         );
         TicketPriority::firstOrCreate(
           ['name' => 'medium'],
           [
-            'color' => '#f3d23c',
+            'colorPriority' => '#f3d23c',
             'is_default' => true,
           ]
         );
         TicketPriority::firstOrCreate(
           ['name' => 'high'],
           [
-            'color' => '#ff7b00',
+            'colorPriority' => '#ff7b00',
             'is_default' => true,
           ]
         );
         TicketPriority::firstOrCreate(
           ['name' => 'critical'],
           [
-            'color' => '#ff0000',
+            'colorPriority' => '#ff0000',
             'is_default' => true,
           ]
         );

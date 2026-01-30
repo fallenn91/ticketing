@@ -194,14 +194,14 @@ unset($__errorArgs, $__bag); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendB
   
   <div class="w-full py-5 px-2.5 border mt-5">
     <ul class="space-y-2">
-     <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $statuses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-      <li class="mt-5">
-        <span class="px-2.5 py-3 rounded-full text-sm font-semibold"
-              style="background-color: <?php echo e($item->color); ?>30; color: black; 
-              border: 1px solid <?php echo e($item->color); ?>99;"><?php echo e($item->name); ?>
+     <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $statuses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $status): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+      <li class="mt-5 flex items-center justify-start">
+        <span class="px-2.5 py-1.5 rounded-full text-sm font-semibold w-40 inline-block"
+              style="background-color: <?php echo e($status->color); ?>30; color: black; 
+              border: 1px solid <?php echo e($status->color); ?>99;"><?php echo e($status->name); ?>
 
         </span>
-        <button type="button" wire:click="deleteStatus(<?php echo e($item->id); ?>)"
+        <button type="button" wire:click="deleteStatus(<?php echo e($status->id); ?>)"
               class="inline-block px-2 py-1 text-sm bg-red-600 text-white rounded ml-4"
               >
               Delete Status
@@ -243,14 +243,14 @@ unset($__errorArgs, $__bag); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendB
   <div class="w-full py-5 px-2.5 border mt-5">
     <ul class="space-y-2">
      <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $priorities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $priority): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-      <li class="mt-5">
-        <span class="px-2.5 py-3 rounded-full text-sm font-semibold"
-              style="background-color: <?php echo e($priority->color); ?>30; color: black; 
-              border: 1px solid <?php echo e($priority->color); ?>99;"><?php echo e($priority->name); ?>
+      <li class="mt-5 flex items-center justify-start">
+        <span class="px-2.5 py-1.5 rounded-full text-sm font-semibold w-40 inline-block"
+              style="background-color: <?php echo e($priority->colorPriority); ?>30; color: black; 
+              border: 1px solid <?php echo e($priority->colorPriority); ?>99;"><?php echo e($priority->name); ?>
 
         </span>
         <button type="button" wire:click="deletePriority(<?php echo e($priority->id); ?>)"
-              class="inline-block px-2 py-1 text-sm bg-red-600 text-white rounded ml-4"
+              class="px-2 py-1 text-sm bg-red-600 text-white rounded ml-4"
               >
               Delete Priority
         </button>

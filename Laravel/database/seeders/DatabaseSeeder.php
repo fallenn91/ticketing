@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
             TicketStatusSeeder::class,
             TicketPrioritySeeder::class,
         ]);
+
+        
         
     }
 }

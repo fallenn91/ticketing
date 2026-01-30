@@ -132,6 +132,7 @@ class Show extends Component
     public function filterByStatus($statusId)
     {
       $this->statusFilter = $statusId;
+      $this->openStatusDropdown = false;
 
     }
     public function mount($showFilters = false, $showPriority = false)
@@ -150,6 +151,7 @@ class Show extends Component
     public function filterByPriority($priorityId)
     {
       $this->statusPriority = $priorityId;
+      $this->openPriorityDropdown = false;
     }
 
     public function clearFilters()

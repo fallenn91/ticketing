@@ -116,13 +116,13 @@
   
   <div class="w-full py-5 px-2.5 border mt-5">
     <ul class="space-y-2">
-     @foreach($statuses as $item)
-      <li class="mt-5">
-        <span class="px-2.5 py-3 rounded-full text-sm font-semibold"
-              style="background-color: {{ $item->color }}30; color: black; 
-              border: 1px solid {{ $item->color}}99;">{{ $item->name }}
+     @foreach($statuses as $status)
+      <li class="mt-5 flex items-center justify-start">
+        <span class="px-2.5 py-1.5 rounded-full text-sm font-semibold w-40 inline-block"
+              style="background-color: {{ $status->color }}30; color: black; 
+              border: 1px solid {{ $status->color}}99;">{{ $status->name }}
         </span>
-        <button type="button" wire:click="deleteStatus({{ $item->id }})"
+        <button type="button" wire:click="deleteStatus({{ $status->id }})"
               class="inline-block px-2 py-1 text-sm bg-red-600 text-white rounded ml-4"
               >
               Delete Status
@@ -157,13 +157,13 @@
   <div class="w-full py-5 px-2.5 border mt-5">
     <ul class="space-y-2">
      @foreach($priorities as $priority)
-      <li class="mt-5">
-        <span class="px-2.5 py-3 rounded-full text-sm font-semibold"
-              style="background-color: {{ $priority->color }}30; color: black; 
-              border: 1px solid {{ $priority->color}}99;">{{ $priority->name }}
+      <li class="mt-5 flex items-center justify-start">
+        <span class="px-2.5 py-1.5 rounded-full text-sm font-semibold w-40 inline-block"
+              style="background-color: {{ $priority->colorPriority }}30; color: black; 
+              border: 1px solid {{ $priority->colorPriority}}99;">{{ $priority->name }}
         </span>
         <button type="button" wire:click="deletePriority({{ $priority->id }})"
-              class="inline-block px-2 py-1 text-sm bg-red-600 text-white rounded ml-4"
+              class="px-2 py-1 text-sm bg-red-600 text-white rounded ml-4"
               >
               Delete Priority
         </button>

@@ -8,7 +8,7 @@ class TicketPriority extends Model
 {
     protected $fillable = [
       'name',
-      'color',
+      'colorPriority',
     ];
 
     public function tickets()

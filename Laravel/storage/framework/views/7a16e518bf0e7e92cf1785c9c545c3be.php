@@ -30,58 +30,75 @@
   </div>
   
   
-  <div class="flex items-center content-center gap-2 mb-6 ml-4 mt-5">
-    <?php if (isset($component)) { $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-label','data' => ['for' => 'filterByStatus','value' => ''.e(__('STATUS')).'']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('input-label'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes(['for' => 'filterByStatus','value' => ''.e(__('STATUS')).'']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581)): ?>
-<?php $attributes = $__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581; ?>
-<?php unset($__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581)): ?>
-<?php $component = $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581; ?>
-<?php unset($__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581); ?>
-<?php endif; ?>
-    <div class="flex flex-wrap gap-2">
-      <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $statuses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $status): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-        <button wire:click="filterByStatus(<?php echo e($status->id); ?>)"
-          class="text-sm font-medium px-2 py-1 rounded-lg border transition"
-          style="background-color: <?php echo e($statusFilter === $status->id ? $status->color :  $status->color . '20'); ?>; 
-          border: 1px solid <?php echo e($status->color); ?>99;">
-          <?php echo e(ucfirst(str_replace('_', ' ', $status->name))); ?>
+  
+  <div class="relative inline-block ml-4 mb-6 mt-4">
+    <button type="button" wire:click="$toggle('openStatusDropdown')"
+      class="px-3 py-1 rounded-lg font-medium border"
+      style="background-color: <?php echo e($statusFilter ? $statuses->firstWhere('id', $statusFilter)->color : '#458cf7'); ?>20;
+      border: 1px solid <?php echo e($statusFilter ? $statuses->firstWhere('id', $statusFilter)->color : '#458cf7'); ?>99;">
+      
+        <?php echo e($statusFilter ? ucfirst(str_replace('_', ' ', $statuses->firstWhere('id', $statusFilter)->name)) : 'Status'); ?>
+
+    </button>
+
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($openStatusDropdown): ?>
+      <div class="absolute z-10 mt-2 w-40 bg-white border rounded-lg shadow-lg">
+        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $statuses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $status): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+          <button wire:click="filterByStatus(<?php echo e($status->id); ?>)"
+              class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+              style="background-color: <?php echo e($status->color); ?>50; color: black;">
+              <?php echo e($status->name); ?>
+
+          </button>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+      </div>
+    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+
+  
+
+    <button type="button" wire:click="$toggle('openPriorityDropdown')"
+      class="px-3 py-1 rounded-lg font-medium border"
+      style="background-color: <?php echo e($statusPriority ? $priorities->firstWhere('id', $statusPriority)->colorPriority : '#458cf7'); ?>20;
+      border: 1px solid <?php echo e($statusPriority ? $priorities->firstWhere('id', $statusPriority)->colorPriority : '#458cf7'); ?>99;">
+      
+        <?php echo e($statusPriority ? ucfirst(str_replace('_', ' ', $priorities->firstWhere('id', $statusPriority)->name)) : 'Priority'); ?>
+
+    </button>
+
+  <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($openPriorityDropdown): ?>
+    <div class="absolute z-10 mt-2 w-40 bg-white border rounded-lg shadow-lg">
+      <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $priorities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $priority): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <button wire:click="filterByPriority(<?php echo e($priority->id); ?>)"
+            class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+            style="background-color: <?php echo e($priority->colorPriority); ?>50; color: black;">
+            <?php echo e($priority->name); ?>
 
         </button>
       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
     </div>
-    
-    
+  <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
     
     <select wire:model.lazy="creationFilter" class="bg-gray-100 border border-gray-300 text-sm font-medium px-4.5 py-0.5 rounded-lg h-[28px] ">
       <option value="desc">DESC</option>
       <option value="asc">ASC</option>
     </select>
-    
-    
+
+    <button wire:click="clearFilters"
+            class="px-1.5 py-0.5 bg-red-600 text-white rounded-lg mt-4">
+            CLEAR
+    </button>
+  
     <?php if (isset($component)) { $__componentOriginal18c21970322f9e5c938bc954620c12bb = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal18c21970322f9e5c938bc954620c12bb = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.text-input','data' => ['id' => 'search','type' => 'text','class' => 'mt-1 block w-[150px]','wire:model.live.debounce.300ms' => 'search','placeholder' => 'Search...','autocomplete' => 'search']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.text-input','data' => ['id' => 'search','type' => 'text','class' => 'mt-4 block w-[150px]','wire:model.live.debounce.300ms' => 'search','placeholder' => 'Search...','autocomplete' => 'search']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('text-input'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['id' => 'search','type' => 'text','class' => 'mt-1 block w-[150px]','wire:model.live.debounce.300ms' => 'search','placeholder' => 'Search...','autocomplete' => 'search']); ?>
+<?php $component->withAttributes(['id' => 'search','type' => 'text','class' => 'mt-4 block w-[150px]','wire:model.live.debounce.300ms' => 'search','placeholder' => 'Search...','autocomplete' => 'search']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginal18c21970322f9e5c938bc954620c12bb)): ?>
@@ -92,45 +109,10 @@
 <?php $component = $__componentOriginal18c21970322f9e5c938bc954620c12bb; ?>
 <?php unset($__componentOriginal18c21970322f9e5c938bc954620c12bb); ?>
 <?php endif; ?>
-    <button wire:click="clearFilters"
-        class="px-1.5 py-0.5 bg-red-600 text-white rounded-lg ml-4">
-        CLEAR
-    </button>
+  
+    
+
   </div>
-
-  <div class="flex items-center content-center gap-2 mb-6 ml-4 mt-5">
-    <?php if (isset($component)) { $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.input-label','data' => ['for' => 'filterByPriority','value' => ''.e(__('PRIORITY')).'']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('input-label'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes(['for' => 'filterByPriority','value' => ''.e(__('PRIORITY')).'']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581)): ?>
-<?php $attributes = $__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581; ?>
-<?php unset($__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581)): ?>
-<?php $component = $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581; ?>
-<?php unset($__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581); ?>
-<?php endif; ?>
-    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $priorities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $priority): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-      <button wire:click="filterByPriority(<?php echo e($priority->id); ?>)"
-        class="text-sm font-medium px-2 py-1 rounded-lg border transition"
-        style="background-color: <?php echo e($statusPriority === $priority->id ? $priority->color :  $priority->color . '20'); ?>; 
-        border: 1px solid <?php echo e($priority->color); ?>99;">
-        <?php echo e(ucfirst(str_replace('_', ' ', $priority->name))); ?>
-
-      </button>
-    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
-  </div>
-
-   
   
   <table class="table-auto w-full">
         
@@ -155,6 +137,7 @@
                       <?php echo e(ucfirst(str_replace('_', ' ', $ticket->status->name))); ?>
 
                       </button>
+
                     <!--Dropdown-->
                     <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($openStatusDropdown === $ticket->id): ?>
                     <div class="absolute z-10 mt-2 w-40 bg-white border rounded-lg shadow-lg">
@@ -174,18 +157,19 @@
                   </td>
                   <td class="border px-4 py-2"><button wire:click="togglePriorityDropdown(<?php echo e($ticket->id); ?>)" 
                     class="px-3 py-1 rounded-full text-sm font-semibold"
-                    style="background-color: <?php echo e($ticket->priority->color); ?>20; color: black;
-                    border: 1px solid <?php echo e($ticket->status->color); ?>99; ">
+                    style="background-color: <?php echo e($ticket->priority->colorPriority); ?>20; color: black;
+                    border: 1px solid <?php echo e($ticket->priority->colorPriority); ?>99; ">
                       <?php echo e(ucfirst(str_replace('_', ' ', $ticket->priority->name))); ?>
 
                     </button>
+
                     <!--Dropdown-->
                       <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($openPriorityDropdown === $ticket->id): ?>
                       <div class="absolute z-10 mt-2 w-40 bg-white border rounded-lg shadow-lg">
                         <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $priorities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $priority): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                           <button wire:click="changePriority(<?php echo e($ticket->id); ?>, '<?php echo e($priority->id); ?>')"
                           class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
-                            style="background-color: <?php echo e($priority->color); ?>50; color: black;" >
+                            style="background-color: <?php echo e($priority->colorPriority); ?>50; color: black;" >
                             <?php echo e(ucfirst(str_replace('_', ' ', $priority->name))); ?>
 
                           </button>
