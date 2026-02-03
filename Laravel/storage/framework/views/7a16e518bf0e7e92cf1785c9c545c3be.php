@@ -1,7 +1,6 @@
 <div>
   
-  <div class="flex items-center content-center gap-2 mb-6 ml-4 mt-5">
-
+  <div class="flex items-center content-center gap-2 mb-3 ml-4 mt-5">
     <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($myGroups->isNotEmpty()): ?>
       <?php if (isset($component)) { $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $attributes; } ?>
@@ -28,7 +27,6 @@
       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
     <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
   </div>
-  
   
   
   <div class="relative inline-block ml-4 mb-6 mt-4">
@@ -83,6 +81,16 @@
       <option value="desc">DESC</option>
       <option value="asc">ASC</option>
     </select>
+    
+    <select wire:model.lazy="creationUser" class="bg-gray-100 border border-gray-300 text-sm font-medium px-4.5 py-0.5 rounded-lg h-[28px] ">
+      <option value = "">All</option>
+
+      <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <option value="<?php echo e($user->id); ?>"><?php echo e($user->name); ?></option>
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+    </select>
+
+    
 
     <button wire:click="clearFilters"
             class="px-1.5 py-0.5 bg-red-600 text-white rounded-lg mt-4">

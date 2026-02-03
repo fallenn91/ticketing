@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Tickets;
 use App\Models\Ticket;
+use App\Models\User;
 use App\Models\TicketStatus;
 use App\Models\TicketPriority;
 use Livewire\Component;
@@ -25,6 +26,9 @@ class Show extends Component
     public $myGroups;
     public $statuses;
     public $priorities;
+    public $creationUser;
+    public $users;
+
 
     protected $listeners = ['saved', 
     'ticketUpdated' => 'refreshTicket', 
@@ -36,16 +40,24 @@ class Show extends Component
     {
       
 
-        $query = Ticket::query();
+      $query = Ticket::query();
       // Filter
-        if (auth()->user()->isAdmin()) {
-          $query = Ticket::query();
-        } else {
-          $query = Ticket::where(function($q){
-            $q->where('user_id', auth()->id())
-          ->orWhere('assigned_to_id', auth()->id());
-          });
-        }
+      if (request()->routeIs('management')) {
+        $query = Ticket::query();
+      } else {
+        $query = Ticket::whereHas('user', fn($q) => $q->where('role', 'admin'));
+      }
+
+      /*
+      if (auth()->user()->isAdmin()) {
+        $query = Ticket::query();
+      } else {
+        $query = Ticket::where(function($q){
+          $q->where('user_id', auth()->id())
+        ->orWhere('assigned_to_id', auth()->id());
+        });
+      }
+      */
 
         /*****FILTERS STATUS AND PRIORITY*****/
         if ($this->statusFilter) {
@@ -78,9 +90,31 @@ class Show extends Component
           ? $this->creationFilter : 'desc'
         );
 
+        /*****CREATED BY FILTER*****/
+
+        if ($this->creationUser) {
+          $query->where('user_id', $this->creationUser);
+        }
+
+        $tickets = $query->orderBy('created_at', 'desc')->get();
+
         $tickets = $query->paginate(5);
         
         return view('livewire.tickets.show', compact('tickets'));
+    }
+
+    public function mount($showFilters = false, $showPriority = false)
+    {
+
+      $this->statuses = TicketStatus::all();
+      $this->priorities = TicketPriority::all();
+      $this->showFilters = $showFilters;
+      $this->showPriority = $showPriority;
+      $this->allUsers = User::class;
+      $this->allGroups = Group::class;
+      $this->users = User::all();
+
+      $this->loadGroups();
     }
 
     // METHODS
@@ -135,18 +169,7 @@ class Show extends Component
       $this->openStatusDropdown = false;
 
     }
-    public function mount($showFilters = false, $showPriority = false)
-    {
 
-      $this->statuses = TicketStatus::all();
-      $this->priorities = TicketPriority::all();
-      $this->showFilters = $showFilters;
-      $this->showPriority = $showPriority;
-      $this->allUsers = User::class;
-      $this->allGroups = Group::class;
-
-      $this->loadGroups();
-    }
 
     public function filterByPriority($priorityId)
     {

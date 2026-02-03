@@ -1,7 +1,6 @@
 <div>
   
-  <div class="flex items-center content-center gap-2 mb-6 ml-4 mt-5">
-
+  <div class="flex items-center content-center gap-2 mb-3 ml-4 mt-5">
     @if ($myGroups->isNotEmpty())
       <x-input-label for="groups" value="{{ __('GROUPS') }}" />
       @foreach($myGroups as $group)
@@ -9,7 +8,6 @@
       @endforeach
     @endif
   </div>
-  
   
   
   <div class="relative inline-block ml-4 mb-6 mt-4">
@@ -60,6 +58,16 @@
       <option value="desc">DESC</option>
       <option value="asc">ASC</option>
     </select>
+    
+    <select wire:model.lazy="creationUser" class="bg-gray-100 border border-gray-300 text-sm font-medium px-4.5 py-0.5 rounded-lg h-[28px] ">
+      <option value = "">All</option>
+
+      @foreach ($users as $user)
+        <option value="{{ $user->id }}">{{ $user->name }}</option>
+      @endforeach
+    </select>
+
+    
 
     <button wire:click="clearFilters"
             class="px-1.5 py-0.5 bg-red-600 text-white rounded-lg mt-4">

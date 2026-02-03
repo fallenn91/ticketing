@@ -214,7 +214,7 @@ unset($__errorArgs, $__bag); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendB
 
   <!-------------- PRIORITY -------------->
 
-<div id="priority" class="w-full bg-white overflow-hidden shadow-xl mt-5 sm:rounded-lg px-5 py-2.5 ">
+<div id="priority" class="w-full bg-white overflow-hidden  mt-5 sm:rounded-lg px-5 py-2.5 ">
   <h1 class="text-lg font-bold mb-2">Ticket Priority</h1>
   <div class="w-full flex items-center align-center gap-4 py-2">
 
