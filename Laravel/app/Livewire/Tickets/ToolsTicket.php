@@ -52,7 +52,7 @@ class ToolsTicket extends Component
       'color.required' => 'Color is required.',
       'namePriority.unique' => 'Priority already in use.', 
       'namePriority.string' => 'Max 15 characters.', 
-      'priorityColor.required' => 'Color is required.'
+      'priorityColor.required' => 'Color is required.',
     ];
 
 
@@ -67,13 +67,19 @@ class ToolsTicket extends Component
     {
         return view('livewire.tickets.tools-ticket', ['statuses' => TicketStatus::all()]);
     }
+
     public function createGroup()
     {
         $this->validate([
-          'group_name' => 'required|string|max:50',
+          'group_name' => 'required|string|max:15|unique:groups,name',
           'selectedUsers' => 'required|array',
           'selectedUsers.*' => 'exists:users,id',
+        ],
+        [
+          'group_name.unique' => 'Group name already in use.',
+          'group_name.max' => 'Max 15 characters.',
         ]);
+
 
         $this->authorize('create', Group::class);
 

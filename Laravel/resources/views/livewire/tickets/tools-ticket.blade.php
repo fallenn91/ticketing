@@ -48,9 +48,11 @@
           >
           Create Group
           </button>
-
           
         </x-slot>
+        @if ($errors->has('group_name'))
+          <span class="text-sm text-red-600">{{ $errors->first('group_name') }}</span>
+        @endif
     </x-slot>
 
 </x-form-section>
@@ -65,7 +67,7 @@
   </thead>
   <tbody>
     @if (session('success'))
-    <p class="mt-3 text-red-600">{{ session('success')}} </p>
+    <p class="mt-3 text-green-600">{{ session('success')}} </p>
     
     @endif
     @foreach ($allGroups as $group)
@@ -133,6 +135,17 @@
     </ul>
   </div>
 
+  <!-------------- ERRORS STATUS-------------->
+  @if(session('deleted'))
+      <p class="mt-3 text-red-600">{{ session('deleted')}} </p>
+  @endif
+  @if(session('error'))
+    <p class="mt-3 text-red-600">{{ session('error')}} </p>
+  @endif
+  @if(session('default'))
+    <p class="mt-3 text-red-600">{{ session('default')}} </p>
+  @endif
+
   <!-------------- PRIORITY -------------->
 
 <div id="priority" class="w-full bg-white overflow-hidden  mt-5 sm:rounded-lg px-5 py-2.5 ">
@@ -172,16 +185,7 @@
      @endforeach
     </ul>
   </div>
-  
-    @if(session('deleted'))
-      <p class="mt-3 text-red-600">{{ session('deleted')}} </p>
-    @endif
-    @if(session('error'))
-      <p class="mt-3 text-red-600">{{ session('error')}} </p>
-    @endif
-    @if(session('default'))
-      <p class="mt-3 text-red-600">{{ session('default')}} </p>
-    @endif
+  <!-------------- ERRORS PRIORITY-------------->
     @if(session('deletedPriority'))
       <p class="mt-3 text-red-600">{{ session('deletedPriority')}} </p>
     @endif

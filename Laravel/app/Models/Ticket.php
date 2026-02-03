@@ -21,6 +21,7 @@ class Ticket extends Model
         'comments_id',
         'status_id',
         'priority_id',
+        'group_id',
         'category_id',
         'timestamps',
     ];
@@ -59,6 +60,11 @@ class Ticket extends Model
     public function priority()
     {
       return $this->belongsTo(TicketPriority::class, 'priority_id');
+    }
+
+    public function groups()
+    {
+      return $this->hasMany(Group::class, 'group_id');
     }
 
     protected static function booted()

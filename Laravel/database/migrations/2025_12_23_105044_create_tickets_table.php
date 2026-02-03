@@ -24,6 +24,7 @@ return new class extends Migration
             $table->foreignId('status_id')->constrained('ticket_statuses')->default(TicketStatus::where('is_default', true)->value('id'));
             $table->foreignId('priority_id')->constrained('ticket_priorities')->default(TicketPriority::where('is_default', true)->value('id'));
             $table->enum('priority', ['low', 'medium', 'high', 'critical'])->default('medium');
+            $table->foreignId('group_id')->constrained('groups')->onDelete('cascade');
             $table->timestamps();
         });
     }

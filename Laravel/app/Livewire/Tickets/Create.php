@@ -7,6 +7,7 @@ use App\Models\Ticket;
 use App\Models\TicketStatus;
 use App\Models\TicketPriority;
 use App\Models\User;
+use App\Models\Group;
 use App\Models\TicketCategory;
 
 class Create extends Component
@@ -16,6 +17,8 @@ class Create extends Component
     public $category;
     public $comment;
     public $users;
+    public $groups;
+    public $group_id;
     public $category_id;
     public $tickets_category;
     public $assigned_to_id;
@@ -28,6 +31,7 @@ class Create extends Component
     {
       // Select users and categories
       $this->users = User::all();
+      $this->groups = Group::all();
       $this->tickets_category = TicketCategory::all();
     }
     
@@ -57,6 +61,7 @@ class Create extends Component
         'description' => $this->description ?? '',
         'priority_id' => $defaultPriority->id,
         'status_id' => $defaultStatus->id,
+        'group_id' => $this->group_id,
         'category_id' => $this->category_id,
         'created_at' => now(),
       ]);

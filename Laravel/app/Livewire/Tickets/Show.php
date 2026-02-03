@@ -17,9 +17,11 @@ class Show extends Component
     protected $paginationTheme = 'tailwind';
     public $openStatusDropdown = null;
     public $openPriorityDropdown = null;
+    public $openStatusDropdown1 = null;
+    public $openPriorityDropdown1 = null;
     public $statusFilter = null;
     public $showFilters = false;
-    public $creationFilter = 'desc';
+    public $creationFilter = '';
     public $statusPriority = null;
     public $showPriority = false;
     public $search = '';
@@ -28,7 +30,7 @@ class Show extends Component
     public $priorities;
     public $creationUser;
     public $users;
-
+    
 
     protected $listeners = ['saved', 
     'ticketUpdated' => 'refreshTicket', 
@@ -39,25 +41,23 @@ class Show extends Component
     public function render()
     {
       
-
+      $user = auth()->user();
       $query = Ticket::query();
       // Filter
-      if (request()->routeIs('management')) {
-        $query = Ticket::query();
-      } else {
-        $query = Ticket::whereHas('user', fn($q) => $q->where('role', 'admin'));
-      }
-
-      /*
+      
+      
       if (auth()->user()->isAdmin()) {
         $query = Ticket::query();
       } else {
-        $query = Ticket::where(function($q){
-          $q->where('user_id', auth()->id())
-        ->orWhere('assigned_to_id', auth()->id());
+        $groupIds = $user->groups()->pluck('groups.id')->toArray();
+
+        $query = Ticket::where(function($q) use ($user, $groupIds) {
+          $q->where('user_id', $user->id) 
+          ->orWhere('assigned_to_id', $user->id)
+          ->orWhereIn('group_id', $groupIds);
         });
       }
-      */
+      
 
         /*****FILTERS STATUS AND PRIORITY*****/
         if ($this->statusFilter) {
@@ -92,11 +92,9 @@ class Show extends Component
 
         /*****CREATED BY FILTER*****/
 
-        if ($this->creationUser) {
-          $query->where('user_id', $this->creationUser);
-        }
+        $query->when($this->creationUser, fn($q) => $q->where('user_id', $this->creationUser));
 
-        $tickets = $query->orderBy('created_at', 'desc')->get();
+        //$tickets = $query->orderBy('created_at', 'desc')->get();
 
         $tickets = $query->paginate(5);
         
@@ -134,6 +132,14 @@ class Show extends Component
     {
       $this->openPriorityDropdown = $this->openPriorityDropdown === $ticketId ? null : $ticketId;
     }
+    public function toggleStatusDropdown1($ticketId)
+    {
+      $this->openStatusDropdown1 = $this->openStatusDropdown1 === $ticketId ? null : $ticketId;
+    }
+    public function togglePriorityDropdown1($ticketId)
+    {
+      $this->openPriorityDropdown1 = $this->openPriorityDropdown1 === $ticketId ? null : $ticketId;
+    }
 
     public function changePriority($ticketId, $priorityId)
     {
@@ -167,6 +173,7 @@ class Show extends Component
     {
       $this->statusFilter = $statusId;
       $this->openStatusDropdown = false;
+      $this->openStatusDropdown1 = false;
 
     }
 
@@ -175,12 +182,18 @@ class Show extends Component
     {
       $this->statusPriority = $priorityId;
       $this->openPriorityDropdown = false;
+      $this->openPriorityDropdown1 = false;
     }
 
     public function clearFilters()
     {
       $this->statusFilter = null;
       $this->statusPriority = null;
+      $this->search = '';
+      $this->creationUser = '';
+      $this->creationFilter = '';
+
+      $this->resetPage();
     }
 
     public function filterByCreation($value)
@@ -192,7 +205,6 @@ class Show extends Component
     {
       $this->myGroups = Auth::user()->groups()->get();
       
-
     }
 
 }

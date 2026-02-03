@@ -53,7 +53,13 @@
                 @endforeach
             </select>
           @endcan
-            
+            <x-input-label for="group_id" value="{{ __('Assign Group') }}" />
+            <select wire:model="group_id" class="mt-1 block w-full">
+                <option value = "">-- Select Group --</option>
+                @foreach ($groups as $group)
+                    <option value="{{ $group->id }}">{{ $group->name }}</option>
+                @endforeach
+            </select>
         </div>
     </x-slot>
 

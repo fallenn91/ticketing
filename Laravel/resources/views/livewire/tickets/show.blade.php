@@ -11,7 +11,7 @@
   
   
   <div class="relative inline-block ml-4 mb-6 mt-4">
-    <button type="button" wire:click="$toggle('openStatusDropdown')"
+    <button type="button" wire:click="$toggle('openStatusDropdown1')"
       class="px-3 py-1 rounded-lg font-medium border"
       style="background-color: {{ $statusFilter ? $statuses->firstWhere('id', $statusFilter)->color : '#458cf7'}}20;
       border: 1px solid {{ $statusFilter ? $statuses->firstWhere('id', $statusFilter)->color : '#458cf7'}}99;">
@@ -19,7 +19,7 @@
         {{ $statusFilter ? ucfirst(str_replace('_', ' ', $statuses->firstWhere('id', $statusFilter)->name)) : 'Status'}}
     </button>
 
-    @if($openStatusDropdown)
+    @if($openStatusDropdown1)
       <div class="absolute z-10 mt-2 w-40 bg-white border rounded-lg shadow-lg">
         @foreach ($statuses as $status)
           <button wire:click="filterByStatus({{ $status->id }})"
@@ -33,7 +33,7 @@
 
   
 
-    <button type="button" wire:click="$toggle('openPriorityDropdown')"
+    <button type="button" wire:click="$toggle('openPriorityDropdown1')"
       class="px-3 py-1 rounded-lg font-medium border"
       style="background-color: {{ $statusPriority ? $priorities->firstWhere('id', $statusPriority)->colorPriority : '#458cf7'}}20;
       border: 1px solid {{ $statusPriority ? $priorities->firstWhere('id', $statusPriority)->colorPriority : '#458cf7'}}99;">
@@ -41,7 +41,7 @@
         {{ $statusPriority ? ucfirst(str_replace('_', ' ', $priorities->firstWhere('id', $statusPriority)->name)) : 'Priority'}}
     </button>
 
-  @if($openPriorityDropdown)
+  @if($openPriorityDropdown1)
     <div class="absolute z-10 mt-2 w-40 bg-white border rounded-lg shadow-lg">
       @foreach ($priorities as $priority)
         <button wire:click="filterByPriority({{ $priority->id }})"
@@ -61,7 +61,6 @@
     
     <select wire:model.lazy="creationUser" class="bg-gray-100 border border-gray-300 text-sm font-medium px-4.5 py-0.5 rounded-lg h-[28px] ">
       <option value = "">All</option>
-
       @foreach ($users as $user)
         <option value="{{ $user->id }}">{{ $user->name }}</option>
       @endforeach

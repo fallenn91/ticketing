@@ -30,7 +30,7 @@
   
   
   <div class="relative inline-block ml-4 mb-6 mt-4">
-    <button type="button" wire:click="$toggle('openStatusDropdown')"
+    <button type="button" wire:click="$toggle('openStatusDropdown1')"
       class="px-3 py-1 rounded-lg font-medium border"
       style="background-color: <?php echo e($statusFilter ? $statuses->firstWhere('id', $statusFilter)->color : '#458cf7'); ?>20;
       border: 1px solid <?php echo e($statusFilter ? $statuses->firstWhere('id', $statusFilter)->color : '#458cf7'); ?>99;">
@@ -39,7 +39,7 @@
 
     </button>
 
-    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($openStatusDropdown): ?>
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($openStatusDropdown1): ?>
       <div class="absolute z-10 mt-2 w-40 bg-white border rounded-lg shadow-lg">
         <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $statuses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $status): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
           <button wire:click="filterByStatus(<?php echo e($status->id); ?>)"
@@ -54,7 +54,7 @@
 
   
 
-    <button type="button" wire:click="$toggle('openPriorityDropdown')"
+    <button type="button" wire:click="$toggle('openPriorityDropdown1')"
       class="px-3 py-1 rounded-lg font-medium border"
       style="background-color: <?php echo e($statusPriority ? $priorities->firstWhere('id', $statusPriority)->colorPriority : '#458cf7'); ?>20;
       border: 1px solid <?php echo e($statusPriority ? $priorities->firstWhere('id', $statusPriority)->colorPriority : '#458cf7'); ?>99;">
@@ -63,7 +63,7 @@
 
     </button>
 
-  <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($openPriorityDropdown): ?>
+  <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($openPriorityDropdown1): ?>
     <div class="absolute z-10 mt-2 w-40 bg-white border rounded-lg shadow-lg">
       <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $priorities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $priority): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <button wire:click="filterByPriority(<?php echo e($priority->id); ?>)"
@@ -84,7 +84,6 @@
     
     <select wire:model.lazy="creationUser" class="bg-gray-100 border border-gray-300 text-sm font-medium px-4.5 py-0.5 rounded-lg h-[28px] ">
       <option value = "">All</option>
-
       <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <option value="<?php echo e($user->id); ?>"><?php echo e($user->name); ?></option>
       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
