@@ -17,20 +17,6 @@
 
     <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="flex flex-wrap gap-2 mb-3">
-          <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $statuses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $status): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <span class="px-3 py-1 rounded-lg font-medium border"
-            style="background-color: <?php echo e($status->color); ?>50; color:black; border: 1px solid <?php echo e($status->color); ?>99;">
-            <?php echo e($status->name); ?> (<?php echo e($tickets->where('status_id', $status->id)->count()); ?>)
-            </span>
-          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
-          <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $priorities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $priority): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <span class="px-3 py-1 rounded-lg font-medium border"
-            style="background-color: <?php echo e($priority->colorPriority); ?>50; color:black; border: 1px solid <?php echo e($priority->colorPriority); ?>99;">
-            <?php echo e($priority->name); ?> (<?php echo e($tickets->where('status_id', $priority->id)->count()); ?>)
-            </span>
-          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
-        </div>
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg mt-5">
             <?php
 $__split = function ($name, $params = []) {

@@ -14,11 +14,11 @@ class Group extends Model
 
     public function users()
     {
-      return $this->belongsToMany(User::class);
+      return $this->belongsToMany(User::class, 'group_user');
     }
 
-    public function ticket()
+    public function tickets()
     {
-      return $this->belongsTo(Ticket::class);
+      return $this->hasMany(Ticket::class, 'group_id');
     }
 }

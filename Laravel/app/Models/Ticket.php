@@ -15,7 +15,7 @@ class Ticket extends Model
         'ticket_number',
         'id',
         'user_id',
-        'assigned_to_id',
+        'assigned_to',
         'title',
         'description',
         'comments_id',
@@ -29,22 +29,23 @@ class Ticket extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function assignedTo()
     {
-        return $this->belongsTo(User::class, 'assigned_to_id');
+        return $this->belongsToMany(User::class, 'ticket_users', 'ticket_id', 'user_id')
+        ->withTimestamps();
     }
 
     public function comments()
     {
-        return $this->hasMany(TicketComment::class);
+        return $this->hasMany(TicketComment::class, 'ticket_id');
     }
 
     public function category()
     {
-      return $this->belongsTo(TicketCategory::class);
+      return $this->belongsTo(TicketCategory::class, 'category_id');
     }
 
     public function getRouteKeyName()
@@ -64,7 +65,7 @@ class Ticket extends Model
 
     public function groups()
     {
-      return $this->hasMany(Group::class, 'group_id');
+      return $this->belongsTo(Group::class, 'group_id');
     }
 
     protected static function booted()

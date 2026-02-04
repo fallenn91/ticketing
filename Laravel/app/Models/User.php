@@ -72,11 +72,11 @@ class User extends Authenticatable
     }
     public function assignedTo()
     {
-        return $this->belongsTo(Ticket::class, 'assigned_to_id');
+        return $this->belongsToMany(Ticket::class, 'ticket_users', 'user_id', 'ticket_id')->withTimestamps();
     }
     public function ticketComment()
     {
-        return $this->hasMany(TicketComment::class);
+        return $this->hasMany(TicketComment::class, 'user_id');
     }
     public function isAdmin(): bool
     {

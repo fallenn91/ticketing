@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ticket_statuses', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('color')->default('#9ca3af');
-            $table->boolean('is_default')->default(false);
-            $table->timestamps();
+        Schema::table('tickets', function (Blueprint $table) {
+            $table->dropColumn('assigned_to_id');
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ticket_statuses');
+        Schema::table('tickets', function (Blueprint $table) {
+            $table->string('assigned_to_id')->nullable();
+        });
     }
 };

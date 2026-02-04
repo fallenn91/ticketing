@@ -55,7 +55,6 @@ class Create extends Component
 
       $ticket = Ticket::create([
         'ticket_number' => $nextNumber,
-        'user_id' => $this->user_id ?? auth()->id(),
         'assigned_to_id' => $this->assigned_to_id ?? null,
         'title' => $this->title,
         'description' => $this->description ?? '',

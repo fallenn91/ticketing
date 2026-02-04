@@ -25,7 +25,7 @@ $__split = function ($name, $params = []) {
 
 $key = null;
 
-$key ??= \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::generateKey('lw-1630499590-0', null);
+$key ??= \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::generateKey('lw-47524579-0', null);
 
 $__html = app('livewire')->mount($__name, $__params, $key);
 
@@ -42,11 +42,11 @@ if (isset($__slots)) unset($__slots);
 $__split = function ($name, $params = []) {
     return [$name, $params];
 };
-[$__name, $__params] = $__split('AdminTickets', []);
+[$__name, $__params] = $__split('tickets.show', []);
 
 $key = null;
 
-$key ??= \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::generateKey('lw-1630499590-1', null);
+$key ??= \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::generateKey('lw-47524579-1', null);
 
 $__html = app('livewire')->mount($__name, $__params, $key);
 
@@ -71,4 +71,4 @@ if (isset($__slots)) unset($__slots);
 <?php if (isset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>
 <?php $component = $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
 <?php unset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
-<?php endif; ?><?php /**PATH /var/www/html/resources/views/tickets.blade.php ENDPATH**/ ?>
+<?php endif; ?><?php /**PATH /var/www/html/resources/views/ticketss.blade.php ENDPATH**/ ?>
