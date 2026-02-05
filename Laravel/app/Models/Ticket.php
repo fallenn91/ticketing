@@ -15,7 +15,7 @@ class Ticket extends Model
         'ticket_number',
         'id',
         'user_id',
-        'assigned_to',
+        'assigned_to_id',
         'title',
         'description',
         'comments_id',
@@ -34,8 +34,7 @@ class Ticket extends Model
 
     public function assignedTo()
     {
-        return $this->belongsToMany(User::class, 'ticket_users', 'ticket_id', 'user_id')
-        ->withTimestamps();
+        return $this->belongsTo(User::class, 'assigned_to_id'); 
     }
 
     public function comments()

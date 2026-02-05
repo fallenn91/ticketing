@@ -68,11 +68,11 @@ class User extends Authenticatable
 
     public function tickets()
     {
-        return $this->hasMany(Ticket::class);
+        return $this->hasMany(Ticket::class, 'assigned_to_id');
     }
     public function assignedTo()
     {
-        return $this->belongsToMany(Ticket::class, 'ticket_users', 'user_id', 'ticket_id')->withTimestamps();
+        return $this->belongsTo(User::class, 'assigned_to_id');
     }
     public function ticketComment()
     {

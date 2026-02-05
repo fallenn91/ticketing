@@ -13,13 +13,5 @@ class TicketController extends Controller
       $ticket = Ticket::where('ticket_number', $ticket_number)->firstOrFail(); 
       return view('ticketDetails', compact('ticket')); 
     }
-
-    public function index()
-    {
-      $tickets = Ticket::all();
-      return view('ticketss', compact('tickets'));
-    }
-
-    
     
 }

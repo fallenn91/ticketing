@@ -22,7 +22,7 @@
     @if($openStatusDropdown1)
       <div class="absolute z-10 mt-2 w-40 bg-white border rounded-lg shadow-lg">
         @foreach ($statuses as $status)
-          <button wire:click="filterByStatus({{ $status->id }})"
+          <button wire:click="filterBy({{ $status->id }}, {{ $statusPriority ?? 'null' }})"
               class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
               style="background-color: {{ $status->color }}50; color: black;">
               {{ $status->name }}
@@ -44,7 +44,7 @@
   @if($openPriorityDropdown1)
     <div class="absolute z-10 mt-2 w-40 bg-white border rounded-lg shadow-lg">
       @foreach ($priorities as $priority)
-        <button wire:click="filterByPriority({{ $priority->id }})"
+        <button wire:click="filterBy({{ $statusFilter ?? 'null' }}, {{ $priority->id }})"
             class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
             style="background-color: {{ $priority->colorPriority }}50; color: black;">
             {{ $priority->name }}
@@ -54,9 +54,9 @@
   @endif
 
     
-    <select wire:model.lazy="creationFilter" class="bg-gray-100 border border-gray-300 text-sm font-medium px-4.5 py-0.5 rounded-lg h-[28px] ">
-      <option value="desc">DESC</option>
+    <select wire:model.lazy="order" class="bg-gray-100 border border-gray-300 text-sm font-medium px-4.5 py-0.5 rounded-lg h-[28px] ">
       <option value="asc">ASC</option>
+      <option value="desc">DESC</option>
     </select>
     
     <select wire:model.lazy="creationUser" class="bg-gray-100 border border-gray-300 text-sm font-medium px-4.5 py-0.5 rounded-lg h-[28px] ">

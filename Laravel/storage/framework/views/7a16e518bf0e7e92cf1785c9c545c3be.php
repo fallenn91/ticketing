@@ -42,7 +42,7 @@
     <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($openStatusDropdown1): ?>
       <div class="absolute z-10 mt-2 w-40 bg-white border rounded-lg shadow-lg">
         <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $statuses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $status): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-          <button wire:click="filterByStatus(<?php echo e($status->id); ?>)"
+          <button wire:click="filterBy(<?php echo e($status->id); ?>, <?php echo e($statusPriority ?? 'null'); ?>)"
               class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
               style="background-color: <?php echo e($status->color); ?>50; color: black;">
               <?php echo e($status->name); ?>
@@ -66,7 +66,7 @@
   <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($openPriorityDropdown1): ?>
     <div class="absolute z-10 mt-2 w-40 bg-white border rounded-lg shadow-lg">
       <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $priorities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $priority): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-        <button wire:click="filterByPriority(<?php echo e($priority->id); ?>)"
+        <button wire:click="filterBy(<?php echo e($statusFilter ?? 'null'); ?>, <?php echo e($priority->id); ?>)"
             class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
             style="background-color: <?php echo e($priority->colorPriority); ?>50; color: black;">
             <?php echo e($priority->name); ?>
@@ -77,9 +77,9 @@
   <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
     
-    <select wire:model.lazy="creationFilter" class="bg-gray-100 border border-gray-300 text-sm font-medium px-4.5 py-0.5 rounded-lg h-[28px] ">
-      <option value="desc">DESC</option>
+    <select wire:model.lazy="order" class="bg-gray-100 border border-gray-300 text-sm font-medium px-4.5 py-0.5 rounded-lg h-[28px] ">
       <option value="asc">ASC</option>
+      <option value="desc">DESC</option>
     </select>
     
     <select wire:model.lazy="creationUser" class="bg-gray-100 border border-gray-300 text-sm font-medium px-4.5 py-0.5 rounded-lg h-[28px] ">
@@ -211,5 +211,4 @@
 
     
     
-</div>
-<?php /**PATH /var/www/html/resources/views/livewire/tickets/show.blade.php ENDPATH**/ ?>
+</div><?php /**PATH /var/www/html/resources/views/livewire/tickets/show.blade.php ENDPATH**/ ?>

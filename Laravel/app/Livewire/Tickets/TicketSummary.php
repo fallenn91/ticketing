@@ -7,21 +7,23 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\TicketStatus;
 use App\Models\TicketPriority;
 use App\Models\User;
+use App\Models\Ticket;
 
 class TicketSummary extends Component
 {
-    public $user;       // usuario logueado
-    public $statuses;   // todos los estados de tickets
-    public $priorities; // todas las prioridades
+    public $user;      
+    public $statuses;  
+    public $priorities;
 
     public function mount()
     {
-        $this->user = Auth::user(); // usuario logueado
+        $this->user = Auth::user(); 
 
-        // Traer los tickets del usuario logueado con relaciones
+        $tickets = Ticket::where('assigned_to_id', auth()->id())->get();
+        
         $this->user->load('assignedTo.status', 'assignedTo.priority');
 
-        // Traer todos los status y prioridades para mostrar
+        
         $this->statuses = TicketStatus::all();
         $this->priorities = TicketPriority::all();
     }
@@ -30,4 +32,6 @@ class TicketSummary extends Component
     {
         return view('livewire.tickets.ticket-summary');
     }
+
+    
 }

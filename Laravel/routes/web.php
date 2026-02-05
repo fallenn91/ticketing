@@ -21,19 +21,16 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function() {
-      return view('userTickets');
+      return view('tickets');
     })->name('dashboard');
+    Route::get('/create', function() {
+      return view('ticketCreate');
+    })->name('create');
 });
 
 Route::middleware([
 'auth', 'admin'
 ])->group(function() {
-  Route::get('/admin/tickets', function() {
-    return view('tickets');
-  })->name('admin.tickets');
-  Route::get('/create', function() {
-      return view('ticketCreate');
-    })->name('create');
     Route::get('/management', function() {
       return view('ticketManagement');
     })->name('management');

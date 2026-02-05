@@ -19,9 +19,6 @@
                           {{ __('Create Ticket') }}
                     </x-nav-link>
                     @can('viewAny', App\Modles\Ticket::class)
-                      <x-nav-link href="{{ route('admin.tickets') }}" :active="request()->routeIs('admin.tickets')">
-                          {{ __('Admin tickets') }}
-                      </x-nav-link>
                       <x-nav-link href="{{ route('management') }}" :active="request()->routeIs('management')">
                           {{ __('Tickets Management') }}
                       </x-nav-link>

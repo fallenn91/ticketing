@@ -21,7 +21,7 @@
 $__split = function ($name, $params = []) {
     return [$name, $params];
 };
-[$__name, $__params] = $__split('tickets.TicketSummary', []);
+[$__name, $__params] = $__split('tickets.ticket-summary', []);
 
 $key = null;
 
@@ -42,7 +42,7 @@ if (isset($__slots)) unset($__slots);
 $__split = function ($name, $params = []) {
     return [$name, $params];
 };
-[$__name, $__params] = $__split('AdminTickets', []);
+[$__name, $__params] = $__split('my-tickets', []);
 
 $key = null;
 
