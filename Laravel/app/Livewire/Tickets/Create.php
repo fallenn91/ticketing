@@ -47,6 +47,7 @@ class Create extends Component
         'title' => 'required|string|max:50',
         'description' => 'required|string|max:255',
         'category_id' => 'required|exists:tickets_category,id',
+        'group_id' => 'nullable|integer',
       ]);
       $nextNumber = (Ticket::max('ticket_number') ?? 0) + 1;
 
@@ -60,7 +61,7 @@ class Create extends Component
         'description' => $this->description ?? '',
         'priority_id' => $defaultPriority->id,
         'status_id' => $defaultStatus->id,
-        'group_id' => $this->group_id,
+        'group_id' => $this->group_id ?? null,
         'category_id' => $this->category_id,
         'created_at' => now(),
       ]);
@@ -80,6 +81,7 @@ class Create extends Component
       $this->user_id = null;
       $this->assigned_to_id = null;
       $this->category_id = null;
+      $this->group_id = null;
 
     }
 

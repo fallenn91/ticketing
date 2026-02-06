@@ -51,9 +51,17 @@
                   @endif
                 </td>
                 
-                <td class="border px-4 py-2">{{ $ticket->created_at }}</td>
+                <td class="border px-4 py-2">{{ $ticket->created_at }}
+                  <a href="{{ route('details', $ticket->ticket_number) }}"
+                      class="inline-block px-4 py-2 bg-blue-600 text-white rounded ml-4">
+                        Details
+                  </a>
+                </td>
             </tr>
           @endforeach
         </tbody>
       </table>
+      <div class="flex justify-center items-center mb-6 ml-4 mt-5">
+        {{ $tickets->links('vendor.pagination.tailwind') }}
+      </div>
 </div>

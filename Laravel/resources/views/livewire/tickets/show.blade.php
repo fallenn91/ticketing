@@ -1,15 +1,4 @@
 <div>
-  
-  <div class="flex items-center content-center gap-2 mb-3 ml-4 mt-5">
-    @if ($myGroups->isNotEmpty())
-      <x-input-label for="groups" value="{{ __('GROUPS') }}" />
-      @foreach($myGroups as $group)
-        <span class="px-3 py-1 rounded-full text-sm font-semibold bg-blue-100 text-blue-800">{{ $group->name }}</span>
-      @endforeach
-    @endif
-  </div>
-  
-  
   <div class="relative inline-block ml-4 mb-6 mt-4">
     <button type="button" wire:click="$toggle('openStatusDropdown1')"
       class="px-3 py-1 rounded-lg font-medium border"

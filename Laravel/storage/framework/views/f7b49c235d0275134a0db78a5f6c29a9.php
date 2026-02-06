@@ -23,7 +23,7 @@
 
         </td>
         <td class="border px-4 py-2">
-          <?php echo e($ticket->user_id ? $ticket->user->name : 'Deleted User'); ?>
+          <?php echo e($ticket->creator->first()->name ?? 'Deleted User'); ?>
 
         </td>
         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('viewAny', App\Models\Ticket::class)): ?>
@@ -76,7 +76,19 @@
   <div class="col-span-6 sm:col-span-4 px-3 py-3 space-y-6">
       <!-- Ticket Description -->
         <div class="border p-4">
-    
+          <h2 class="text-lg font-semibold">Group Assigned</h2>
+          <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $groups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $group): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($group): ?>
+
+              <p class="mt-1 block w-full border-gray-300 rounded">
+                  <?php echo e($group->name); ?>  
+              </p>
+            <?php else: ?> 
+              <p class="mt-1 block w-full border-gray-300 rounded">
+                  No group yet. 
+              </p>
+            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
               <h2 class="text-lg font-semibold">Description</h2>
               
               <p class="mt-1 block w-full border-gray-300 rounded">

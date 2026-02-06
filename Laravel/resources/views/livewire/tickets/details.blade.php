@@ -22,7 +22,7 @@
           {{ sprintf('TCK-%04d', $ticket->ticket_number) }}
         </td>
         <td class="border px-4 py-2">
-          {{ $ticket->user_id ? $ticket->user->name : 'Deleted User' }}
+          {{ $ticket->creator->first()->name ?? 'Deleted User' }}
         </td>
         @can('viewAny', App\Models\Ticket::class)
         <td class="border px-4 py-2">
@@ -68,7 +68,19 @@
   <div class="col-span-6 sm:col-span-4 px-3 py-3 space-y-6">
       <!-- Ticket Description -->
         <div class="border p-4">
-    
+          <h2 class="text-lg font-semibold">Group Assigned</h2>
+          @foreach($groups as $group)
+            @if($group)
+
+              <p class="mt-1 block w-full border-gray-300 rounded">
+                  {{ $group->name }}  
+              </p>
+            @else 
+              <p class="mt-1 block w-full border-gray-300 rounded">
+                  No group yet. 
+              </p>
+            @endif
+          @endforeach
               <h2 class="text-lg font-semibold">Description</h2>
               
               <p class="mt-1 block w-full border-gray-300 rounded">

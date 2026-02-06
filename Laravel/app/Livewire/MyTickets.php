@@ -17,6 +17,7 @@ class MyTickets extends Component
     public $openStatusDropdown = null;
     public $openPriorityDropdown = null;
 
+
     public function mount()
     {
       $this->mountFilters();
@@ -25,8 +26,13 @@ class MyTickets extends Component
     public function render()
     {
         $user = auth()->user();
+        $groupsIds = $user->groups->pluck('id')->toArray();
       
-        $query = Ticket::with(['assignedTo', 'status', 'priority', 'groups'])->whereHas('assignedTo', fn($q) => $q->where('users.id', $user->id));
+        $query = Ticket::with(['assignedTo', 'status', 'priority', 'groups'])
+          ->where(function ($q) use ($user, $groupsIds) {
+            $q->whereHas('assignedTo', fn($q2) => $q2->where('users.id', $user->id))
+              ->orWhereHas('groups', fn($q3) => $q3->whereIn('groups.id', $groupsIds));
+          });
 
         $query = $this->applyFilters($query);
 

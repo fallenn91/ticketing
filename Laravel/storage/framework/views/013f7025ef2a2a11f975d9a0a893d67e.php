@@ -54,10 +54,20 @@
                   <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
                 </td>
                 
-                <td class="border px-4 py-2"><?php echo e($ticket->created_at); ?></td>
+                <td class="border px-4 py-2"><?php echo e($ticket->created_at); ?>
+
+                  <a href="<?php echo e(route('details', $ticket->ticket_number)); ?>"
+                      class="inline-block px-4 py-2 bg-blue-600 text-white rounded ml-4">
+                        Details
+                  </a>
+                </td>
             </tr>
           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
         </tbody>
       </table>
+      <div class="flex justify-center items-center mb-6 ml-4 mt-5">
+        <?php echo e($tickets->links('vendor.pagination.tailwind')); ?>
+
+      </div>
 </div>
 <?php /**PATH /var/www/html/resources/views/livewire/my-tickets.blade.php ENDPATH**/ ?>

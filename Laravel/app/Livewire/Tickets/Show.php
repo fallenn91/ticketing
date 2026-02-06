@@ -29,7 +29,6 @@ class Show extends Component
         $this->users = User::all();
         $this->allGroups = Group::class;
 
-        $this->loadGroups();
     }
 
     public function render()
@@ -49,9 +48,6 @@ class Show extends Component
             });
         }
 
-        
-        
-
         if ($this->creationUser) {
             $query->where('user_id', $this->creationUser);
         }
@@ -68,8 +64,13 @@ class Show extends Component
 
         return view('livewire.tickets.show', compact('tickets'));
     }
-    public function loadGroups()
+
+    public function deleteTicket($ticketId)
     {
-      $this->myGroups = Auth::user()->groups()->get();
+      $ticket = Ticket::findOrFail($ticketId);
+      $ticket->delete($ticketId);
+      $ticket = Ticket::all();
+      $ticket->save();
+
     }
 }

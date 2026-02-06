@@ -40,15 +40,19 @@ trait FiltersTrait
         return $query->orderBy($this->orderBy, $this->order);
     }
 
-    public function changeStatus($ticketId, $statusId, $priorityId)
+    public function changeStatus($ticketId, $statusId)
     {
         $ticket = Ticket::findOrFail($ticketId);
-        $ticket->update(['status_id' => $statusId, 'priority_id' => $priorityId]);
+        $ticket->update(['status_id' => $statusId]);
+        $this->openStatusDropdown1 = false;
+        $this->openStatusDropdown = false;
     }
     public function changePriority($ticketId, $priorityId)
     {
         $ticket = Ticket::findOrFail($ticketId);
-        $ticket->update(['status_id' => $statusId, 'priority_id' => $priorityId]);
+        $ticket->update(['priority_id' => $priorityId]);
+        $this->openPriorityDropdown1 = false;
+        $this->openPriorityDropdown = false;
     }
 
     // Filtrar por estado

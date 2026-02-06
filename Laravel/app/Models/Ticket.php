@@ -27,9 +27,14 @@ class Ticket extends Model
     ];
     
 
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsToMany(User::class, 'ticket_users', 'user_id', 'ticket_id');
+    }
+
+    public function creator()
+    {
+      return $this->belongsToMany(User::class, 'ticket_users', 'ticket_id', 'user_id')->limit(3);
     }
 
     public function assignedTo()
