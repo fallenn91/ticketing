@@ -19,11 +19,11 @@ class TicketSummary extends Component
 
     public function mount()
     {
-        $this->user = Auth::user(); 
+        $this->user = auth()->user(); 
         $this->allGroups = Group::class;
         $this->loadGroups();
         $tickets = Ticket::where('assigned_to_id', auth()->id())
-        ->with(['assignedTo', 'status', 'priority', 'groups'])->get();
+        ->with(['assignedTo', 'status', 'priority', 'group'])->get();
         
         $this->user->load('assignedTo.status', 'assignedTo.priority');
 

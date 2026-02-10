@@ -37,8 +37,8 @@ class Details extends Component
         $user = auth()->user();
         $groupsIds = $user->groups->pluck('id')->toArray();
 
-        $tickets = Ticket::with(['creator', 'groups'])->where(function($q) use ($user, $groupsIds) {
-          $q->whereHas('groups', fn($q2) => $q2->whereIn('groups.id', $groupsIds))
+        $tickets = Ticket::with(['creator', 'group'])->where(function($q) use ($user, $groupsIds) {
+          $q->whereHas('group', fn($q2) => $q2->whereIn('groups.id', $groupsIds))
           ->orWhereHas('users', fn($q3) => $q3->where('users.id', $user->id));
           
         })->get();

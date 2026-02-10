@@ -2,6 +2,9 @@
     <x-slot name="form">
         <div class="col-span-6 sm:col-span-4 ">
           <!-- Ticket Title -->
+          @if (session('success'))
+            <p class="mb-2 text-green-600">{{ session('success')}}</p>
+          @endif
           <x-input-label for="title" value="{{ __('Ticket Title') }}" />
 
             <x-text-input

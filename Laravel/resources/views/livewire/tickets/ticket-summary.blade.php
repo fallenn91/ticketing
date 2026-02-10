@@ -8,10 +8,19 @@
           @endforeach
         @endif
       </div>
-      <h3 class="font-semibold text-lg mb-2">Tickets: {{ $user->name }}</h3>
+      <h3 class="font-semibold text-lg mb-2">
+        {{ $user->name }}
+      </h3>
+      <h3 class="font-semibold text-lg mb-2">         
+        Total Tickets:
+      </h3>
+      <h3 class="font-semibold text-lg mb-2">        
+        Tickets Assigned: 
+      </h3>
 
       <div class="flex flex-wrap gap-2 mb-3">
           {{-- Status Count --}}
+         
           @foreach($statuses as $status)
               @php
                   $statusCount = $user->tickets->where('status_id', $status->id)->count();

@@ -1,6 +1,6 @@
 <div>
   <div class="relative inline-block ml-4 mb-6 mt-4">
-    <button type="button" wire:click="$toggle('openStatusDropdown1')"
+    <button type="button" wire:click="toggleStatusDropdownGlobal"
       class="px-3 py-1 rounded-lg font-medium border"
       style="background-color: {{ $statusFilter ? $statuses->firstWhere('id', $statusFilter)->color : '#458cf7'}}20;
       border: 1px solid {{ $statusFilter ? $statuses->firstWhere('id', $statusFilter)->color : '#458cf7'}}99;">
@@ -8,7 +8,7 @@
         {{ $statusFilter ? ucfirst(str_replace('_', ' ', $statuses->firstWhere('id', $statusFilter)->name)) : 'Status'}}
     </button>
 
-    @if($openStatusDropdown1)
+    @if($openStatusDropdownGlobal)
       <div class="absolute z-10 mt-2 w-40 bg-white border rounded-lg shadow-lg">
         @foreach ($statuses as $status)
           <button wire:click="filterBy({{ $status->id }}, {{ $statusPriority ?? 'null' }})"
@@ -22,7 +22,7 @@
 
   
 
-    <button type="button" wire:click="$toggle('openPriorityDropdown1')"
+    <button type="button" wire:click="togglePriorityDropdownGlobal"
       class="px-3 py-1 rounded-lg font-medium border"
       style="background-color: {{ $statusPriority ? $priorities->firstWhere('id', $statusPriority)->colorPriority : '#458cf7'}}20;
       border: 1px solid {{ $statusPriority ? $priorities->firstWhere('id', $statusPriority)->colorPriority : '#458cf7'}}99;">
@@ -30,7 +30,7 @@
         {{ $statusPriority ? ucfirst(str_replace('_', ' ', $priorities->firstWhere('id', $statusPriority)->name)) : 'Priority'}}
     </button>
 
-  @if($openPriorityDropdown1)
+  @if($openPriorityDropdownGlobal)
     <div class="absolute z-10 mt-2 w-40 bg-white border rounded-lg shadow-lg">
       @foreach ($priorities as $priority)
         <button wire:click="filterBy({{ $statusFilter ?? 'null' }}, {{ $priority->id }})"
@@ -90,7 +90,13 @@
             @foreach ($tickets as $ticket)
             
                 <tr>
-                    <td class="border px-4 py-2">{{ sprintf('TCK-%04d', $ticket->ticket_number) }}</td>
+                    <td class="border px-4 py-2">{{ sprintf('TCK-%04d', $ticket->ticket_number) }}
+                      @if ($ticket->group)
+                      <span class="inline-block border border-black px-2 py-1 rounded-lg text-sm ml-4">
+                        {{ $ticket->group->name }}
+                      </span>
+                      @endif
+                    </td>
                     <td class="border px-4 py-2">{{ $ticket->title }}</td>
                     <td class="border px-4 py-2"><button wire:click="toggleStatusDropdown({{ $ticket->id }})"
                       class="px-3 py-1 rounded-full text-sm font-semibold"
@@ -99,10 +105,10 @@
                       </button>
 
                     <!--Dropdown-->
-                    @if($openStatusDropdown === $ticket->id)
+                    @if($openStatusDropdowns[$ticket->id] ?? false)
                     <div class="absolute z-10 mt-2 w-40 bg-white border rounded-lg shadow-lg">
                       @foreach ($statuses as $status)
-                      <button wire:click="changeStatus({{ $ticket->id }}, '{{ $status->id }}')"
+                      <button wire:click="changeStatus({{ $ticket->id }}, {{ $status->id }})"
                         class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
                         style="background-color: {{ $status->color }}50; color: black;" >
                         
@@ -122,7 +128,7 @@
                     </button>
 
                     <!--Dropdown-->
-                      @if($openPriorityDropdown === $ticket->id)
+                      @if($openPriorityDropdowns[$ticket->id] ?? false)
                       <div class="absolute z-10 mt-2 w-40 bg-white border rounded-lg shadow-lg">
                         @foreach ($priorities as $priority)
                           <button wire:click="changePriority({{ $ticket->id }}, '{{ $priority->id }}')"

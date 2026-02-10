@@ -48,10 +48,10 @@ class ToolsTicket extends Component
 
     protected $messages = [
       'name.unique' => 'Status already in use.',
-      'name.string' => 'Max 15 character.',
+      'name.max' => 'Max 15 character.',
       'color.required' => 'Color is required.',
       'namePriority.unique' => 'Priority already in use.', 
-      'namePriority.string' => 'Max 15 characters.', 
+      'namePriority.max' => 'Max 15 characters.', 
       'priorityColor.required' => 'Color is required.',
     ];
 
@@ -172,6 +172,7 @@ class ToolsTicket extends Component
 
       session()->flash('deletedPriority', 'Priority deleted successfully.');
     }
+
     
     
 }

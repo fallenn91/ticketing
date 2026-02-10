@@ -23,7 +23,7 @@
 
         </td>
         <td class="border px-4 py-2">
-          <?php echo e($ticket->creator->first()->name ?? 'Deleted User'); ?>
+          <?php echo e($ticket->creator ? $ticket->creator->name : 'Deleted User'); ?>
 
         </td>
         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('viewAny', App\Models\Ticket::class)): ?>

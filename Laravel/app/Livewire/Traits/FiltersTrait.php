@@ -6,9 +6,12 @@ use App\Models\Ticket;
 use App\Models\TicketStatus;
 use App\Models\TicketPriority;
 
+use App\Livewire\Traits\DropdownTrait;
+
 trait FiltersTrait
 {
-    
+    use DropdownTrait;
+
     public $statuses;
     public $priorities;
 
@@ -44,15 +47,17 @@ trait FiltersTrait
     {
         $ticket = Ticket::findOrFail($ticketId);
         $ticket->update(['status_id' => $statusId]);
-        $this->openStatusDropdown1 = false;
-        $this->openStatusDropdown = false;
+
+        $this->closeStatusDropdowns($ticketId);
+        
     }
     public function changePriority($ticketId, $priorityId)
     {
         $ticket = Ticket::findOrFail($ticketId);
         $ticket->update(['priority_id' => $priorityId]);
-        $this->openPriorityDropdown1 = false;
-        $this->openPriorityDropdown = false;
+        
+        $this->closePriorityDropdowns($ticketId);
+        
     }
 
     // Filtrar por estado
@@ -61,7 +66,8 @@ trait FiltersTrait
         $this->statusFilter = $statusId;
         $this->statusPriority = $priorityId;
         
-        $this->resetPage(); // Livewire: resetea la paginación al aplicar filtro
+        $this->openStatusDropdownGlobal = false;
+        $this->openPriorityDropdownGlobal = false;
     }
 
     public function clearFilters()

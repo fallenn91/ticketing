@@ -26,6 +26,7 @@ Route::middleware([
     Route::get('/create', function() {
       return view('ticketCreate');
     })->name('create');
+    Route::get('/details/{ticket_number}',[ TicketController::class, 'show'])->name('details');
 });
 
 Route::middleware([
@@ -34,7 +35,6 @@ Route::middleware([
     Route::get('/management', function() {
       return view('ticketManagement');
     })->name('management');
-    Route::get('/details/{ticket_number}',[ TicketController::class, 'show'])->name('details');
     Route::get('/configuration', function() {
       return view('ticketConfiguration');
     })->name('configuration');

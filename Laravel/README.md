@@ -45,7 +45,7 @@ docker compose exec laravel.test php artisan migrate --seed
 | Admin | Can create tickets, view all tickets, assign to other users, change Status and Priority, comment any ticket. |
 | User  | Can create tickets, view just their tickets, comment their tickets. |
 
-## Features
+## Features (default values)
 
 | Status     | Priority | Category |
 |--------    |----------|----------|
@@ -54,5 +54,4 @@ docker compose exec laravel.test php artisan migrate --seed
 | Resolved   | High     | Web      |
 | Closed     | Critical | Marketing|
 
-
-
+You can add more Status, Priority and Category, assigning one color to each one of them.

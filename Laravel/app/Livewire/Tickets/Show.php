@@ -70,7 +70,6 @@ class Show extends Component
       $ticket = Ticket::findOrFail($ticketId);
       $ticket->delete($ticketId);
       $ticket = Ticket::all();
-      $ticket->save();
 
     }
 }

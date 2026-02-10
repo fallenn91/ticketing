@@ -27,10 +27,20 @@
           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
         <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
       </div>
-      <h3 class="font-semibold text-lg mb-2">Tickets: <?php echo e($user->name); ?></h3>
+      <h3 class="font-semibold text-lg mb-2">
+        <?php echo e($user->name); ?>
+
+      </h3>
+      <h3 class="font-semibold text-lg mb-2">         
+        Total Tickets:
+      </h3>
+      <h3 class="font-semibold text-lg mb-2">        
+        Tickets Assigned: 
+      </h3>
 
       <div class="flex flex-wrap gap-2 mb-3">
           
+         
           <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $statuses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $status): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
               <?php
                   $statusCount = $user->tickets->where('status_id', $status->id)->count();

@@ -37,8 +37,8 @@ unset($__params);
 unset($__split);
 if (isset($__slots)) unset($__slots);
 ?>
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <?php
+          <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+              <?php
 $__split = function ($name, $params = []) {
     return [$name, $params];
 };
@@ -58,7 +58,7 @@ unset($__params);
 unset($__split);
 if (isset($__slots)) unset($__slots);
 ?>
-            </div>
+          </div>
         </div>
     </div>
 

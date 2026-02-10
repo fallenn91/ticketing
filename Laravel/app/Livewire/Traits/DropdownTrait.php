@@ -4,26 +4,37 @@ namespace App\Livewire\Traits;
 
 trait DropdownTrait
 {
-    public $openStatusDropdown1 = null;
-    public $openPriorityDropdown1 = null;
-    public $openStatusDropdown = null;
-    public $openPriorityDropdown = null;
+    public $openStatusDropdownGlobal = false;
+    public $openPriorityDropdownGlobal = false;
 
-    public function toggleStatusDropdown1($ticketId)
+    public $openStatusDropdowns = [];
+    public $openPriorityDropdowns = [];
+
+    public function toggleStatusDropdownGlobal()
     {
-        $this->openStatusDropdown1 = $this->openStatusDropdown1 === $ticketId ? null : $ticketId;
+        $this->openStatusDropdownGlobal = !$this->openStatusDropdownGlobal;
     }
-    public function togglePriorityDropdown1($ticketId)
+    public function togglePriorityDropdownGlobal()
     {
-        $this->openPriorityDropdown1 = $this->openPriorityDropdown1 === $ticketId ? null : $ticketId;
+        $this->openPriorityDropdownGlobal = !$this->openPriorityDropdownGlobal;
     }
     public function toggleStatusDropdown($ticketId)
     {
-        $this->openStatusDropdown = $this->openStatusDropdown === $ticketId ? null : $ticketId;
+        $this->openStatusDropdowns[$ticketId] = ($this->openStatusDropdowns[$ticketId] ?? null) ? null : $ticketId;
     }
     public function togglePriorityDropdown($ticketId)
     {
-        $this->openPriorityDropdown = $this->openPriorityDropdown === $ticketId ? null : $ticketId;
+        $this->openPriorityDropdowns[$ticketId] = ($this->openPriorityDropdowns[$ticketId] ?? null) ? null : $ticketId;
+    }
+
+    public function closeStatusDropdowns($ticketId)
+    {
+      $this->openStatusDropdowns[$ticketId] = null;
+    }
+
+    public function closePriorityDropdowns($ticketId)
+    {
+      $this->openPriorityDropdowns[$ticketId] = null;
     }
 
 }

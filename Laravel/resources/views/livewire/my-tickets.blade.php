@@ -1,4 +1,80 @@
 <div>
+  <div>
+    <div class="relative inline-block ml-4 mb-6 mt-4">
+      <button type="button" wire:click="toggleStatusDropdownGlobal"
+        class="px-3 py-1 rounded-lg font-medium border"
+        style="background-color: {{ $statusFilter ? $statuses->firstWhere('id', $statusFilter)->color : '#458cf7'}}20;
+        border: 1px solid {{ $statusFilter ? $statuses->firstWhere('id', $statusFilter)->color : '#458cf7'}}99;">
+        
+          {{ $statusFilter ? ucfirst(str_replace('_', ' ', $statuses->firstWhere('id', $statusFilter)->name)) : 'Status'}}
+      </button>
+
+      @if($openStatusDropdownGlobal)
+        <div class="absolute z-10 mt-2 w-40 bg-white border rounded-lg shadow-lg">
+          @foreach ($statuses as $status)
+            <button wire:click="filterBy({{ $status->id }}, {{ $statusPriority ?? 'null' }})"
+                class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                style="background-color: {{ $status->color }}50; color: black;">
+                {{ $status->name }}
+            </button>
+          @endforeach
+        </div>
+      @endif
+
+    
+
+      <button type="button" wire:click="togglePriorityDropdownGlobal"
+        class="px-3 py-1 rounded-lg font-medium border"
+        style="background-color: {{ $statusPriority ? $priorities->firstWhere('id', $statusPriority)->colorPriority : '#458cf7'}}20;
+        border: 1px solid {{ $statusPriority ? $priorities->firstWhere('id', $statusPriority)->colorPriority : '#458cf7'}}99;">
+        
+          {{ $statusPriority ? ucfirst(str_replace('_', ' ', $priorities->firstWhere('id', $statusPriority)->name)) : 'Priority'}}
+      </button>
+
+      @if($openPriorityDropdownGlobal)
+        <div class="absolute z-10 mt-2 w-40 bg-white border rounded-lg shadow-lg">
+          @foreach ($priorities as $priority)
+            <button wire:click="filterBy({{ $statusFilter ?? 'null' }}, {{ $priority->id }})"
+                class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                style="background-color: {{ $priority->colorPriority }}50; color: black;">
+                {{ $priority->name }}
+            </button>
+          @endforeach
+        </div>
+      @endif
+
+      
+      <select wire:model.lazy="order" class="bg-gray-100 border border-gray-300 text-sm font-medium px-4.5 py-0.5 rounded-lg h-[28px] ">
+        <option value="asc">ASC</option>
+        <option value="desc">DESC</option>
+      </select>
+      
+      <select wire:model.lazy="creationUser" class="bg-gray-100 border border-gray-300 text-sm font-medium px-4.5 py-0.5 rounded-lg h-[28px] ">
+        <option value = "">All</option>
+        @foreach ($users as $user)
+          <option value="{{ $user->id }}">{{ $user->name }}</option>
+        @endforeach
+      </select>
+
+      
+
+      <button wire:click="clearFilters"
+              class="px-1.5 py-0.5 bg-red-600 text-white rounded-lg mt-4">
+              CLEAR
+      </button>
+    
+      <x-text-input
+        id="search"
+        type="text"
+        class="mt-4 block w-[150px]"
+        wire:model.live.debounce.300ms="search"
+        placeholder='Search...'
+        autocomplete="search"
+      />
+    
+      
+
+    </div>
   <table class="table-auto w-full">
         <thead>
             <tr>
@@ -12,12 +88,18 @@
         <tbody>
           @foreach ($tickets as $ticket)
             <tr>
-                <td class="border px-4 py-2">{{ sprintf('TCK-%04d', $ticket->ticket_number) }}</td>
+                <td class="border px-4 py-2">{{ sprintf('TCK-%04d', $ticket->ticket_number) }} 
+                  @if ($ticket->group)
+                  <span class="inline-block border border-black px-2 py-1 rounded-lg text-sm ml-4">
+                    {{ $ticket->group->name }}
+                  </span>
+                @endif
+                </td>
                 <td class="border px-4 py-2">{{ $ticket->title }}</td>
                 <td class="border px-4 py-2"><button wire:click="toggleStatusDropdown({{ $ticket->id }})" class="px-3 py-1 rounded-full text-sm font-semibold"
                 style="background-color: {{ $ticket->status->color}}20; color:black; border: 1px solid {{ $ticket->status->color }}99;"> 
                 {{ ucfirst(str_replace('_', ' ', $ticket->status->name)) }}</button>
-              @if($openStatusDropdown === $ticket->id)
+              @if($openStatusDropdowns[$ticket->id] ?? false)
                     <div class="absolute z-10 mt-2 w-40 bg-white border rounded-lg shadow-lg">
                       @foreach ($statuses as $status)
                       <button wire:click="changeStatus({{ $ticket->id }}, {{ $status->id }})"
@@ -38,7 +120,7 @@
                     {{ ucfirst(str_replace('_', ' ', $ticket->priority->name)) }}
                   </button>
               
-                  @if($openPriorityDropdown === $ticket->id)
+                  @if($openPriorityDropdowns[$ticket->id] ?? false)
                     <div class="absolute z-10 mt-2 w-40 bg-white border rounded-lg shadow-lg">
                       @foreach ($priorities as $priority)
                         <button wire:click="changePriority({{ $ticket->id }}, '{{ $priority->id }}')"

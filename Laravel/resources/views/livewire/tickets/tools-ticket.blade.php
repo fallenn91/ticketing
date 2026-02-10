@@ -67,8 +67,7 @@
   </thead>
   <tbody>
     @if (session('success'))
-    <p class="mt-3 text-green-600">{{ session('success')}} </p>
-    
+    <p class="mt-3 text-red-600">{{ session('success')}}</p>
     @endif
     @foreach ($allGroups as $group)
       <tr>
@@ -195,9 +194,7 @@
     @if(session('defaultPriority'))
       <p class="mt-3 text-red-600">{{ session('defaultPriority')}} </p>
     @endif
-    
-    
-  
+
 </div>
 
 

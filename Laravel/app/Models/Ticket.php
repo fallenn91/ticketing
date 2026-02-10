@@ -29,12 +29,11 @@ class Ticket extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'ticket_users', 'user_id', 'ticket_id');
+        return $this->belongsToMany(User::class, 'ticket_user');
     }
-
     public function creator()
     {
-      return $this->belongsToMany(User::class, 'ticket_users', 'ticket_id', 'user_id')->limit(3);
+      return $this->belongsTo(User::class, 'user_id');
     }
 
     public function assignedTo()
@@ -67,7 +66,7 @@ class Ticket extends Model
       return $this->belongsTo(TicketPriority::class, 'priority_id');
     }
 
-    public function groups()
+    public function group()
     {
       return $this->belongsTo(Group::class, 'group_id');
     }

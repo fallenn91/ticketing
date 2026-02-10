@@ -22,7 +22,7 @@
           {{ sprintf('TCK-%04d', $ticket->ticket_number) }}
         </td>
         <td class="border px-4 py-2">
-          {{ $ticket->creator->first()->name ?? 'Deleted User' }}
+          {{ $ticket->creator ? $ticket->creator->name : 'Deleted User' }}
         </td>
         @can('viewAny', App\Models\Ticket::class)
         <td class="border px-4 py-2">

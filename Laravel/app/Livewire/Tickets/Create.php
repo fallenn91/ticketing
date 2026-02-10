@@ -57,6 +57,7 @@ class Create extends Component
       $ticket = Ticket::create([
         'ticket_number' => $nextNumber,
         'assigned_to_id' => $this->assigned_to_id ?? null,
+        'user_id' => auth()->id(),
         'title' => $this->title,
         'description' => $this->description ?? '',
         'priority_id' => $defaultPriority->id,
@@ -83,6 +84,7 @@ class Create extends Component
       $this->category_id = null;
       $this->group_id = null;
 
+      session()->flash('success', 'Ticket created successfully.');
     }
 
     public function assignUser($userId)
