@@ -11,18 +11,23 @@
     </button>
 
     <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($openStatusDropdownGlobal): ?>
-      <div class="absolute z-20 mt-2 w-44 bg-white border rounded-lg shadow-lg overflow-hidden transition-all duration-200">
+      <div class="absolute z-20 mt-2 w-44 bg-white border rounded-lg shadow-lg overflow-hidden">
         <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $statuses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $status): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-          <button wire:click="filterBy(<?php echo e($status->id); ?>, <?php echo e($statusPriority ?? 'null'); ?>)"
-              class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
-              style="background-color: <?php echo e($status->color); ?>50; color: black;">
+          <button 
+              wire:click="filterBy(<?php echo e($status->id); ?>, <?php echo e($statusPriority ?? 'null'); ?>)"
+              class="block w-full text-left px-4 py-2 text-sm transition duration-150 hover:brightness-110"
+              style="background-color: <?php echo e($status->color); ?>50; color: black;"
+          >
               <?php echo e($status->name); ?>
 
           </button>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
       </div>
     <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+
+
   </div>
+  
   <div class="relative inline-block mb-6 mt-4">
     <button type="button" wire:click="togglePriorityDropdownGlobal"
       class="px-3 py-1 rounded-lg font-medium border items-center gap-1 transition-colors duration-200"
@@ -37,7 +42,7 @@
       <div class="absolute z-20 mt-2 w-44 bg-white border rounded-lg shadow-lg overflow-hidden transition-all duration-200">
         <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $priorities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $priority): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
           <button wire:click="filterBy(<?php echo e($statusFilter ?? 'null'); ?>, <?php echo e($priority->id); ?>)"
-              class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+              class="block w-full text-left px-4 py-2 text-sm transition duration-150 hover:brightness-110"
               style="background-color: <?php echo e($priority->colorPriority); ?>50; color: black;">
               <?php echo e($priority->name); ?>
 
@@ -62,7 +67,7 @@
     
 
     <button wire:click="clearFilters"
-            class="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-800">
+            class="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-700 transition-colors duration-200">
             CLEAR
     </button>
 

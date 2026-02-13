@@ -75,13 +75,13 @@
 
                       <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('delete', $ticket)): ?>
                       <button wire:click="deleteTicket(<?php echo e($ticket->id); ?>)"
-                        class="inline-block px-4 py-2 bg-red-600 text-white rounded ml-4"
+                        class="inline-block px-4 py-2 bg-red-500 hover:bg-red-700 transition-colors duration-200 text-white rounded ml-4"
                         >
                         Delete
                       </button>
                     <?php endif; ?>
                     <a href="<?php echo e(route('details', $ticket->ticket_number)); ?>"
-                      class="inline-block px-4 py-2 bg-blue-600 text-white rounded ml-4">
+                      class="inline-block px-4 py-2 bg-blue-500 hover:bg-blue-700 transition-colors duration-200 text-white rounded ml-4">
                         Details
                     </a>
 

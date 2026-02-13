@@ -10,17 +10,22 @@
     </button>
 
     @if($openStatusDropdownGlobal)
-      <div class="absolute z-20 mt-2 w-44 bg-white border rounded-lg shadow-lg overflow-hidden transition-all duration-200">
+      <div class="absolute z-20 mt-2 w-44 bg-white border rounded-lg shadow-lg overflow-hidden">
         @foreach ($statuses as $status)
-          <button wire:click="filterBy({{ $status->id }}, {{ $statusPriority ?? 'null' }})"
-              class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
-              style="background-color: {{ $status->color }}50; color: black;">
+          <button 
+              wire:click="filterBy({{ $status->id }}, {{ $statusPriority ?? 'null' }})"
+              class="block w-full text-left px-4 py-2 text-sm transition duration-150 hover:brightness-110"
+              style="background-color: {{ $status->color }}50; color: black;"
+          >
               {{ $status->name }}
           </button>
         @endforeach
       </div>
     @endif
+
+
   </div>
+  
   <div class="relative inline-block mb-6 mt-4">
     <button type="button" wire:click="togglePriorityDropdownGlobal"
       class="px-3 py-1 rounded-lg font-medium border items-center gap-1 transition-colors duration-200"
@@ -34,7 +39,7 @@
       <div class="absolute z-20 mt-2 w-44 bg-white border rounded-lg shadow-lg overflow-hidden transition-all duration-200">
         @foreach ($priorities as $priority)
           <button wire:click="filterBy({{ $statusFilter ?? 'null' }}, {{ $priority->id }})"
-              class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+              class="block w-full text-left px-4 py-2 text-sm transition duration-150 hover:brightness-110"
               style="background-color: {{ $priority->colorPriority }}50; color: black;">
               {{ $priority->name }}
           </button>
@@ -58,7 +63,7 @@
     
 
     <button wire:click="clearFilters"
-            class="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-800">
+            class="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-700 transition-colors duration-200">
             CLEAR
     </button>
 
