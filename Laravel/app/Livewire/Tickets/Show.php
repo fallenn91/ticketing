@@ -18,8 +18,6 @@ class Show extends Component
 
     protected $paginationTheme = 'tailwind';
     
-    public $creationUser;
-    public $search = '';
     public $myGroups;
     public $users;
 
@@ -36,6 +34,9 @@ class Show extends Component
         $user = auth()->user();
         $query = Ticket::query();
         // Aplicar filtros del Trait
+        if (!empty($this->userId)) {
+            $query->where('user_id', $this->userId);
+        }
         $query = $this->applyFilters($query);
 
         // Ejemplo de permisos
@@ -45,18 +46,6 @@ class Show extends Component
                 $q->where('user_id', $user->id)
                   ->orWhere('assigned_to_id', $user->id)
                   ->orWhereIn('group_id', $groupIds);
-            });
-        }
-
-        if ($this->creationUser) {
-            $query->where('user_id', $this->creationUser);
-        }
-
-        if (trim($this->search) !== '') {
-            $userInput = trim($this->search);
-            $query->where(function($q) use ($userInput) {
-                $q->where('title', 'like', "%{$userInput}%")
-                  ->orWhere('ticket_number', 'like', "%{$userInput}%");
             });
         }
 

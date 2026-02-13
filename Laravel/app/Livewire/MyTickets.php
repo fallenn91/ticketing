@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 
 use App\Models\Ticket;
 use App\Models\User;
@@ -12,7 +13,9 @@ use App\Livewire\Traits\DropdownTrait;
 
 class MyTickets extends Component
 {
-    use FiltersTrait, DropdownTrait;
+    use FiltersTrait, DropdownTrait, WithPagination;
+
+    protected $paginationTheme = 'tailwind';
 
     public $openStatusDropdown1;
     public $openPriorityDropdown1;
@@ -43,6 +46,9 @@ class MyTickets extends Component
 
         $tickets = $query->paginate(5);
 
-        return view('livewire.my-tickets', compact('tickets'));
+        $users = User::all();
+
+        return view('livewire.my-tickets', compact('tickets', 'users'));
     }
+    
 }

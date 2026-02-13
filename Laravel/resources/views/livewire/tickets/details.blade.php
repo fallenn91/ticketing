@@ -69,18 +69,15 @@
       <!-- Ticket Description -->
         <div class="border p-4">
           <h2 class="text-lg font-semibold">Group Assigned</h2>
-          @foreach($groups as $group)
-            @if($group)
-
+          @if ($ticket->group)
               <p class="mt-1 block w-full border-gray-300 rounded">
-                  {{ $group->name }}  
+                  {{ $ticket->group->name }}  
               </p>
-            @else 
+          @else
               <p class="mt-1 block w-full border-gray-300 rounded">
-                  No group yet. 
+                  No Ticket Group Assigned.  
               </p>
-            @endif
-          @endforeach
+          @endif
               <h2 class="text-lg font-semibold">Description</h2>
               
               <p class="mt-1 block w-full border-gray-300 rounded">

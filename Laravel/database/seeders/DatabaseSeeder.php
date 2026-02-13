@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             TicketStatusSeeder::class,
             TicketPrioritySeeder::class,
+            GroupSeeder::class,
+            TicketSeeder::class,
         ]);
 
         

@@ -77,18 +77,15 @@
       <!-- Ticket Description -->
         <div class="border p-4">
           <h2 class="text-lg font-semibold">Group Assigned</h2>
-          <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $groups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $group): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($group): ?>
-
+          <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($ticket->group): ?>
               <p class="mt-1 block w-full border-gray-300 rounded">
-                  <?php echo e($group->name); ?>  
+                  <?php echo e($ticket->group->name); ?>  
               </p>
-            <?php else: ?> 
+          <?php else: ?>
               <p class="mt-1 block w-full border-gray-300 rounded">
-                  No group yet. 
+                  No Ticket Group Assigned.  
               </p>
-            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
-          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+          <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
               <h2 class="text-lg font-semibold">Description</h2>
               
               <p class="mt-1 block w-full border-gray-300 rounded">

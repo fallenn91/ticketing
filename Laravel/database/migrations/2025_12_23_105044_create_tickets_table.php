@@ -15,16 +15,15 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('ticket_number')->unique()->after('id');
             $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->foreignId('assigned_to_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->foreignId('category_id')->constrained('tickets_category')->cascadeOnDelete();
             $table->string('title');
             $table->text('description');
-            $table->enum('status', ['open', 'in_process', 'resolved', 'closed'])->default('in_process');
             $table->foreignId('status_id')->constrained('ticket_statuses')->default(TicketStatus::where('is_default', true)->value('id'));
             $table->foreignId('priority_id')->constrained('ticket_priorities')->default(TicketPriority::where('is_default', true)->value('id'));
-            $table->enum('priority', ['low', 'medium', 'high', 'critical'])->default('medium');
-            $table->foreignId('group_id')->nullable()->constrained();
+            $table->foreignId('group_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

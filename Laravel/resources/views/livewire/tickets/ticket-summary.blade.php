@@ -12,10 +12,16 @@
         {{ $user->name }}
       </h3>
       <h3 class="font-semibold text-lg mb-2">         
-        Total Tickets:
+        @php
+          $totalTickets = auth()->user()->tickets->count();
+        @endphp
+        Total Tickets: {{ $totalTickets }}
       </h3>
-      <h3 class="font-semibold text-lg mb-2">        
-        Tickets Assigned: 
+      <h3 class="font-semibold text-lg mb-2">  
+        @php
+          $assignedTickets = auth()->user()->assignedTo->count();
+        @endphp      
+        Tickets Assigned: {{ $assignedTickets }}
       </h3>
 
       <div class="flex flex-wrap gap-2 mb-3">

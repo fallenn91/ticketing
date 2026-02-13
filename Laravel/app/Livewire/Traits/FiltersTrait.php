@@ -18,8 +18,11 @@ trait FiltersTrait
     public $statusFilter = null;
     public $statusPriority = null;
 
-    public $order = 'asc';
+    public $order = 'desc';
     public $orderBy = 'created_at';
+
+    public $userId = '';
+    public $search = '';
 
     
     protected $queryString = ['statusFilter', 'order', 'orderBy', 'statusPriority'];
@@ -34,10 +37,20 @@ trait FiltersTrait
     public function applyFilters($query)
     {
         if ($this->statusFilter) {
-            $query->where('status_id', $this->statusFilter);
+          $query->where('status_id', $this->statusFilter);
         }
         if ($this->statusPriority) {
           $query->where('priority_id', $this->statusPriority);
+        }
+        if (!empty($this->userId)) {
+          $query->where('user_id', $this->userId);
+        }
+        if (trim($this->search) !== '') {
+            $userInput = strtolower(trim($this->search));
+            $query->where(function($q) {
+            $q->where('title', 'ilike', "%{$this->search}%")
+              ->orWhere('ticket_number', 'ilike', "%{$this->search}%");
+            });
         }
 
         return $query->orderBy($this->orderBy, $this->order);
@@ -74,7 +87,10 @@ trait FiltersTrait
     {
       $this->statusFilter = null;
       $this->statusPriority = null;
+     // $this->userId = null;
     }
+
+    
 
     
 }

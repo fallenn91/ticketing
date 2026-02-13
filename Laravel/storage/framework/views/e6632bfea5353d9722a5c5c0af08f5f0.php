@@ -32,10 +32,18 @@
 
       </h3>
       <h3 class="font-semibold text-lg mb-2">         
-        Total Tickets:
+        <?php
+          $totalTickets = auth()->user()->tickets->count();
+        ?>
+        Total Tickets: <?php echo e($totalTickets); ?>
+
       </h3>
-      <h3 class="font-semibold text-lg mb-2">        
-        Tickets Assigned: 
+      <h3 class="font-semibold text-lg mb-2">  
+        <?php
+          $assignedTickets = auth()->user()->assignedTo->count();
+        ?>      
+        Tickets Assigned: <?php echo e($assignedTickets); ?>
+
       </h3>
 
       <div class="flex flex-wrap gap-2 mb-3">
