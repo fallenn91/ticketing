@@ -36,6 +36,7 @@ trait FiltersTrait
     // Aplicar filtros y orden a cualquier query de tickets
     public function applyFilters($query)
     {
+      
         if ($this->statusFilter) {
           $query->where('status_id', $this->statusFilter);
         }
@@ -53,7 +54,7 @@ trait FiltersTrait
             });
         }
 
-        return $query->orderBy($this->orderBy, $this->order);
+        return $query->orderBy('created_at', 'desc');
     }
 
     public function changeStatus($ticketId, $statusId)

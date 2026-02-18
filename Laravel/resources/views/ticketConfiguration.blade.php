@@ -14,6 +14,7 @@
                 <a href="#groups" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-800 rounded transition-colors duration-200">Groups</a>
                 <a href="#status" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-800 rounded transition-colors duration-200">Status</a>
                 <a href="#priority" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-800 rounded transition-colors duration-200">Priority</a>
+                <a href="#ticketsDeleted" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-800 rounded transition-colors duration-200">Deleted Tickets</a>
             </nav>
         </aside>
 

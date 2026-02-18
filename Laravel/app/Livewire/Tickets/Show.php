@@ -49,7 +49,7 @@ class Show extends Component
             });
         }
 
-        $tickets = $this->applyFilters(Ticket::query())->paginate(5);
+        $tickets = $query->paginate(5);
 
         return view('livewire.tickets.show', compact('tickets'));
     }

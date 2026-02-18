@@ -85,6 +85,11 @@ class Ticket extends Model
       });
     }
 
+    public function histories()
+    {
+      return $this->hasMany(TicketHistory::class);
+    }
+
     
     
 }

@@ -1,6 +1,6 @@
 <div>
   @include('livewire.tickets.filters')
-  <table class="table-auto w-full">
+  <table class="table-auto w-full" >
         
         <thead>
             <tr>
@@ -68,13 +68,13 @@
                     <td class="border px-4 py-2">{{ $ticket->created_at }}
                       @can('delete', $ticket)
                       <button wire:click="deleteTicket({{ $ticket->id }})"
-                        class="inline-block px-4 py-2 bg-red-500 hover:bg-red-700 transition-colors duration-200 text-white rounded ml-4"
+                        class="inline-block px-4 py-2 bg-red-500 hover:bg-red-700 transition-colors duration-200 text-white rounded-lg ml-4"
                         >
                         Delete
                       </button>
                     @endcan
                     <a href="{{ route('details', $ticket->ticket_number) }}"
-                      class="inline-block px-4 py-2 bg-blue-500 hover:bg-blue-700 transition-colors duration-200 text-white rounded ml-4">
+                      class="inline-block px-4 py-2 bg-blue-500 hover:bg-blue-700 transition-colors duration-200 text-white rounded-lg ml-4">
                         Details
                     </a>
 

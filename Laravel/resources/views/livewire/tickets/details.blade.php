@@ -124,7 +124,7 @@
     
             <form wire:submit.prevent="addComment({{ $ticket->id }})" class="mt-4 flex">
               <input type="text" wire:model.defer="newComment" class="flex-1 px-5 py-2.5 border rounded">
-              <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded ml-4">Send</button>
+              <button type="submit" class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded ml-4">Send</button>
             </form>
         </div>
       </div>

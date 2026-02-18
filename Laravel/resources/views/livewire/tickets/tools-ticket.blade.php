@@ -23,7 +23,7 @@
                 
                     
                   <button wire:click="addUser" type="button"
-                  class="mt-3 px-5 py-2 bg-blue-600 text-white rounded"
+                  class="mt-3 px-5 py-2 bg-blue-500 hover:to-blue-700 text-white rounded-lg"
                   >
                   Add User
                   </button>
@@ -34,7 +34,7 @@
                   @php $user = $allUsers->find($userId); @endphp
                   <li class="flex justify-between items-center mt-1">
                     {{ $user->name }}
-                    <button wire:click="removeUser({{ $userId }})" class="px-2 py-1 bg-red-500 text-white rounded text-sm"> 
+                    <button wire:click="removeUser({{ $userId }})" class="px-2 py-1 bg-red-500 hover:bg-red-700 text-white rounded-lg text-sm"> 
                       Remove User
                     </button>
                   </li>
@@ -44,7 +44,7 @@
         <x-slot name="actions">
             
           <button wire:click="createGroup"
-          class="px-4 py-2 bg-blue-600 text-white rounded"
+          class="px-4 py-2 bg-blue-500 hover:to-blue-700 text-white rounded-lg"
           >
           Create Group
           </button>
@@ -82,7 +82,7 @@
 
             
           <button type="button" wire:click="deleteGroup({{ $group->id }})"
-            class="inline-block px-4 py-2 bg-red-600 text-white rounded ml-4"
+            class="inline-block px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded-lg ml-4"
             >
             Delete Group
           </button>
@@ -113,7 +113,7 @@
       class="w-100 h-10 rounded-lg cursor-pointer"
     />
   </div>
-  <button type="submit" wire:click="createStatus" class="px-4 py-2 bg-blue-600 text-white rounded-lg mt-5">Create Status</button>
+  <button type="submit" wire:click="createStatus" class="px-4 py-2 bg-blue-500 hover:to-blue-700 text-white rounded-lg mt-5">Create Status</button>
   
   <div class="w-full py-5 px-2.5 border mt-5">
     <ul class="space-y-2">
@@ -124,7 +124,7 @@
               border: 1px solid {{ $status->color}}99;">{{ $status->name }}
         </span>
         <button type="button" wire:click="deleteStatus({{ $status->id }})"
-              class="inline-block px-2 py-1 text-sm bg-red-600 text-white rounded ml-4"
+              class="inline-block px-2 py-1 text-sm bg-red-500 hover:bg-red-700 text-white rounded-lg ml-4"
               >
               Delete Status
         </button>
@@ -164,7 +164,7 @@
       class="w-100 h-10 rounded-lg cursor-pointer"
     />
   </div>
-  <button type="submit" wire:click="createPriority" class="px-4 py-2 bg-blue-600 text-white rounded-lg mt-5">Create Priority</button>
+  <button type="submit" wire:click="createPriority" class="px-4 py-2 bg-blue-500 hover:to-blue-700 text-white rounded-lg mt-5">Create Priority</button>
   
   <div class="w-full py-5 px-2.5 border mt-5">
     <ul class="space-y-2">
@@ -175,7 +175,7 @@
               border: 1px solid {{ $priority->colorPriority}}99;">{{ $priority->name }}
         </span>
         <button type="button" wire:click="deletePriority({{ $priority->id }})"
-              class="px-2 py-1 text-sm bg-red-600 text-white rounded ml-4"
+              class="px-2 py-1 text-sm bg-red-500 hover:bg-red-700 text-white rounded-lg ml-4"
               >
               Delete Priority
         </button>

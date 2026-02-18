@@ -24,6 +24,7 @@ class MyTickets extends Component
 
     public $users;
 
+    
 
     public function mount()
     {

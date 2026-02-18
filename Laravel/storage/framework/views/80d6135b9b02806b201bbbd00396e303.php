@@ -18,7 +18,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <a href="<?php echo e(url()->previous()); ?>" class="inline-block mb-5">
-              <button class="px-4 py-2 mb-5 bg-blue-600 text-white rounded-lg ml-4">Back</button>
+              <button class="px-4 py-2 mb-5 bg-blue-500 hover:bg-blue-700 text-white rounded-lg ml-4">Back</button>
             </a>
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <?php
@@ -41,6 +41,30 @@ unset($__params);
 unset($__split);
 if (isset($__slots)) unset($__slots);
 ?>
+            </div>
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg mt-5">
+               <?php
+$__split = function ($name, $params = []) {
+    return [$name, $params];
+};
+[$__name, $__params] = $__split('tickets.history', ['ticket' => $ticket]);
+
+$key = null;
+
+$key ??= \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::generateKey('lw-572078688-1', null);
+
+$__html = app('livewire')->mount($__name, $__params, $key);
+
+echo $__html;
+
+unset($__html);
+unset($__name);
+unset($__params);
+unset($__split);
+if (isset($__slots)) unset($__slots);
+?>
+              </div>
             </div>
         </div>
     </div>

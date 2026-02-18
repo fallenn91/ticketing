@@ -66,7 +66,7 @@
                 <td class="border px-4 py-2"><?php echo e($ticket->created_at); ?>
 
                   <a href="<?php echo e(route('details', $ticket->ticket_number)); ?>"
-                      class="inline-block px-4 py-2 bg-blue-500 hover:bg-blue-700 transition-colors duration-200 text-white rounded ml-4">
+                      class="inline-block px-4 py-2 bg-blue-500 hover:bg-blue-700 transition-colors duration-200 text-white rounded-lg ml-4">
                         Details
                   </a>
                 </td>

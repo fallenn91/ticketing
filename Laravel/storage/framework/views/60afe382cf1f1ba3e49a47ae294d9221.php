@@ -83,7 +83,7 @@
                 
                     
                   <button wire:click="addUser" type="button"
-                  class="mt-3 px-5 py-2 bg-blue-600 text-white rounded"
+                  class="mt-3 px-5 py-2 bg-blue-500 hover:to-blue-700 text-white rounded-lg"
                   >
                   Add User
                   </button>
@@ -95,7 +95,7 @@
                   <li class="flex justify-between items-center mt-1">
                     <?php echo e($user->name); ?>
 
-                    <button wire:click="removeUser(<?php echo e($userId); ?>)" class="px-2 py-1 bg-red-500 text-white rounded text-sm"> 
+                    <button wire:click="removeUser(<?php echo e($userId); ?>)" class="px-2 py-1 bg-red-500 hover:bg-red-700 text-white rounded-lg text-sm"> 
                       Remove User
                     </button>
                   </li>
@@ -105,7 +105,7 @@
          <?php $__env->slot('actions', null, []); ?> 
             
           <button wire:click="createGroup"
-          class="px-4 py-2 bg-blue-600 text-white rounded"
+          class="px-4 py-2 bg-blue-500 hover:to-blue-700 text-white rounded-lg"
           >
           Create Group
           </button>
@@ -153,7 +153,7 @@
 
             
           <button type="button" wire:click="deleteGroup(<?php echo e($group->id); ?>)"
-            class="inline-block px-4 py-2 bg-red-600 text-white rounded ml-4"
+            class="inline-block px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded-lg ml-4"
             >
             Delete Group
           </button>
@@ -191,7 +191,7 @@ unset($__errorArgs, $__bag); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendB
       class="w-100 h-10 rounded-lg cursor-pointer"
     />
   </div>
-  <button type="submit" wire:click="createStatus" class="px-4 py-2 bg-blue-600 text-white rounded-lg mt-5">Create Status</button>
+  <button type="submit" wire:click="createStatus" class="px-4 py-2 bg-blue-500 hover:to-blue-700 text-white rounded-lg mt-5">Create Status</button>
   
   <div class="w-full py-5 px-2.5 border mt-5">
     <ul class="space-y-2">
@@ -203,7 +203,7 @@ unset($__errorArgs, $__bag); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendB
 
         </span>
         <button type="button" wire:click="deleteStatus(<?php echo e($status->id); ?>)"
-              class="inline-block px-2 py-1 text-sm bg-red-600 text-white rounded ml-4"
+              class="inline-block px-2 py-1 text-sm bg-red-500 hover:bg-red-700 text-white rounded-lg ml-4"
               >
               Delete Status
         </button>
@@ -250,7 +250,7 @@ unset($__errorArgs, $__bag); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendB
       class="w-100 h-10 rounded-lg cursor-pointer"
     />
   </div>
-  <button type="submit" wire:click="createPriority" class="px-4 py-2 bg-blue-600 text-white rounded-lg mt-5">Create Priority</button>
+  <button type="submit" wire:click="createPriority" class="px-4 py-2 bg-blue-500 hover:to-blue-700 text-white rounded-lg mt-5">Create Priority</button>
   
   <div class="w-full py-5 px-2.5 border mt-5">
     <ul class="space-y-2">
@@ -262,7 +262,7 @@ unset($__errorArgs, $__bag); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendB
 
         </span>
         <button type="button" wire:click="deletePriority(<?php echo e($priority->id); ?>)"
-              class="px-2 py-1 text-sm bg-red-600 text-white rounded ml-4"
+              class="px-2 py-1 text-sm bg-red-500 hover:bg-red-700 text-white rounded-lg ml-4"
               >
               Delete Priority
         </button>
