@@ -15,6 +15,10 @@ Route::get('/', function () {
     return redirect('dashboard');
 });
 
+Route::get('/diabolo', function() {
+  return view('diabolo.admin');
+});
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

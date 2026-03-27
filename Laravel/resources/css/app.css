@@ -3,8 +3,115 @@
 @tailwind utilities;
 @import 'tailwindcss';
 
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 [x-cloak] {
     display: none;
+}
+
+:root {
+            --wp-sidebar-bg: #23282d;
+            --wp-sidebar-hover: #191e23;
+            --wp-sidebar-text: #c3c4c7;
+            --wp-blue: #2271b1;
+            --wp-bg: #f0f0f1;
+            --wp-border: #ccd0d4;
+            --verde: #CDE953;
+            --negro: #000000;
+            --beige: #F2F0DC;
+}
+
+body {
+    background-color: var(--wp-bg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    color: #3c434a;
+    overflow-x: hidden;
+}
+
+/* Top Bar */
+.top-bar {
+    background-color: var(--verde);
+    height: 32px;
+    color: var(--negro);
+    font-size: 13px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1030;
+}
+
+.top-bar .nav-link {
+    color: var(--negro);
+    padding: 0 10px;
+    line-height: 32px;
+}
+
+.top-bar .nav-link:hover {
+    color: rgb(71, 71, 71);
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: var(--verde);
+    width: 160px;
+    position: fixed;
+    top: 32px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    padding-top: 10px;
+    overflow-y: auto;
+}
+
+.sidebar .nav-link {
+    color: var(--negro);
+    font-size: 14px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar .nav-link i {
+    width: 20px;
+    margin-right: 8px;
+    text-align: center;
+}
+
+.sidebar .nav-link:hover {
+    background-color: var(--beige);
+    color: rgb(71, 71, 71);
+}
+
+.sidebar .nav-link.active {
+    background-color: var(--beige);
+    color: var(--black);
+}
+
+.sidebar-divider {
+    height: 1px;
+    background-color: #3c434a;
+    margin: 8px 0;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 160px;
+    margin-top: 50px;
+    padding: 20px;
+    min-height: calc(100vh - 50px);
+}
+
+.dashboard-header {
+    font-size: 23px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .sidebar { width: 45px; }
+    .sidebar .nav-link span { display: none; }
+    .main-content { margin-left: 45px; }
 }
 

@@ -16,6 +16,11 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+              verde: 'var(--verde)',
+              negro: 'var(--negro)',
+              beige: 'var(--beige)',
+            },
         },
     },
 
