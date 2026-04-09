@@ -17,7 +17,7 @@
     <!-- Top Bar -->
     <nav class="top-bar d-flex justify-content-between align-items-center px-3">
         <div class="d-flex align-items-center">
-            <a href="#" class="nav-link"><i class="fas fa-home me-1"></i>Diabolo</a>
+            <a href="" class="nav-link"><i class="fas fa-home me-1"></i>Diabolo</a>
             <a href="#" class="nav-link"><i class="fas fa-comment me-1"></i>0</a>
             <a href="#" class="nav-link"><i class="fas fa-plus me-1"></i>Nuevo</a>
         </div>
@@ -30,10 +30,12 @@
     <div class="sidebar">
         <nav class="nav flex-column">
             <!--INICIO-->
-            <a class="nav-link active" href="#"><i class="fas fa-tachometer-alt"></i> <span>Inicio</span></a>
+            <a class="nav-link <?php echo e(request()->routeIs('diabolo.admin') ? 'active' : ''); ?>" href="<?php echo e(route('diabolo.admin')); ?>"><i class="fas fa-tachometer-alt"></i> <span>Inicio</span></a>
             <!--GESTIÓN DE USUARIOS-->
             <div class="sidebar-divider"></div>
-            <a class="nav-link" href="#"><i class="fas fa-users"></i> <span>Usuarios</span></a>
+            <a class="nav-link <?php echo e(request()->routeIs('diabolo.users') ? 'active' : ''); ?>" href="<?php echo e(route('diabolo.users')); ?>">
+                <i class="fas fa-users"></i> <span>Usuarios</span>
+            </a>
             <a class="nav-link" href="#"><i class="fas fa-images"></i> <span>Portfolios</span></a>
             <div class="sidebar-divider"></div>
             <!--MARKETPLACE-->

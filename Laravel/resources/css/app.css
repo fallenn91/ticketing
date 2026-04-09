@@ -115,3 +115,9 @@ body {
     .main-content { margin-left: 45px; }
 }
 
+.form-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}

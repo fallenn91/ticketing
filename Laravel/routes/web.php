@@ -17,7 +17,10 @@ Route::get('/', function () {
 
 Route::get('/diabolo', function() {
   return view('diabolo.admin');
-});
+})->name('diabolo.admin');
+Route::get('/diabolo/users', function() {
+  return view('diabolo.users');
+})->name('diabolo.users');
 
 Route::middleware([
     'auth:sanctum',
@@ -43,7 +46,5 @@ Route::middleware([
       return view('ticketConfiguration');
     })->name('configuration');
 });
-
-
 
 
