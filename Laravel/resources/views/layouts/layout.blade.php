@@ -32,23 +32,21 @@
             <!--INICIO-->
             <a class="nav-link {{ request()->routeIs('diabolo.admin') ? 'active' : '' }}" href="{{ route('diabolo.admin') }}"><i class="fas fa-tachometer-alt"></i> <span>Inicio</span></a>
             <!--GESTIÓN DE USUARIOS-->
-            <div class="sidebar-divider"></div>
             <a class="nav-link {{ request()->routeIs('diabolo.users') ? 'active' : '' }}" href="{{ route('diabolo.users') }}">
                 <i class="fas fa-users"></i> <span>Usuarios</span>
             </a>
-            <a class="nav-link" href="#"><i class="fas fa-images"></i> <span>Portfolios</span></a>
+            <!--SOCIAL-->
             <div class="sidebar-divider"></div>
-            <!--MARKETPLACE-->
-            <a class="nav-link" href="#"><i class="fas fa-store"></i> <span>Marketplace</span></a>
-            <a class="nav-link" href="#"><i class="fas fa-briefcase"></i> <span>Trabajo</span></a>
-            <div class="sidebar-divider"></div>
+            <a class="nav-link nav-link {{ request()->routeIs('diabolo.market') ? 'active' : '' }}" href="{{ route('diabolo.market') }}" href="#"><i class="fas fa-store"></i> <span>Marketplace</span></a>
+            <a class="nav-link nav-link nav-link {{ request()->routeIs('diabolo.work') ? 'active' : '' }}" href="{{ route('diabolo.work') }}" href="#"><i class="fas fa-briefcase"></i> <span>Trabajo</span></a>
+            <a class="nav-link {{ request()->routeIs('diabolo.posts') ? 'active' : '' }}" href="{{ route('diabolo.posts') }}"><i class="fas fa-newspaper"></i> <span>Posts</span></a>
+            <a class="nav-link {{ request()->routeIs('diabolo.comments') ? 'active' : '' }}" href="{{ route('diabolo.comments') }}" href="#"><i class="fas fa-comment"></i> <span>Comentarios</span></a>
             <!--ANALÍTICAS-->
-            <a class="nav-link" href="#"><i class="fas fa-newspaper"></i> <span>Noticias</span></a>
-            <a class="nav-link" href="#"><i class="fas fa-chart-bar"></i> <span>Analíticas</span></a>
+            <div class="sidebar-divider"></div>
+            <a class=nav-link {{ request()->routeIs('diabolo.analiticas') ? 'active' : '' }}" href="{{ route('diabolo.analiticas') }}" href="#"><i class="fas fa-chart-bar"></i> <span>Analíticas</span></a>
             <div class="sidebar-divider"></div>
             <!--CONFIGURACIÓN-->
-            <a class="nav-link" href="#"><i class="fas fa-comment"></i> <span>Comentarios</span></a>
-            <a class="nav-link" href="#"><i class="fas fa-cog"></i> <span>Ajustes</span></a>
+            <a class="nav-link" href="#"><i class="fa-door-open"></i> <span>Log Out</span></a>
         </nav>
     </div>
     <div class="main-content">

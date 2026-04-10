@@ -1,11 +1,13 @@
-<?php $__env->startSection('content'); ?>
+@extends('layouts.layout')
+
+@section('content')
 <div class="w-full h-screen">
   <div class="w-full rounded-lg bg-white shadow-lg p-4">
-    <h1 class="text-lg text-[var(--negro)] font-bold mb-3">Usuarios</h1>
+    <h1 class="text-lg text-[var(--negro)] font-bold mb-3">Comentarios</h1>
     <div class="w-full">
       <div class="flex justify-between items-center my-4">
         <form action="" method="GET" class="flex items-center gap-2 ">
-          <input type="text" name="search" placeholder="Buscar usuario..."
+          <input type="text" name="search" placeholder="Buscar comentario..."
                 class="w-[450px] px-4 py-2 border-2 border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
           <button type="submit"
                   class="px-4 py-2 rounded-lg border-1 border-[var(--negro)] bg-[var(--verde)] text-[var(--negro)] hover:bg-[var(--negro)] hover:text-[var(--beige)] transition duration-300">
@@ -20,14 +22,14 @@
     <form class="w-full border-l-2 border-r-2">
       <div class="grid grid-cols-1 md:grid-cols-4 w-full p-4 border-t-2">
         <div class="form-items"><h2 class="font-bold">ID</h2></div>
-        <div class="form-items"><h2 class="font-bold">Nombre</h2></div>
-        <div class="form-items"><h2 class="font-bold">Rol</h2></div>
+        <div class="form-items"><h2 class="font-bold">Creado por</h2></div>
+        <div class="form-items"><h2 class="font-bold">Comentario</h2></div>
         <div class="form-items"><h2 class="font-bold">Acciones</h2></div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-4 w-full p-4 border-t-2">
         <div class="form-items">1</div>
         <div class="form-items">Juan Pérez</div>
-        <div class="form-items">Administrador</div>
+        <div class="form-items">Qué tontería</div>
         <div class="form-items gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-green-700 cursor-pointer hover:text-[var(--black)]">
             <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
@@ -45,6 +47,4 @@
   </div>
 </div>
 
-<?php $__env->stopSection(); ?>
-
-<?php echo $__env->make('layouts.layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH /var/www/html/resources/views/diabolo/users.blade.php ENDPATH**/ ?>
+@endsection

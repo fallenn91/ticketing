@@ -2,19 +2,21 @@
 
 @section('content')
 <div class="w-full h-screen">
-  <div class="w-full rounded-lg shadow-lg p-4">
-    <h1 class="text-lg text-[var(--negro)] font-bold mb-3">USUARIOS</h1>
+  <div class="w-full rounded-lg bg-white shadow-lg p-4">
+    <h1 class="text-lg text-[var(--negro)] font-bold mb-3">Usuarios</h1>
     <div class="w-full">
-      <div class="my-4">
+      <div class="flex justify-between items-center my-4">
         <form action="" method="GET" class="flex items-center gap-2 ">
           <input type="text" name="search" placeholder="Buscar usuario..."
                 class="w-[450px] px-4 py-2 border-2 border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-          
           <button type="submit"
                   class="px-4 py-2 rounded-lg border-1 border-[var(--negro)] bg-[var(--verde)] text-[var(--negro)] hover:bg-[var(--negro)] hover:text-[var(--beige)] transition duration-300">
             Buscar
           </button>
         </form>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 cursor-pointer text-black hover:text-blue-700">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
+        </svg>
       </div>
     </div>
     <form class="w-full border-l-2 border-r-2">

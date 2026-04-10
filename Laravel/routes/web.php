@@ -21,6 +21,21 @@ Route::get('/diabolo', function() {
 Route::get('/diabolo/users', function() {
   return view('diabolo.users');
 })->name('diabolo.users');
+Route::get('/diabolo/market', function() {
+  return view('diabolo.market');
+})->name('diabolo.market');
+Route::get('/diabolo/work', function() {
+  return view('diabolo.work');
+})->name('diabolo.work');
+Route::get('/diabolo/posts', function() {
+  return view('diabolo.posts');
+})->name('diabolo.posts');
+Route::get('/diabolo/comments', function() {
+  return view('diabolo.comments');
+})->name('diabolo.comments');
+Route::get('/diabolo/analiticas', function() {
+  return view('diabolo.analiticas');
+})->name('diabolo.analiticas');
 
 Route::middleware([
     'auth:sanctum',
