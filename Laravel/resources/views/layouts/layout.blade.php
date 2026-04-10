@@ -15,7 +15,7 @@
 <body>
 
     <!-- Top Bar -->
-    <nav class="top-bar d-flex justify-content-between align-items-center px-3">
+    <nav class="top-bar d-flex justify-content-between border-bottom border-dark align-items-center px-3">
         <div class="d-flex align-items-center">
             <a href="" class="nav-link"><i class="fas fa-home me-1"></i>Diabolo</a>
             <a href="#" class="nav-link"><i class="fas fa-comment me-1"></i>0</a>
@@ -27,7 +27,7 @@
     </nav>
 
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar border-end border-dark">
         <nav class="nav flex-column">
             <!--INICIO-->
             <a class="nav-link {{ request()->routeIs('diabolo.admin') ? 'active' : '' }}" href="{{ route('diabolo.admin') }}"><i class="fas fa-tachometer-alt"></i> <span>Inicio</span></a>
