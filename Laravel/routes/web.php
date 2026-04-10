@@ -11,6 +11,8 @@ use App\Livewire\Tickets\Details;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 
+use App\Http\Controllers\ProfileController;
+
 Route::get('/', function () {
     return redirect('dashboard');
 });
@@ -36,6 +38,7 @@ Route::get('/diabolo/comments', function() {
 Route::get('/diabolo/analiticas', function() {
   return view('diabolo.analiticas');
 })->name('diabolo.analiticas');
+Route::get('/diabolo/profile', [ProfileController::class, 'render'])->name('diabolo.profile');
 
 Route::middleware([
     'auth:sanctum',

@@ -1,0 +1,112 @@
+/* Bootstrap */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import 'tailwindcss';
+
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+/* Fuente Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+/* Fuente personalizada CategoriesElegant */
+@font-face {
+    font-family: 'CategoriesElegant';
+    src: url('../fonts/categories-elegant-demo.otf') format('opentype'),
+         url('../fonts/categories-elegant-demo.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*COLORES
+VERDE #CDE953
+NEGRO #000000
+BEIGE #F2F0DC
+*/
+:root {
+    --verde: #CDE953;
+    --negro: #000000;
+    --beige: #F2F0DC;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--beige);
+    color: var(--negro);
+}
+/* Uso de la fuente en body */
+* {
+    margin: 0px;
+    box-sizing: 0px;
+    padding: 0px;
+}
+
+
+/* Utilidades */
+.bg-verde { background-color: var(--verde); }
+.text-verde { color: var(--verde); }
+.bg-negro { background-color: var(--negro); }
+
+   
+
+.logo-container{
+position: relative;
+display: inline-block;
+}
+
+    /* fuego oculto */
+    .fire{
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 80px;
+        pointer-events: none;
+        opacity: 0;
+    }
+
+    /* aparece al hover */
+    .logo-container:hover .fire{
+        opacity: 1;
+    }
+
+    .particle{
+        position:absolute;
+        bottom:0;
+        width:10px;
+        height:10px;
+        background: radial-gradient(rgb(255,120,0), rgba(255,80,0,0));
+        border-radius:50%;
+        animation: rise 1s infinite ease-in;
+    }
+
+    @keyframes rise{
+        from{
+            transform: translateY(0) scale(1);
+            opacity:1;
+        }
+        to{
+            transform: translateY(-60px) scale(0);
+            opacity:0;
+        }
+    }
+
+.card-body {
+    background-color: #F2F0DC;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--negro);
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(205, 233, 83, 0.2);
+}
+.navbar-brand {
+    font-weight: 900;
+    font-size: 1.8rem;
+    letter-spacing: -1px;
+}
+

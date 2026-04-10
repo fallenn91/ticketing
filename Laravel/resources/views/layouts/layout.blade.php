@@ -17,7 +17,7 @@
     <!-- Top Bar -->
     <nav class="top-bar d-flex justify-content-between border-bottom border-dark align-items-center px-3">
         <div class="d-flex align-items-center">
-            <a href="" class="nav-link"><i class="fas fa-home me-1"></i>Diabolo</a>
+            <a  class="nav-link {{ request()->routeIs('diabolo.profile') ? 'active' : '' }}" href="{{ route('diabolo.profile') }}"><i class="fas fa-home me-1"></i>Diabolo</a>
             <a href="#" class="nav-link"><i class="fas fa-comment me-1"></i>0</a>
             <a href="#" class="nav-link"><i class="fas fa-plus me-1"></i>Nuevo</a>
         </div>

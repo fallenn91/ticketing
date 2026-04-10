@@ -1,6 +1,6 @@
 <?php $__env->startSection('content'); ?>
 <div class="w-full h-full">
-  <div class="w-full h-full flex flex-col p-4 gap-3">
+  <div class="fade-up w-full h-full flex flex-col p-4 gap-3">
     <div class="w-full">
       <h1 class="text-lg text-[var(--negro)] font-bold">Ofertas Recientes</h1>
     </div>
@@ -100,7 +100,7 @@
   <div class="w-full">
       <h1 class="text-lg text-[var(--negro)] font-bold mb-3">Todas las Ofertas</h1>
   </div>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+  <div class=" fade-up grid grid-cols-1 md:grid-cols-3 gap-4">
     <card class="card-item !w-full !h-full flex flex-col justify-between bg-gray-100 shadow-sm rounded-lg">
       <!--LOGO PERFIL-->
         <h1 class="text-lg">FOTO PERFIL</h1>

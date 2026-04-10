@@ -1,5 +1,5 @@
 <?php $__env->startSection('content'); ?>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3">
+<div class="fade-up grid grid-cols-1 md:grid-cols-3 gap-4 mb-3">
     <?php
 $__split = function ($name, $params = []) {
     return [$name, $params];
@@ -62,7 +62,7 @@ if (isset($__slots)) unset($__slots);
 ?>
 
 </div>
-<div class="grid grid-cols1 gap-6">
+<div class="fade-up grid grid-cols1 gap-6">
   <?php
 $__split = function ($name, $params = []) {
     return [$name, $params];

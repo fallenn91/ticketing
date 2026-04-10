@@ -1,10 +1,8 @@
 @extends('layouts.layout')
 
 @section('content')
-<div class="w-full h-screen">
+<div class="fade-up w-full h-screen">
   <div class="w-full bg-white rounded-lg shadow-lg">
-
-
     <div class="p-6 space-y-6">
   
     <!-- Stats -->

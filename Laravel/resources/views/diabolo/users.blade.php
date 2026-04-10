@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
-<div class="w-full h-screen">
+<div class="fade-up w-full h-screen">
   <div class="w-full rounded-lg bg-white shadow-lg p-4">
     <h1 class="text-lg text-[var(--negro)] font-bold mb-3">Usuarios</h1>
     <div class="w-full">

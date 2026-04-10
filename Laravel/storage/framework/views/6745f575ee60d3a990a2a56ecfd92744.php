@@ -1,6 +1,6 @@
 <?php $__env->startSection('content'); ?>
 <div class="w-full h-screen">
-  <div class="w-full rounded-lg bg-white shadow-lg p-4">
+  <div class="fade-up w-full rounded-lg bg-white shadow-lg p-4">
     <h1 class="text-lg text-[var(--negro)] font-bold mb-3">Posts</h1>
     <div class="w-full">
       <div class="flex justify-between items-center my-4">
