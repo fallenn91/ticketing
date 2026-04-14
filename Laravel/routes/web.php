@@ -40,6 +40,10 @@ Route::get('/diabolo/analiticas', function() {
 })->name('diabolo.analiticas');
 Route::get('/diabolo/profile', [ProfileController::class, 'render'])->name('diabolo.profile');
 
+Route::get('/profile', function() {
+  return view('profile');
+})->name('profile');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
