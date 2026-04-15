@@ -132,4 +132,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   animateCards();
+
+  /*HERO SECTION  */
+  const hero = document.getElementById("hero");
+
+  window.addEventListener("scroll", () => {
+    const scrollY = window.scrollY;
+
+    // controla cuánto desaparece
+    const opacity = 1 - scrollY / 600;
+
+    // mueve hacia arriba
+    const translateY = scrollY * 0.5;
+
+    hero.style.opacity = Math.max(opacity, 0);
+    hero.style.transform = `translateY(-${translateY}px)`;
+  });
 });
